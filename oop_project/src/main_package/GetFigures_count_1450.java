@@ -165,6 +165,12 @@ public class NguoiKeSuScraper {
 	}
 	
 	static void getDataFromParagraph(Element div) {
+		String descContent = normalizeString(div.text().toString());
+		if(descContent.contains("co the la")) {
+			System.out.println("	DIA DIEM");
+			return;
+		}
+		
 		Elements otherNameElements = div.select("b");
 		String otherName = "Khong co";
 
@@ -173,7 +179,6 @@ public class NguoiKeSuScraper {
 			otherName = normalizeString(otherNameElements.get(1).text());
 		
 		System.out.println("	TEN KHAC: " + otherName);
-		String descContent = normalizeString(div.text().toString());
 		
 		//get other data
 		getYears(descContent);
