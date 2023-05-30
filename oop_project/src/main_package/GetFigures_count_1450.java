@@ -4,8 +4,13 @@ import java.io.FileWriter;
 
 import java.io.IOException;
 import java.text.Normalizer;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.crypto.ExemptionMechanism;
+
 import java.io.FileReader;
 import java.io.BufferedReader;
 
@@ -21,54 +26,78 @@ enum ContentType {
 }
 
 public class NguoiKeSuScraper {
-	public static int count = 0;
-	public static int actualCount = 0;
+	public static int figureCount = 0;
+	public static int homeCount = 0;
+	public static int dynastyCount = 0;
+	public static int parentCount = 0;
+	public static int bitrhDeathCount = 0;
+	
 	static int urlCounter = 0;
+	static List<String> cities = Arrays.asList("An Giang", "Ba Ria-Vung Tau", "Bac Lieu", "Bac Giang", "Bac Kan",
+			"Bac Ninh", "Ben Tre", "Binh Duong", "Binh Dinh", "Binh Phuoc", "Binh Thuan", "Ca Mau", "Cao Bang",
+			"Can Tho", "Da Nang", "Dak Lak", "Dak Nong", "Dien Bien", "Dong Nai", "Dong Thap", "Gia Lai", "Ha Giang",
+			"Ha Nam", "Ha Noi", "Ha Tinh", "Hai Duong", "Hai Phong", "Hau Giang", "Hoa Binh", "Hue", "Hung Yen",
+			"Ho Chi Minh", "Khanh Hoa", "Kien Giang", "Kon Tum", "Lai Chau", "Lang Son", "Lao Cai", "Lam Dong",
+			"Long An", "Nam Dinh", "Nghe An", "Ninh Binh", "Ninh Thuan", "Phu Tho", "Phu Yen", "Quang Binh",
+			"Quang Nam", "Quang Ngai", "Quang Ninh", "Quang Tri", "Soc Trang", "Son La", "Tay Ninh", "Thai Binh",
+			"Thai Nguyen", "Thanh Hoa", "Thua Thien Hue", "Tien Giang", "Tra Vinh", "Tuyen Quang", "Vinh Long",
+			"Vinh Phuc", "Yen Bai", "Thua Thien", "Thang Long");
 
 	public static void main(String[] args) {
-		try {
 
+		try {
 			String url;
 			Document doc;
-
 			while (true) {
-//				if (urlCounter > 1450) break;
-				if (urlCounter < 175) {
+				if (urlCounter > 1450)
+					break;
+///*
+				if (urlCounter < 935) {
 					urlCounter += 5;
 					continue;
-				} else if (urlCounter > 200)
-					break;
-
+				}else if(urlCounter > 960) break;
+//*/
 				if (urlCounter == 0)
 					url = "https://nguoikesu.com/nhan-vat";
 				else
 					url = "https://nguoikesu.com/nhan-vat?start=" + urlCounter;
 				doc = Jsoup.connect(url).get();
-				getFigures(doc);
-
+				getFiguresPage(doc);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		System.out.println("\nCount: " + count);
 	}
 
-	static void getFigures(Document doc) {
+	static void getFiguresPage(Document doc) {
 		Elements divs = doc.select("div.com-content-category-blog__item");
+		
+		System.out.println("								" + urlCounter);
 
+		//loop each figures in a page
 		for (Element div : divs) {
 			Element figureNameElement = div.selectFirst("h2");
 			String _figureDetail = div.select("a").attr("href");
 
-			String figureName = figureNameElement.text();
+			String figureName = normalizeString(figureNameElement.text());
 
-			System.out.println(normalizeString(figureName));
+			if(figureName.startsWith("nha") || figureName.startsWith("Nha")) {				
+				System.out.println("TRIEU DAI: " + figureName);
+				continue;
+			}else if(figureName.equals("Nha Trang")) {
+				System.out.println("DIA DIEM: " + figureName);
+				continue;
+			}
+			else {				
+				//print figure's name
+				System.out.println(figureName);
+			}
 
 			accessDetail(_figureDetail);
-
-			count++;
-			actualCount++;
+			System.out.println("			Nam sinh/mat: " + bitrhDeathCount + "/" + figureCount);
+			System.out.println("			Que quan: " + homeCount + "/" + figureCount);
+			System.out.println("			Trieu dai: " + dynastyCount + "/" + figureCount);
+			System.out.println("			Cha me: " + parentCount + "/" + figureCount);
 
 		}
 		urlCounter += 5;
@@ -76,18 +105,36 @@ public class NguoiKeSuScraper {
 
 	private static void accessDetail(String _figureDetail) {
 		ContentType type = ContentType.PARAGRAPH;
+		Boolean alreadyGetHome = false;
+		Boolean hasParents = false;
+		Boolean hasBirthOrDeathYear = false;
 
 		String url = "https://nguoikesu.com" + _figureDetail;
 		try {
 			Document doc = Jsoup.connect(url).get();
+			
+			//get description inside detail page
+			StringBuilder desc = new StringBuilder();
+			Elements pTags = doc.select("p");
+			for (Element pTag : pTags) 
+				desc.append(" " + normalizeString(pTag.text()));
+
+			if(desc.toString().contains("la thuy hieu")) {
+				System.out.println("	KHONG PHAI NHAN VAT");
+				return;
+			}
+			
+			//find tr tags to search whether there's a table or not
 			Elements rows = doc.select("tr");
 
 			if (rows != null) {
+				
+				//each row has 2 columns, title and content
 				for (Element row : rows) {
-					Element subDivTitle = row.selectFirst("th");
+					Element title = row.selectFirst("th");
 					Element subDivContent = row.selectFirst("td");
 
-					if (subDivTitle != null && normalizeString(subDivTitle.text()).equals("Dia ly")) {
+					if (title != null && normalizeString(title.text()).equals("Dia ly")) {
 						System.out.println("	DIA DIEM");
 						return;
 					}
@@ -95,46 +142,56 @@ public class NguoiKeSuScraper {
 					String content = "";
 					if (subDivContent != null)
 						content = normalizeString(subDivContent.text());
-					else
+					else continue;
+
+					if (title == null || subDivContent == null)
 						continue;
 
-					if (subDivTitle == null || subDivContent == null)
-						continue;
-
-					switch (normalizeString(subDivTitle.text())) {
+					switch (normalizeString(title.text())) {
 					case "Ten day du": {
 						type = ContentType.TABLE;
-						System.out.println("	TEN KHAC: " + content);
+						System.out.println("	(T)TEN KHAC: " + content);
 						break;
 					}
 					case "Ten khac": {
 						type = ContentType.TABLE;
-						System.out.println("	TEN KHAC: " + content);
+						System.out.println("	(T)TEN KHAC: " + content);
 						break;
 					}
 					case "Biet danh": {
 						type = ContentType.TABLE;
-						System.out.println("	TEN KHAC: " + content);
+						System.out.println("	(T)TEN KHAC: " + content);
 						break;
 					}
 					case "Sinh": {
 						type = ContentType.TABLE;
-						System.out.println("	SINH: " + content);
+						System.out.println("	(T)SINH: " + content);
+						hasBirthOrDeathYear = true;
+						if (getHome(content))
+							alreadyGetHome = true;
 						break;
 					}
 					case "Mat": {
 						type = ContentType.TABLE;
-						System.out.println("	MAT: " + content);
+						System.out.println("	(T)MAT: " + content);
+						hasBirthOrDeathYear = true;
 						break;
 					}
 					case "Than phu": {
 						type = ContentType.TABLE;
-						System.out.println("	THAN PHU: " + content);
+						System.out.println("	(T)THAN PHU: " + content);
+						hasParents = true;
 						break;
 					}
 					case "Than mau": {
 						type = ContentType.TABLE;
-						System.out.println("	THAN MAU: " + content);
+						System.out.println("	(T)THAN MAU: " + content);
+						hasParents = true;
+						break;
+					}
+					case "Tai vi": {
+						type = ContentType.TABLE;
+						System.out.println("	(T)TAI VI: " + content);
 						break;
 					}
 					default:
@@ -142,84 +199,219 @@ public class NguoiKeSuScraper {
 					}
 				}
 
+				// if data is not a place then increment
+				figureCount++;
+				if(hasParents) parentCount++;
+				if(hasBirthOrDeathYear) bitrhDeathCount++;
+
+				//get belonged dynasty
+				getDynasty(desc.toString());
+				
+				//get parents
+				getParent(desc.toString());
+
+				//get home town if not found in "SINH"
+				if (!alreadyGetHome) {
+					getHome(desc.toString());
+				}
+
 				// if there are no content table
 				if (type.equals(ContentType.PARAGRAPH)) {
 
-					count--;
-//					int i=0;
-//					if(i == 0) return;
-
 					Element div = doc.selectFirst("div.com-content-article__body p");
-					
-					if(div != null) getDataFromParagraph(div);
-					else System.out.println("	NO PARAGRAPH, NO NOTHING ...");
-					
+
+					if (div != null)
+						getDataFromParagraph(div, alreadyGetHome, desc.toString());
+					else
+						System.out.println("	NO PARAGRAPH, NO NOTHING ...");
+
 				}
 			} else {
 				System.out.println("THERE ARE NO TR TAGS");
 			}
 		} catch (IOException e) {
-			System.out.println("ACCESSING DETAILS ERROR");
-			e.printStackTrace();
+			System.out.println("NOT A FIGURE");
+			return;
 		}
 	}
-	
-	static void getDataFromParagraph(Element div) {
+
+	static void getDataFromParagraph(Element div, boolean alreadyGetHome, String desc) {
+		System.out.println("\n	(SEARCH IN PARAGRAPH)");
+		
+		//check if it's a place or not
 		String descContent = normalizeString(div.text().toString());
-		if(descContent.contains("co the la")) {
+		if (descContent.contains("co the la")) {
 			System.out.println("	DIA DIEM");
 			return;
 		}
-		
+
+		// 1st bold text is real name -> 2nd bold text is otherName
 		Elements otherNameElements = div.select("b");
 		String otherName = "Khong co";
 
-		//1st bold text is real name -> 2nd bold text is otherName
 		if (otherNameElements.size() >= 2 && otherNameElements.get(1) != null)
 			otherName = normalizeString(otherNameElements.get(1).text());
-		
+
 		System.out.println("	TEN KHAC: " + otherName);
-		
-		//get other data
+
 		getYears(descContent);
-		getHome(descContent);
-//		getParents(descContent);
+		getDynasty(descContent);
+	}
+
+	static boolean getHome(String text) {
+		
+		String[] words = text.split("\\s+");
+		StringBuilder cityNameBuilder = new StringBuilder();
+		for(String word: words) {
+			cityNameBuilder.append(word 	).append(" ");
+			
+			for(String city: cities) {
+				if(cityNameBuilder.toString().contains(city)) {					
+					System.out.println("	QUE QUAN: " + city);
+					homeCount++;
+					return true;
+				}
+			}
+		}
+		
+		
+		Pattern pattern = Pattern.compile("lang\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)");
+		Matcher matcher = pattern.matcher(text);
+
+		String name;
+		if (matcher.find()) {
+			name = matcher.group(1);
+
+			System.out.println("	QUE QUAN (lang)" + name);
+			homeCount++;
+			return true;
+		}
+
+		pattern = Pattern.compile("tai\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)");
+		matcher = pattern.matcher(text);
+
+		if (matcher.find()) {
+			name = matcher.group(1);
+			System.out.println("	QUE QUAN (tai)" + name);
+			homeCount++;
+			return true;
+		}
+
+		System.out.println("	QUE QUAN: Khong ro");
+		return false;
+	}
+
+	static void getDynasty(String text) {
+		if (text.contains("vua Le chua Trinh")) {
+			dynastyCount++;
+			System.out.println("    THOI: Vua Le chua Trinh");
+			return;
+		}
+
+		Pattern pattern = Pattern.compile("nha\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)");
+		Matcher matcher = pattern.matcher(text);
+
+		String name, nameGroup;
+		if (matcher.find()) {
+			nameGroup = matcher.group(0);
+			name = matcher.group(1);
+
+			// check if "Le so"
+			int index = text.indexOf(nameGroup);
+			String afterSubstring = text.substring(index + nameGroup.length());
+			if (afterSubstring.trim().startsWith("so")) {
+				name += " so";
+			}
+
+			dynastyCount++;
+			System.out.println("	THOI (nha): " + name);
+			return;
+		}
+
+		pattern = Pattern.compile("trieu\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)");
+		matcher = pattern.matcher(text);
+
+		if (matcher.find()) {
+			name = matcher.group(1);
+			System.out.println("	THOI (trieu): " + name);
+			dynastyCount++;
+			return;
+		}
+		
+		pattern = Pattern.compile("trieu dai\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)");
+		matcher = pattern.matcher(text);
+
+		if (matcher.find()) {
+			name = matcher.group(1);
+			System.out.println("	THOI (trieu dai): " + name);
+			dynastyCount++;
+			return;
+		}
+
+		pattern = Pattern.compile("Nha\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)");
+		matcher = pattern.matcher(text);
+
+		if (matcher.find()) {
+			name = matcher.group(1);
+			if(!(name.equals("Y") || name.equals("nho") || name.equals("y"))) {
+				System.out.println("	THOI (Nha): " + name);
+				dynastyCount++;
+				return;
+			}
+		}
+
+		System.out.println("	THOI: Khong ro");
+
+	}
+
+	
+	static void getParent(String text) {
+		Pattern pattern = Pattern.compile("la con trai cua\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)");
+		Matcher matcher = pattern.matcher(text);
+
+		String name;
+		if (matcher.find()) {
+			name = matcher.group(1);
+
+
+			dynastyCount++;
+			System.out.println("	CHA ME: " + name);
+			return;
+		}
+		System.out.println("	CHA ME: Khong ro");
 	}
 	
-	static void getHome(String text) {
-		Pattern pattern = Pattern.compile("nha\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)");
-        Matcher matcher = pattern.matcher(text);
-
-        if (matcher.find()) {
-            String name = matcher.group(1);
-            System.out.println("	Thoi: " + name);
-            return;
-        }
-        
-        pattern = Pattern.compile("trieu\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)");
-        matcher = pattern.matcher(text);
-
-        if (matcher.find()) {
-            String name = matcher.group(1);
-            System.out.println("	Thoi: " + name);
-            return;
-        }
-        
-        System.out.println("	Thoi: Khong ro");
-
-	}
-
 	static void getYears(String str) {
 		int birthYear = 0, deathYear = 0;
 		String birthYearString, deathYearString;
-		
+
 		// check the format: sinh nam 1990, mat nam 1990
-		Pattern pattern = Pattern.compile("(sinh|mat) nam (\\d{4})");
+		Pattern pattern = Pattern.compile("(Sinh|sinh) nam (\\d{4})");
 		Matcher matcher = pattern.matcher(str);
 		if (matcher.find()) {
 			String yearString = matcher.group(2);
 			int year = Integer.parseInt(yearString);
-			System.out.println("	Sinh|Mat nam (3):" + year);
+			System.out.println("	SINH (Sinh nam): " + year);
+			return;
+		}
+		
+		if(str.contains("sinh ngay")) {			
+			pattern = Pattern.compile("nam (\\d{4})");
+			matcher = pattern.matcher(str);
+			if (matcher.find()) {
+	            String year = matcher.group(1);
+	            System.out.println("	SINH (Sinh ngay): " + year);
+	            return;
+	        }
+		}
+		
+		
+		pattern = Pattern.compile("(Mat|mat) nam (\\d{4})");
+		matcher = pattern.matcher(str);
+		if (matcher.find()) {
+			String yearString = matcher.group(2);
+			int year = Integer.parseInt(yearString);
+			System.out.println("	MAT (Mat nam): " + year);
 			return;
 		}
 
@@ -238,6 +430,9 @@ public class NguoiKeSuScraper {
 			return;
 		}
 
+		//check the format: 769 - 860
+		birthYear = 0;
+		deathYear = 0;
 		pattern = Pattern.compile("(\\d{3})-(\\d{3})");
 		matcher = pattern.matcher(str);
 		if (matcher.find()) {
@@ -252,18 +447,10 @@ public class NguoiKeSuScraper {
 			return;
 		}
 
-		// check the format: sinh nam 1990, mat nam 1990
-		pattern = Pattern.compile("(sinh|mat) nam (\\d{4})");
-		matcher = pattern.matcher(str);
-		if (matcher.find()) {
-			String yearString = matcher.group(2);
-			int year = Integer.parseInt(yearString);
-			System.out.println("	Sinh|Mat nam (3):" + year);
-			return;
-		}
-
 		// Check the format: "year-?" or "?-year"
 		// First, check the 4 digit years
+		birthYear = 0;
+		deathYear = 0;
 		pattern = Pattern.compile("(\\d{1,4}|\\?)-?(\\d{1,4}|\\?)?");
 		matcher = pattern.matcher(str);
 		while (matcher.find()) {
@@ -273,10 +460,12 @@ public class NguoiKeSuScraper {
 			}
 			if (match.contains("-")) {
 				String[] years = match.split("-");
-				if (years[0] != null)
-					birthYear = Integer.parseInt(years[0]);
-				if (years[1] != null)
-					deathYear = Integer.parseInt(years[1]);
+				if (years.length >= 2) {
+					if (years[0] != null)
+						birthYear = Integer.parseInt(years[0]);
+					if (years[1] != null)
+						deathYear = Integer.parseInt(years[1]);
+				}
 			} else {
 				birthYear = Integer.parseInt(match);
 			}
@@ -293,6 +482,8 @@ public class NguoiKeSuScraper {
 		}
 
 		// Then check the 3 digit years
+		birthYear = 0;
+		deathYear = 0;
 		pattern = Pattern.compile("(\\d{1,3}|\\?)-?(\\d{1,3}|\\?)?");
 		matcher = pattern.matcher(str);
 		while (matcher.find()) {
