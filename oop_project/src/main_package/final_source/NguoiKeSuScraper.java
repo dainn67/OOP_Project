@@ -27,7 +27,7 @@ public class NguoiKeSuScraper {
 	static int parentCount = 0;
 	static int bitrhDeathCount = 0;
 
-	static int urlCounter = 0;
+	static int urlCounter = 1360;
 
 	static List<String> cities = Arrays.asList("An Giang", "Ba Ria-Vung Tau", "Bac Lieu", "Bac Giang", "Bac Kan",
 			"Bac Ninh", "Ben Tre", "Binh Duong", "Binh Dinh", "Binh Phuoc", "Binh Thuan", "Ca Mau", "Cao Bang",
@@ -126,7 +126,10 @@ public class NguoiKeSuScraper {
 			if (rows != null) getDataFromTable(rows);
 
 			//get the remaining unknown data from description
-			getDataFromParagraph(pTags.get(0), desc.toString());
+			if(pTags.size() != 0) {
+				getDataFromParagraph(pTags.get(0), desc.toString());
+				figureCount--;
+			}
 
 		} catch (IOException e) {
 			return;
