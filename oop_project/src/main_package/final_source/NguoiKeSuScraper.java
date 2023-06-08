@@ -21,13 +21,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class NguoiKeSuScraper {
-	public static int figureCount = 0;
-	public static int homeCount = 0;
-	public static int dynastyCount = 0;
-	public static int parentCount = 0;
-	public static int bitrhDeathCount = 0;
+	static int figureCount = 0;
+	static int homeCount = 0;
+	static int dynastyCount = 0;
+	static int parentCount = 0;
+	static int bitrhDeathCount = 0;
 
 	static int urlCounter = 0;
+
 	static List<String> cities = Arrays.asList("An Giang", "Ba Ria-Vung Tau", "Bac Lieu", "Bac Giang", "Bac Kan",
 			"Bac Ninh", "Ben Tre", "Binh Duong", "Binh Dinh", "Binh Phuoc", "Binh Thuan", "Ca Mau", "Cao Bang",
 			"Can Tho", "Da Nang", "Dak Lak", "Dak Nong", "Dien Bien", "Dong Nai", "Dong Thap", "Gia Lai", "Ha Giang",
@@ -37,65 +38,63 @@ public class NguoiKeSuScraper {
 			"Quang Nam", "Quang Ngai", "Quang Ninh", "Quang Tri", "Soc Trang", "Son La", "Tay Ninh", "Thai Binh",
 			"Thai Nguyen", "Thanh Hoa", "Thua Thien Hue", "Tien Giang", "Tra Vinh", "Tuyen Quang", "Vinh Long",
 			"Vinh Phuc", "Yen Bai", "Thua Thien", "Thang Long");
+	
 	static List<Figure> figures = new ArrayList<Figure>();
 	static String[] figureAttributes = new String[9];
 
 	public static void main(String[] args) {
 
-		try {
-			String url;
-			Document doc;
-			while (true) {
-				if (urlCounter > 1450)
-					break;
-///*
-				if (urlCounter < 900) {
-					urlCounter += 5;
-					continue;
-				} else if (urlCounter > 920)
-					break;
-//*/
-				if (urlCounter == 0)
-					url = "https://nguoikesu.com/nhan-vat";
-				else
-					url = "https://nguoikesu.com/nhan-vat?start=" + urlCounter;
+		String url;
+		Document doc;
+		while (true) {
+			if (urlCounter > 1450)
+				break;
+			/*
+			 * if (urlCounter < 900){ urlCounter += 5; continue; } else if (urlCounter >
+			 * 920) break;
+			 */
+			if (urlCounter == 0)
+				url = "https://nguoikesu.com/nhan-vat";
+			else
+				url = "https://nguoikesu.com/nhan-vat?start=" + urlCounter;
+
+			try {
 				doc = Jsoup.connect(url).get();
 				getFiguresPage(doc);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-
-			System.out.println("DONE");
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
+
+		System.out.println("DONE");
 	}
 
 	static void getFiguresPage(Document doc) {
-		Elements divs = doc.select("div.com-content-category-blog__item");
+		Elements figures = doc.select("div.com-content-category-blog__item");
 
-		System.out.println("								" + urlCounter);
+		System.out.println("								PAGE: " + urlCounter);
 
 		// loop each figures in a page
-		for (Element div : divs) {
-			Element figureNameElement = div.selectFirst("h2");
-			String _figureDetail = div.select("a").attr("href");
+		for (Element figure : figures) {
+			Element figureNameElement = figure.selectFirst("h2");
+			String _figureDetail = figure.select("a").attr("href");
 
 			String figureName = normalizeString(figureNameElement.text());
 
-			if (figureName.startsWith("nha") || figureName.startsWith("Nha")) {
-				System.out.println("TRIEU DAI: " + figureName);
+			if (figureName.startsWith("nha") || figureName.startsWith("Nha"))
 				continue;
-			} else if (figureName.equals("Nha Trang")) {
-				System.out.println("DIA DIEM: " + figureName);
-				continue;
-			} else
+			else {				
 				figureAttributes[0] = figureName;
+				figureCount++;
+			}
 
 			accessDetail(_figureDetail);
 			prtAttributes();
-//			System.out.println("			Nam sinh/mat: " + bitrhDeathCount + "/" + figureCount);
-//			System.out.println("			Que quan: " + homeCount + "/" + figureCount);
-//			System.out.println("			Trieu dai: " + dynastyCount + "/" + figureCount);
-//			System.out.println("			Cha me: " + parentCount + "/" + figureCount);
+
+			System.out.println("			Nam sinh/mat: " + bitrhDeathCount + "/" + figureCount);
+			System.out.println("			Que quan: " + homeCount + "/" + figureCount);
+			System.out.println("			Trieu dai: " + dynastyCount + "/" + figureCount);
+			System.out.println("			Cha me: " + parentCount + "/" + figureCount);
 
 		}
 		urlCounter += 5;
@@ -111,28 +110,35 @@ public class NguoiKeSuScraper {
 		try {
 			Document doc = Jsoup.connect(url).get();
 
-			// get description inside detail page
+			// get description inside detail page for data scrapping
 			StringBuilder desc = new StringBuilder();
 			Elements pTags = doc.select("p");
 			for (Element pTag : pTags)
 				desc.append(normalizeString(pTag.text()) + " ");
 
-			//assign the name first
+			// assign the name first
 			figureAttributes[8] = desc.toString();
-		
+
 			// find tr tags to search whether there's a table or not
 			Elements rows = doc.select("tr");
-			
+
+			//get data from table
 			if (rows != null) getDataFromTable(rows);
-			
+
+			//get the remaining unknown data from description
 			getDataFromParagraph(pTags.get(0), desc.toString());
-			
+
 		} catch (IOException e) {
 			return;
 		}
 	}
-	
+
 	static void getDataFromTable(Elements rows) {
+		
+		//debug
+		Boolean hasMother = false, hasFather = false;
+		Boolean hasBirthYear = false, hasDeathYear = false;
+		
 		for (Element row : rows) {
 			// each row has 2 columns, title and content
 			Element title = row.selectFirst("th");
@@ -140,59 +146,66 @@ public class NguoiKeSuScraper {
 
 			if (title == null || subDivContent == null)
 				continue;
-			
+
 			if (title != null && normalizeString(title.text()).equals("Dia ly"))
 				return;
-			
+
 			String content = subDivContent != null ? normalizeString(subDivContent.text()) : null;
 
 			switch (normalizeString(title.text())) {
-			case "Ten day du": {
-				figureAttributes[1] = content;
-				break;
+				case "Ten day du": {
+					figureAttributes[1] = content;
+					break;
+				}
+				case "Ten khac": {
+					figureAttributes[1] = content;
+					break;
+				}
+				case "Biet danh": {
+					figureAttributes[1] = content;
+					break;
+				}
+				case "Sinh": {
+					figureAttributes[2] = content;
+					hasBirthYear = true;
+					getHome(content);
+					break;
+				}
+				case "Mat": {
+					figureAttributes[3] = content;
+					hasDeathYear = true;
+					break;
+				}
+				case "Than phu": {
+					figureAttributes[4] = content;
+					hasFather = true;
+					break;
+				}
+				case "Than mau": {
+					figureAttributes[5] = content;
+					hasMother = true;
+					break;
+				}
+				case "Tai vi": {
+	
+					break;
+				}
+				default:
+					break;
 			}
-			case "Ten khac": {
-				figureAttributes[1] = content;
-				break;
-			}
-			case "Biet danh": {
-				figureAttributes[1] = content;
-				break;
-			}
-			case "Sinh": {
-				figureAttributes[2] = content;
-				getHome(content);
-				break;
-			}
-			case "Mat": {
-				figureAttributes[3] = content;
-				break;
-			}
-			case "Than phu": {
-				figureAttributes[4] = content;
-				break;
-			}
-			case "Than mau": {
-				figureAttributes[5] = content;
-				break;
-			}
-			case "Tai vi": {
-				
-				break;
-			}
-			default:
-				break;
-			}
+			
+			//debug
+			if(hasBirthYear || hasDeathYear) bitrhDeathCount++;
+			if(hasFather || hasMother) parentCount++;
+			
+			hasBirthYear = false;
+			hasDeathYear = false;
+			hasFather = false;
+			hasMother = false;
 		}
 	}
 
 	static void getDataFromParagraph(Element div, String desc) {
-
-		// check if it's a place or not
-		if (desc.contains("co the la ") || desc.contains("la thuy hieu") || desc.contains("co the la: ")) {
-			System.out.println("	NOT A FIGURE");
-			return;
-		}
 
 		// 1st bold text is real name -> 2nd bold text is otherName
 		Elements otherNameElements = div.select("b");
@@ -203,12 +216,14 @@ public class NguoiKeSuScraper {
 
 		figureAttributes[1] = otherName;
 
+		//get dynasty and remaining data if not found in table
 		getDynasty(desc);
-		if(figureAttributes[2] == null && figureAttributes[3] == null) 
+		if (figureAttributes[2] == null && figureAttributes[3] == null)
 			getYears(desc);
-		if(figureAttributes[4] == null && figureAttributes[5] == null) 
+		if (figureAttributes[4] == null && figureAttributes[5] == null)
 			getParent(desc);
-		if(figureAttributes[7] == null) getHome(desc);
+		if (figureAttributes[7] == null)
+			getHome(desc);
 	}
 
 	static boolean getHome(String text) {
@@ -227,12 +242,14 @@ public class NguoiKeSuScraper {
 			}
 		}
 
-		if(homePattern(text, "lang\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)")) return true;
-		if(homePattern(text, "tai\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)")) return true;
-		
+		if (homePattern(text, "lang\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)"))
+			return true;
+		if (homePattern(text, "tai\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)"))
+			return true;
+
 		return false;
 	}
-	
+
 	static Boolean homePattern(String text, String patternString) {
 		Pattern pattern = Pattern.compile(patternString);
 		Matcher matcher = pattern.matcher(text);
@@ -242,7 +259,7 @@ public class NguoiKeSuScraper {
 			homeCount++;
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -303,12 +320,10 @@ public class NguoiKeSuScraper {
 		if (matcher.find()) {
 			father = matcher.group(1);
 
-			dynastyCount++;
-//			System.out.println("	CHA: " + father);
+			parentCount++;
 			figureAttributes[4] = father;
 			return;
 		}
-//		System.out.println("	CHA ME: Khong ro");
 	}
 
 	static void getYears(String str) {
@@ -317,44 +332,49 @@ public class NguoiKeSuScraper {
 
 		Pattern pattern;
 		Matcher matcher;
-		
+
 		// check the format: 1990-1991
 		pattern = Pattern.compile("(\\d{4})-(\\d{4})");
 		matcher = pattern.matcher(str);
 		if (matcher.find()) {
 			birthYearString = matcher.group(1);
 			deathYearString = matcher.group(2);
-			
+
 			birthYear = Integer.parseInt(birthYearString);
 			deathYear = Integer.parseInt(deathYearString);
-			
+
 			figureAttributes[2] = "" + birthYear;
 			figureAttributes[3] = "" + deathYear;
+			
+			bitrhDeathCount++;
 			return;
 		}
 
 		pattern = Pattern.compile("\\((.*?)\\)");
 		matcher = pattern.matcher(str);
 		if (matcher.find()) {
-		    String matchedString = matcher.group(1);
-		    String[] parts = matchedString.split("-");
+			String matchedString = matcher.group(1);
+			String[] parts = matchedString.split("-");
 
-		    if (parts.length == 2) {
-		    	figureAttributes[2] = parts[0];
-		    	figureAttributes[3] = parts[1];
-		    	return;
-		    }
-		}
-		
+			if (parts.length == 2) {
+				figureAttributes[2] = parts[0];
+				figureAttributes[3] = parts[1];
 				
-			
+				bitrhDeathCount++;
+				return;
+			}
+		}
+
 		// check the format: sinh nam 1990, mat nam 1990
 		pattern = Pattern.compile("(Sinh|sinh) nam (\\d{4})");
 		matcher = pattern.matcher(str);
 		if (matcher.find()) {
 			String yearString = matcher.group(2);
 			int year = Integer.parseInt(yearString);
+			
 			figureAttributes[2] = "" + year;
+			bitrhDeathCount++;
+			
 			return;
 		}
 
@@ -363,7 +383,10 @@ public class NguoiKeSuScraper {
 			matcher = pattern.matcher(str);
 			if (matcher.find()) {
 				String year = matcher.group(1);
+				
 				figureAttributes[2] = "" + year;
+				bitrhDeathCount++;
+				
 				return;
 			}
 		}
@@ -373,11 +396,12 @@ public class NguoiKeSuScraper {
 		if (matcher.find()) {
 			String yearString = matcher.group(2);
 			int year = Integer.parseInt(yearString);
+			
 			figureAttributes[3] = "" + year;
+			bitrhDeathCount++;
+			
 			return;
 		}
-
-		
 
 		// check the format: 769 - 860
 		birthYear = 0;
@@ -393,6 +417,8 @@ public class NguoiKeSuScraper {
 
 			figureAttributes[2] = "" + birthYear;
 			figureAttributes[3] = "" + deathYear;
+			
+			bitrhDeathCount++;
 			return;
 		}
 
@@ -428,6 +454,8 @@ public class NguoiKeSuScraper {
 
 			figureAttributes[2] = "" + birthYear;
 			figureAttributes[3] = "" + deathYear;
+			
+			bitrhDeathCount++;
 			return;
 		}
 
@@ -456,6 +484,8 @@ public class NguoiKeSuScraper {
 
 			figureAttributes[2] = "" + birthYear;
 			figureAttributes[3] = "" + deathYear;
+			
+			bitrhDeathCount++;
 			return;
 		}
 	}
