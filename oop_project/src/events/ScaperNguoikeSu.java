@@ -5,7 +5,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.io.IOException;
 
-public class Crawler {
+public class ScaperNguoiKeSu {
     public static void main(String[] args) throws IOException {
         String base = "https://nguoikesu.com";
         ScrapeUtil.EventScrapper("https://nguoikesu.com/tu-lieu/quan-su?filter_tag[0]=", base);

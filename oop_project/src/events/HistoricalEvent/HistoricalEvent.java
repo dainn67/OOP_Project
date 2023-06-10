@@ -4,7 +4,16 @@ public class HistoricalEvent {
     private String title;
     private String time;
     private String location;
+    private String dynasty;
     private String description;
+
+    public String getDynasty() {
+        return dynasty;
+    }
+
+    public void setDynasty(String dynasty) {
+        this.dynasty = dynasty;
+    }
 
     public String getTitle() {
         return title;
