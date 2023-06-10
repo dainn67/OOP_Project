@@ -1,0 +1,1226 @@
+[
+  {
+    "ten": "Kinh Duong Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Kinh Duong Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Loc Tuc",
+    "theThu": "Khai sang trieu dai, con thu De Minh, em De Nghi",
+    "thoiGianTriVi": "2879 TCN-2794 TCN "
+  },
+  {
+    "ten": "Lac Long Quan",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Lac Long Quan",
+    "nienHieu": "khong co",
+    "tenHuy": "Sung Lam",
+    "theThu": "Con Kinh Duong Vuong",
+    "thoiGianTriVi": "2525 TCN-2253 TCN "
+  },
+  {
+    "ten": "Hung Vuong thu nhat",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Quoc Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "khong ro",
+    "theThu": "Con truong Lac Long Quan",
+    "thoiGianTriVi": "TK VII TCN-? "
+  },
+  {
+    "ten": "Hung Vuong thu hai",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Hien Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "khong ro",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu ba",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Lan Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "khong ro",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu tu",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Diep Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "khong ro",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu nam",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Hy Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "khong ro",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu sau",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Huy Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "khong ro",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu bay",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Chieu Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Lang Lieu",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu tam",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Vi Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Thua Van Lang",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu chin",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Dinh Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Quan Lang",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu muoi",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Uy Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Hung Hai Lang",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu 11",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Trinh Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Hung Duc Lang",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu 12",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Vu Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "khong ro",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu 13",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Viet Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Tuan Lang",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu 14",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Anh Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Chan Nhan Lang",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu 15",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Trieu Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Canh Chieu Lang",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu 16",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Tao Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Duc Quan Lang",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu 17",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Nghi Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "khong ro",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-? "
+  },
+  {
+    "ten": "Hung Vuong thu 18",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Due Vuong Hung Tuyen Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "khong ro",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-258 TCN hoac 208 TCN "
+  },
+  {
+    "ten": "Hung Vuong thu 19",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hung Kinh Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Hue Lang",
+    "theThu": "Khong co",
+    "thoiGianTriVi": "?-6 nam "
+  },
+  {
+    "ten": "An Duong Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "An Duong Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Thuc Phan (蜀泮)",
+    "theThu": "Hau due Khai Minh thi nuoc Thuc thoi Xuan Thu Chien Quoc.",
+    "thoiGianTriVi": "257-208TCN hoac 207-179TCN "
+  },
+  {
+    "ten": "Trieu Vu Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Vu Vuong Vu De",
+    "nienHieu": "khong co",
+    "tenHuy": "Trieu Da",
+    "theThu": "Dong doi nuoc Trieu thoi Chien Quoc, khai sang trieu dai.",
+    "thoiGianTriVi": "204-137TCN "
+  },
+  {
+    "ten": "Trieu Van Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Van Vuong Van De",
+    "nienHieu": "khong co",
+    "tenHuy": "Trieu Ho Trieu Muoi",
+    "theThu": "Chau noi Trieu Da, con Trieu Trong Thuy.",
+    "thoiGianTriVi": "137-125TCN "
+  },
+  {
+    "ten": "Trieu Minh Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Minh Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trieu Anh Te",
+    "theThu": "Con Trieu Ho",
+    "thoiGianTriVi": "125-113TCN "
+  },
+  {
+    "ten": "Trieu Ai Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Ai Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trieu Hung",
+    "theThu": "Con thu Trieu Anh Te",
+    "thoiGianTriVi": "113-112TCN "
+  },
+  {
+    "ten": "Trieu Duong Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Duong Vuong Thuat Duong Vuong Ve Duong vuong Ve Duong hau",
+    "nienHieu": "khong co",
+    "tenHuy": "Trieu Kien Duc",
+    "theThu": "Con truong Trieu Anh Te, anh Trieu Hung.",
+    "thoiGianTriVi": "112-111TCN "
+  },
+  {
+    "ten": "Trung Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Trinh Linh Chi Phu Nhan",
+    "nienHieu": "khong co",
+    "tenHuy": "Trung Trac (徵側) Lac Trac",
+    "theThu": "Vo Thi Sach, sang lap trieu dai",
+    "thoiGianTriVi": "40-43 "
+  },
+  {
+    "ten": "Ly Nam De",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Nam De, Nam Viet De",
+    "nienHieu": "Thien Duc (544-548)",
+    "tenHuy": "Ly Bi Ly Bon (李賁)",
+    "theThu": "Noi day tu lap, khai sang trieu dai",
+    "thoiGianTriVi": "544-548 "
+  },
+  {
+    "ten": "Trieu Viet Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Nam Viet Quoc Vuong, Da Trach Vuong Than Vu Hoang De",
+    "nienHieu": "khong co",
+    "tenHuy": "Trieu Quang Phuc (趙光復)",
+    "theThu": "Con Thai pho Trieu Tuc, duoc Ly Nam De giao toan bo quyen hanh.",
+    "thoiGianTriVi": "548-571 "
+  },
+  {
+    "ten": "Dao Lang Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "khong co",
+    "tenHuy": "Ly Thien Bao",
+    "theThu": "Anh trai Ly Nam De",
+    "thoiGianTriVi": "549-555 "
+  },
+  {
+    "ten": "Hau Ly Nam De",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Nam De Anh Liet Nhan Hieu Kham Minh Thanh Vu Hoang De",
+    "nienHieu": "khong co",
+    "tenHuy": "Ly Phat Tu (李佛子)",
+    "theThu": "Nguoi trong ho Ly Nam De",
+    "thoiGianTriVi": "555-602 "
+  },
+  {
+    "ten": "Ly Su Loi",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "khong co",
+    "tenHuy": "Ly Su Loi",
+    "theThu": "con Hau Ly Nam De",
+    "thoiGianTriVi": "602-603 "
+  },
+  {
+    "ten": "Mai Hac De",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Dai De, Hac De",
+    "nienHieu": "khong co",
+    "tenHuy": "Mai Thuc Loan, (梅叔鸞) Mai Huyen Thanh, Mai Lap Thanh, Mai Thuc Yen, Mai Phuong.",
+    "theThu": "Con Mai Hoan, sang lap trieu dai.",
+    "thoiGianTriVi": "713-722 "
+  },
+  {
+    "ten": "Mai Thieu De",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "khong co",
+    "tenHuy": "Mai Thuc Huy, Mai Bao Son",
+    "theThu": "Con ut Mai Hac De, em song sinh voi Bach Dau De.",
+    "thoiGianTriVi": "722-723 "
+  },
+  {
+    "ten": "Bach Dau De",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "khong co",
+    "tenHuy": "Mai Ky Son",
+    "theThu": "Con thu hai Mai Hac De, anh song sinh voi Mai Thieu De.",
+    "thoiGianTriVi": "723-723 "
+  },
+  {
+    "ten": "Phung Hung",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Bo Cai Dai Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Phung Hung (馮興), Phung Cu Lao",
+    "theThu": "con Phung Hap Khanh, the tap Bien Kho Di Tu Truong",
+    "thoiGianTriVi": "766-791 "
+  },
+  {
+    "ten": "Phung An",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "khong co",
+    "tenHuy": "Phung An",
+    "theThu": "con Phung Hung",
+    "thoiGianTriVi": "791-791 "
+  },
+  {
+    "ten": "Tien Ngo Vuong",
+    "mieuHieu": "Tien Chu",
+    "thuyHieu": "khong co",
+    "nienHieu": "khong co",
+    "tenHuy": "Ngo Quyen",
+    "theThu": "Sang lap trieu dai; con re Duong Dinh Nghe",
+    "thoiGianTriVi": "939-944 "
+  },
+  {
+    "ten": "Duong Binh Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Truong Duong Cong",
+    "nienHieu": "khong co",
+    "tenHuy": "Duong Tam Kha, Duong Chu Tuong, Duong Thieu Hong",
+    "theThu": "Con trai Duong Dinh Nghe",
+    "thoiGianTriVi": "944-950 "
+  },
+  {
+    "ten": "Thien Sach Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "khong co",
+    "tenHuy": "Ngo Xuong Ngap",
+    "theThu": "Con truong Ngo Quyen",
+    "thoiGianTriVi": "951-954 "
+  },
+  {
+    "ten": "Nam Tan Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "khong co",
+    "tenHuy": "Ngo Xuong Tan, Ngo Xuong Van",
+    "theThu": "Con thu Ngo Quyen",
+    "thoiGianTriVi": "950-965 "
+  },
+  {
+    "ten": "Ngo Su Quan",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "khong co",
+    "tenHuy": "Ngo Xuong Xi",
+    "theThu": "Con Ngo Xuong Ngap",
+    "thoiGianTriVi": "965-966 "
+  },
+  {
+    "ten": "Dinh Tien Hoang",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Tien Hoang De Dai Thang Minh Hoang De",
+    "nienHieu": "Thai Binh (970-979)",
+    "tenHuy": "Dinh Bo Linh, Dinh Hoan",
+    "theThu": "Sang lap trieu dai; con nuoi Su quan Tran Minh Cong",
+    "thoiGianTriVi": "968-979 "
+  },
+  {
+    "ten": "Dinh Phe De",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Phe De Thieu De",
+    "nienHieu": "Thai Binh (979-980)",
+    "tenHuy": "Dinh Toan, Dinh Tue",
+    "theThu": "Con trai thu 2 Dinh Tien Hoang",
+    "thoiGianTriVi": "979-980 "
+  },
+  {
+    "ten": "Le Dai Hanh",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Dai Hanh Hoang De Minh Can Ung Van Than Vu Thang Binh Chi Nhan Quang Hieu Hoang de",
+    "nienHieu": "Thien Phuc (980-988) Hung Thong (989-993) Ung Thien (994-1005)",
+    "tenHuy": "Le Hoan",
+    "theThu": "Sang lap trieu dai, Pho vuong nhiep chinh thoi Dinh Phe De",
+    "thoiGianTriVi": "980-1005 "
+  },
+  {
+    "ten": "Le Trung Tong",
+    "mieuHieu": "Trung Tong",
+    "thuyHieu": "khong co",
+    "nienHieu": "Ung Thien (1005-1005)",
+    "tenHuy": "Le Long Viet",
+    "theThu": "Con thu Le Dai Hanh",
+    "thoiGianTriVi": "1005-1005 "
+  },
+  {
+    "ten": "Le Ngoa Trieu",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Khai Thien Ung Van Thanh Van Than Vu Tac Thien Sung Dao Dai Thang Minh Quang Hieu Hoang De Ngoa Trieu Hoang De",
+    "nienHieu": "Ung Thien (1005-1007) Canh Thuy (1008-1009)",
+    "tenHuy": "Le Long Dinh,",
+    "theThu": "Con thu nam Le Dai Hanh",
+    "thoiGianTriVi": "1005-1009 "
+  },
+  {
+    "ten": "Tran Thai Tong",
+    "mieuHieu": "Thai Tong Thien Hoang Van Hoang",
+    "thuyHieu": "Thong Thien Ngu Cuc Long Cong Hau Duc Hien Cong Huu Thuan Thanh Van Than Vu Hieu Nguyen Hoang De",
+    "nienHieu": "Kien Trung (1225-1232) Thien Ung Chinh Binh (1232-1351) Nguyen Phong (1251-1258)",
+    "tenHuy": "Tran Canh Tran Bo Tran Quang Binh Tran Nhat Canh",
+    "theThu": "Sang lap trieu dai, chong va anh ho Ly Chieu Hoang",
+    "thoiGianTriVi": "1225-1258 "
+  },
+  {
+    "ten": "Tran Thanh Tong",
+    "mieuHieu": "Thanh Tong Nhan Hoang",
+    "thuyHieu": "Huyen Cong Thinh Duc Nhan Minh Van Vu Tuyen Hieu Hoang De",
+    "nienHieu": "Thieu Long (1258-1272) Bao Phu (1273-1278)",
+    "tenHuy": "Tran Hoang Tran Uy Hoang Tran Quang Binh Tran Nhat Huyen",
+    "theThu": "Con thu hai Tran Thai Tong",
+    "thoiGianTriVi": "1258-1279 "
+  },
+  {
+    "ten": "Tran Nhan Tong",
+    "mieuHieu": "Nhan Tong Hieu Hoang",
+    "thuyHieu": "Phap Thien Sung Dao Ung The Hoa Dan Long Tu Hien Hieu Thanh Van Than Vu Nguyen Minh Due Hieu Hoang De",
+    "nienHieu": "Thieu Bao (1278-1285) Trung Hung (1285-1293)",
+    "tenHuy": "Tran Kham Tran Nhat Tuan",
+    "theThu": "Con truong Tran Thanh Tong",
+    "thoiGianTriVi": "1278-1293 "
+  },
+  {
+    "ten": "Tran Anh Tong",
+    "mieuHieu": "Anh Tong Anh Hoang",
+    "thuyHieu": "Hien Van Due Vu Kham Minh Nhan Hieu Hoang De",
+    "nienHieu": "Hung Long (1293-1314)",
+    "tenHuy": "Tran Thuyen Tran Nhat 㷃 Tran Nhat 𤊞",
+    "theThu": "Con truong Tran Nhan Tong",
+    "thoiGianTriVi": "1293-1314 "
+  },
+  {
+    "ten": "Tran Minh Tong",
+    "mieuHieu": "Minh Tong Ninh Hoang",
+    "thuyHieu": "Chuong Nghieu Van Triet Hoang De",
+    "nienHieu": "Dai Khanh (1314-1323) Khai Thai (1324-1329)",
+    "tenHuy": "Tran Manh Tran Thanh Sinh Tran Nhat Khoang",
+    "theThu": "Con thu tu Tran Anh Tong",
+    "thoiGianTriVi": "1314-1329 "
+  },
+  {
+    "ten": "Tran Hien Tong",
+    "mieuHieu": "Hien Tong Triet Hoang",
+    "thuyHieu": " The Nguyen Ngu Cuc Due Thanh Chi Hieu Hoang De",
+    "nienHieu": "Khai Huu (1329-1341)",
+    "tenHuy": "Tran Vuong Tran Thien Kien  Tran Nhat 㷆",
+    "theThu": "Con truong Tran Minh Tong",
+    "thoiGianTriVi": "1329-1341 "
+  },
+  {
+    "ten": "Tran Du Tong",
+    "mieuHieu": "Du Tong Du Hoang",
+    "thuyHieu": "Thong Thien The Dao Nhan Minh Quang Hieu Hoang de",
+    "nienHieu": "Thieu Phong (1341-1357) Dai Tri (1358-1369)",
+    "tenHuy": "Tran Hao Tran Nhat Khue",
+    "theThu": "Con thu muoi Tran Minh Tong, dong hoang dich tu",
+    "thoiGianTriVi": "1341-1369 "
+  },
+  {
+    "ten": "Dai Dinh De",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hon Duc Cong",
+    "nienHieu": "Dai Dinh (1369-1370)",
+    "tenHuy": "Tran Nhat Le Duong Nhat Le Tran Nhat Kien",
+    "theThu": "Con rieng cua chi dau Tran Du Tong",
+    "thoiGianTriVi": "1369-1370 "
+  },
+  {
+    "ten": "Tran Nghe Tong",
+    "mieuHieu": "Nghe Tong Nghe Hoang Nghia Hoang",
+    "thuyHieu": "Quang Nhien Anh Triet Hoang De The Thien Kien Cuc Thuan Hieu Hoang De",
+    "nienHieu": "Thieu Khanh (1370-1372)",
+    "tenHuy": "Tran Phu Tran Thuc Minh",
+    "theThu": "Con thu ba Tran Minh Tong",
+    "thoiGianTriVi": "1370-1372 "
+  },
+  {
+    "ten": "Tran Due Tong",
+    "mieuHieu": "Due Tong Kham Hoang",
+    "thuyHieu": "Ke Thien Ung Van Nhan Minh Kham Hieu Hoang De",
+    "nienHieu": "Long Khanh (1373-1377)",
+    "tenHuy": "Tran Kinh Tran Nhat Doan",
+    "theThu": "Con thu 11 Tran Minh Tong",
+    "thoiGianTriVi": "1372-1377 "
+  },
+  {
+    "ten": "Tran Phe De",
+    "mieuHieu": "Gian Hoang",
+    "thuyHieu": "Phe De",
+    "nienHieu": "Xuong Phu (1377-1388)",
+    "tenHuy": "Tran Hien Tran Nhat Vi",
+    "theThu": "Con thu Tran Due Tong",
+    "thoiGianTriVi": "1377-1388 "
+  },
+  {
+    "ten": "Tran Thuan Tong",
+    "mieuHieu": "Thuan Tong Nguyen Hoang",
+    "thuyHieu": "khong co",
+    "nienHieu": "Quang Thai (1388-1398)",
+    "tenHuy": "Tran Ngung Tran Nhat Hon",
+    "theThu": "Con thu cua Tran Nghe Tong",
+    "thoiGianTriVi": "1388-1398 "
+  },
+  {
+    "ten": "Tran Thieu De",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Thieu De",
+    "nienHieu": "Kien Tan (1398-1400)",
+    "tenHuy": "Tran An",
+    "theThu": "Con truong Tran Thuan Tong, chau ngoai Ho Quy Ly",
+    "thoiGianTriVi": "1398-1400 "
+  },
+  {
+    "ten": "Ho Quy Ly",
+    "mieuHieu": "Quoc To",
+    "thuyHieu": "Chuong Hoang",
+    "nienHieu": "Thanh Nguyen (1400)",
+    "tenHuy": "Ho Quy Ly Ho Nhat Nguyen Le Quy Ly Le Nhat Nguyen",
+    "theThu": "Sang lap trieu dai, pho ma Tran Minh Tong, ong ngoai Tran Thieu De",
+    "thoiGianTriVi": "1400-1400 "
+  },
+  {
+    "ten": "Ho Han Thuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "Thieu Thanh (1401-1402) Khai Dai (1403-1407)",
+    "tenHuy": "Ho Han Thuong Le Han Thuong Ho Hoa",
+    "theThu": "Con thu Ho Quy Ly",
+    "thoiGianTriVi": "1400-1407 "
+  },
+  {
+    "ten": "Tran Nguyet Ho",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "khong co",
+    "tenHuy": "Tran Nguyet Ho",
+    "theThu": "khong ro",
+    "thoiGianTriVi": "1407-1407 "
+  },
+  {
+    "ten": "Gian Dinh De",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "Hung Khanh (1407-1409)",
+    "tenHuy": "Tran Ngoi, Tran Quy",
+    "theThu": "Con trai thu Tran Nghe Tong",
+    "thoiGianTriVi": "1407-1409 "
+  },
+  {
+    "ten": "Trung Quang De",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "Trung Quang (1409-1414)",
+    "tenHuy": "Tran Quy Khoang, Tran Quy Khoach",
+    "theThu": "Chau noi Tran Nghe Tong",
+    "thoiGianTriVi": "1409-1414 "
+  },
+  {
+    "ten": "Tran Cao",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "Thien Khanh (1426-1428)",
+    "tenHuy": "Tran Cao, Tran Dich, Tran Cao, Tran Ho Ong",
+    "theThu": "1426",
+    "thoiGianTriVi": "-1428 "
+  },
+  {
+    "ten": "Mac Thai To",
+    "mieuHieu": "Thai To",
+    "thuyHieu": "Nhan Minh Cao Hoang De",
+    "nienHieu": "Minh Duc (1527-1530)",
+    "tenHuy": "Mac Dang Dung",
+    "theThu": "Chau 7 doi Mac Dinh Chi, sang lap trieu dai",
+    "thoiGianTriVi": "1527-1530 "
+  },
+  {
+    "ten": "Mac Thai Tong",
+    "mieuHieu": "Thai Tong",
+    "thuyHieu": "Kham Triet Van Hoang De",
+    "nienHieu": "Dai Chinh (1530-1540)",
+    "tenHuy": "Mac Dang Doanh Mac Phuong Doanh",
+    "theThu": "Con truong Mac Thai To",
+    "thoiGianTriVi": "1530-1540 "
+  },
+  {
+    "ten": "Mac Hien Tong",
+    "mieuHieu": "Hien Tong",
+    "thuyHieu": "Hien Hoang De",
+    "nienHieu": "Quang Hoa (1540-1546)",
+    "tenHuy": "Mac Phuc Hai Mac Duc Nguyen",
+    "theThu": "Con truong Mac Thai Tong",
+    "thoiGianTriVi": "1540-1546 "
+  },
+  {
+    "ten": "Mac Chinh Trung",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "khong co",
+    "tenHuy": "Mac Chinh Trung",
+    "theThu": "Em Mac Thai Tong",
+    "thoiGianTriVi": "1546-1547 "
+  },
+  {
+    "ten": "Mac Tuyen Tong",
+    "mieuHieu": "Tuyen Tong",
+    "thuyHieu": "Anh Nghi Hoang De Due Hoang De",
+    "nienHieu": "Vinh Dinh (1547) Canh Lich (1548-1553) Quang Bao (1554-1561)",
+    "tenHuy": "Mac Phuc Nguyen",
+    "theThu": "Con Mac Hien Tong",
+    "thoiGianTriVi": "1546-1561 "
+  },
+  {
+    "ten": "Mac Muc Tong Mac Anh To",
+    "mieuHieu": "Muc Tong Anh To",
+    "thuyHieu": "An Thien Huy Dia Trang Van Can Vu Binh Dinh Hue Cuong Hieu Tinh Hoang De",
+    "nienHieu": "Thuan Phuc (1562-1565) Sung Khang (1566-1577) Dien Thanh (1578-1585) Doan Thai (1586-1587) Hung Tri (1588-1590) Hong Ninh (1591-1592)",
+    "tenHuy": "Mac Mau Hop",
+    "theThu": "Con trai Mac Tuyen Tong",
+    "thoiGianTriVi": "1561-1592 "
+  },
+  {
+    "ten": "Mac Canh Tong",
+    "mieuHieu": "Canh Tong",
+    "thuyHieu": "Khai Thien Xung Dia An Van Doat Vu Thanh Hoang De",
+    "nienHieu": "Vu An (1592-1592)",
+    "tenHuy": "Mac Toan",
+    "theThu": "Con thu Mac Mau Hop",
+    "thoiGianTriVi": "1592-1592 "
+  },
+  {
+    "ten": "Mac Man Tong",
+    "mieuHieu": "Man Tong",
+    "thuyHieu": "Hoai Nghi Minh Huan Trinh Hoang De",
+    "nienHieu": "Bao Dinh (1592-1593) Khang Huu (1593-1593)",
+    "tenHuy": "Mac Kinh Chi Mac Kinh Bang",
+    "theThu": "Con truong Mac Kinh Dien, chau noi Mac Thai Tong",
+    "thoiGianTriVi": "1592-1593 "
+  },
+  {
+    "ten": "Mac Dai Tong",
+    "mieuHieu": "Dai Tong",
+    "thuyHieu": "Khoi Thien Dinh Dia Khac Van Dinh Vu Linh Hoang De",
+    "nienHieu": "Can Thong (1593-1625)",
+    "tenHuy": "Mac Kinh Cung",
+    "theThu": "Con thu 7 Mac Kinh Dien",
+    "thoiGianTriVi": "1592-1625 "
+  },
+  {
+    "ten": "Mac Quang To",
+    "mieuHieu": "Quang To",
+    "thuyHieu": "Hoa Thien Phu Dia Do Van Khanh Vu Hue Nguyen Hoang De",
+    "nienHieu": "Long Thai (1623-1638)",
+    "tenHuy": "Mac Kinh Khoan",
+    "theThu": "Chau noi Mac Kinh Dien",
+    "thoiGianTriVi": "1623-1638 "
+  },
+  {
+    "ten": "Mac Minh Tong",
+    "mieuHieu": "Minh Tong",
+    "thuyHieu": "Trang Thien Hue Dia Canh Van Di Vu Khai Hoang De",
+    "nienHieu": "Thuan Duc (1638-1677)",
+    "tenHuy": "Mac Kinh Vu Mac Kinh Hoan Mac Kinh Dieu",
+    "theThu": "Con Mac Kinh Khoan",
+    "thoiGianTriVi": "1638-1677 "
+  },
+  {
+    "ten": "Mac Quy Tong",
+    "mieuHieu": "Quy Tong",
+    "thuyHieu": "Hoan Thien Thanh Dia Doat Van Duong Vu Hue Dai Vuong",
+    "nienHieu": "Vinh Xuong (1677-1681)",
+    "tenHuy": "Mac Kinh He Mac Kinh Thuy Mac Nguyen Thanh",
+    "theThu": "Con Mac Kinh Vu",
+    "thoiGianTriVi": "1677-1681 "
+  },
+  {
+    "ten": "Mac Duc Tong",
+    "mieuHieu": "Duc Tong",
+    "thuyHieu": "Thien Dia Dai Bao Van Vu Do Dai Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Mac Kinh Quang Mac Kinh Tieu Mac Kinh Hoang",
+    "theThu": "Con Mac Kinh Vu, em Mac Nguyen Thanh",
+    "thoiGianTriVi": "1681-1683 "
+  },
+  {
+    "ten": "Le Trang Tong",
+    "mieuHieu": "Trang Tong",
+    "thuyHieu": "Du Hoang De",
+    "nienHieu": "Nguyen Hoa (1533-1548)",
+    "tenHuy": "Le Ninh Le Huyen Le Duy Ninh",
+    "theThu": "Duoc cho la con Le Chieu Tong",
+    "thoiGianTriVi": "1533-1548 "
+  },
+  {
+    "ten": "Le Trung Tong",
+    "mieuHieu": "Trung Tong",
+    "thuyHieu": "Vu Hoang De",
+    "nienHieu": "Thuan Binh (1548-1556)",
+    "tenHuy": "Le Huyen Le Duy Huyen",
+    "theThu": "Con Le Trang Tong",
+    "thoiGianTriVi": "1548-1556 "
+  },
+  {
+    "ten": "Le Anh Tong",
+    "mieuHieu": "Anh Tong",
+    "thuyHieu": "Tuan Hoang De",
+    "nienHieu": "Thien Huu (1556-1557) Chinh tri (1558-1571) Hong Phuc (1572-1573)",
+    "tenHuy": "Le Duy Bang",
+    "theThu": "Chau 6 doi cua Le Tru, anh Le Thai To",
+    "thoiGianTriVi": "1556-1573 "
+  },
+  {
+    "ten": "Le The Tong",
+    "mieuHieu": "The Tong",
+    "thuyHieu": "Nghi Hoang De",
+    "nienHieu": "Gia Thai (1573-1577) Quang Hung (1578-1599)",
+    "tenHuy": "Le Dam Le Duy Dam",
+    "theThu": "Con thu nam Le Anh Tong",
+    "thoiGianTriVi": "1573-1599 "
+  },
+  {
+    "ten": "Le Kinh Tong",
+    "mieuHieu": "Kinh Tong",
+    "thuyHieu": "Hue Hoang De Gian Huy De",
+    "nienHieu": "Than Duc (1600-1600) Hoang Dinh (1601-1619)",
+    "tenHuy": "Le Duy Tan",
+    "theThu": "Con thu Le The Tong",
+    "thoiGianTriVi": "1599-1619 "
+  },
+  {
+    "ten": "Le Than Tong",
+    "mieuHieu": "Than Tong",
+    "thuyHieu": "Uyen Hoang De",
+    "nienHieu": "Vinh To (1620--1628) Duc Long (1629-1634) Duong Hoa (1635-1643)",
+    "tenHuy": "Le Duy Ky",
+    "theThu": "Con truong Le Kinh Tong",
+    "thoiGianTriVi": "1619-1643 "
+  },
+  {
+    "ten": "Le Chan Tong",
+    "mieuHieu": "Chan Tong",
+    "thuyHieu": "Thuan Hoang De",
+    "nienHieu": "Phuc Thai (1643-1649)",
+    "tenHuy": "Le Duy Huu Le Duy De",
+    "theThu": "Con truong Le Than Tong",
+    "thoiGianTriVi": "1643-1649 "
+  },
+  {
+    "ten": "Le Than Tong",
+    "mieuHieu": "Than Tong",
+    "thuyHieu": "Uyen Hoang De",
+    "nienHieu": "Khanh Duc (1649-1652) Thinh Duc (1653-1657) Vinh Tho (1658-1661) Van Khanh (1662)",
+    "tenHuy": "Le Duy Ky",
+    "theThu": "Lam vua lan 2",
+    "thoiGianTriVi": "1649-1662 "
+  },
+  {
+    "ten": "Le Huyen Tong",
+    "mieuHieu": "Huyen Tong",
+    "thuyHieu": "Muc Hoang De",
+    "nienHieu": "Canh Tri (1663-1671)",
+    "tenHuy": "Le Duy Vu Le Duy Hy",
+    "theThu": "Con thu Le Than Tong",
+    "thoiGianTriVi": "1663-1671 "
+  },
+  {
+    "ten": "Le Gia Tong",
+    "mieuHieu": "Gia Tong",
+    "thuyHieu": "My Hoang De",
+    "nienHieu": "Duong Duc (1672--1673) Duc Nguyen (1674-1675)",
+    "tenHuy": "Le Duy Coi Le Duy Khoai",
+    "theThu": "Con thu Le Than Tong",
+    "thoiGianTriVi": "1671-1675 "
+  },
+  {
+    "ten": "Le Hy Tong",
+    "mieuHieu": "Hy Tong",
+    "thuyHieu": "Chuong Hoang De",
+    "nienHieu": "Vinh Tri (1676-1680) Chinh Hoa (1680-1705)",
+    "tenHuy": "Le Duy Hop Le Duy Hiep Le Duy Cap",
+    "theThu": "con thu tu Le Than Tong",
+    "thoiGianTriVi": "1675-1705 "
+  },
+  {
+    "ten": "Le Du Tong",
+    "mieuHieu": "Du Tong",
+    "thuyHieu": "Hoa Hoang De",
+    "nienHieu": "Vinh Thinh (1706-1719) Bao Thai (1720-1729)",
+    "tenHuy": "Le Duy Duong Le Duy Tao",
+    "theThu": "con truong Le Hy Tong",
+    "thoiGianTriVi": "1705-1729 "
+  },
+  {
+    "ten": "Le Duy Phuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hon Duc Cong",
+    "nienHieu": "Vinh Khanh (1729-1732)",
+    "tenHuy": "Le Duy Phuong",
+    "theThu": "con thu Le Du Tong",
+    "thoiGianTriVi": "1729-1732 "
+  },
+  {
+    "ten": "Le Thuan Tong",
+    "mieuHieu": "Thuan Tong",
+    "thuyHieu": "Gian Hoang De",
+    "nienHieu": "Long Duc (1732-1735)",
+    "tenHuy": "Le Duy Tuong Le Duy Ho",
+    "theThu": "con truong Le Du Tong",
+    "thoiGianTriVi": "1732-1735 "
+  },
+  {
+    "ten": "Le Y Tong",
+    "mieuHieu": "Y Tong",
+    "thuyHieu": "Huy Hoang De",
+    "nienHieu": "Vinh Huu (1735-1740)",
+    "tenHuy": "Le Duy Than Le Duy Chan Le Duy Ho",
+    "theThu": "con thu 11 Le Du Tong",
+    "thoiGianTriVi": "1735-1740 "
+  },
+  {
+    "ten": "Le Hien Tong",
+    "mieuHieu": "Hien Tong",
+    "thuyHieu": "Vinh Hoang De",
+    "nienHieu": "Canh Hung (1740-1786)",
+    "tenHuy": "Le Duy Dieu Le Duy Dao",
+    "theThu": "con truong Le Thuan Tong",
+    "thoiGianTriVi": "1740-1786 "
+  },
+  {
+    "ten": "Le Chieu Thong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Man Hoang De",
+    "nienHieu": "Chieu Thong (1786-1789)",
+    "tenHuy": "Le Duy Ky Le Duy Khiem Le Tu Khiem",
+    "theThu": "con Le Duy Vy, chau dich ton Le Hien Tong",
+    "thoiGianTriVi": "1786-1789 "
+  },
+  {
+    "ten": "Trinh Kiem",
+    "mieuHieu": "The To",
+    "thuyHieu": "Minh Khang Thai Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trinh Kiem",
+    "theThu": "con re Nguyen Kim",
+    "thoiGianTriVi": "1545-1570 "
+  },
+  {
+    "ten": "Trinh Coi",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Tuan Duc Hau, Trung Quoc Cong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trinh Coi",
+    "theThu": "con ca Trinh Kiem",
+    "thoiGianTriVi": "1570-1570 "
+  },
+  {
+    "ten": "Binh An Vuong",
+    "mieuHieu": "Thanh To",
+    "thuyHieu": "Triet Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trinh Tung",
+    "theThu": "con thu Trinh Kiem, chua Trinh dau tien",
+    "thoiGianTriVi": "1570-1623 "
+  },
+  {
+    "ten": "Thanh Do Vuong",
+    "mieuHieu": "Van To",
+    "thuyHieu": "Nghi Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trinh Trang",
+    "theThu": "con thu hai Trinh Tung",
+    "thoiGianTriVi": "1623-1657 "
+  },
+  {
+    "ten": "Tay Dinh Vuong",
+    "mieuHieu": "Hoang To",
+    "thuyHieu": "Duong Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trinh Tac",
+    "theThu": "con thu hai Trinh Trang",
+    "thoiGianTriVi": "1657-1682 "
+  },
+  {
+    "ten": "Dinh Nam Vuong",
+    "mieuHieu": "Chieu To",
+    "thuyHieu": "Khang Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trinh Can",
+    "theThu": "con truong Trinh Tac",
+    "thoiGianTriVi": "1682-1709 "
+  },
+  {
+    "ten": "An Do Vuong",
+    "mieuHieu": "Hy To",
+    "thuyHieu": "Nhan Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trinh Cuong",
+    "theThu": "chat cua Trinh Can, chau Trinh Vinh, con Trinh Binh",
+    "thoiGianTriVi": "1709-1729 "
+  },
+  {
+    "ten": "Uy Nam Vuong",
+    "mieuHieu": "Du To",
+    "thuyHieu": "Thuan Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trinh Giang Trinh Khuong Trinh 𣞪",
+    "theThu": "con truong Trinh Cuong",
+    "thoiGianTriVi": "1729-1740 "
+  },
+  {
+    "ten": "Minh Do Vuong",
+    "mieuHieu": "Nghi To",
+    "thuyHieu": "An Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trinh Doanh",
+    "theThu": "con thu Trinh Cuong, em Trinh Giang",
+    "thoiGianTriVi": "1740-1767 "
+  },
+  {
+    "ten": "Tinh Do Vuong",
+    "mieuHieu": "Thanh To",
+    "thuyHieu": "Thinh Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trinh Sam",
+    "theThu": "con truong Trinh Doanh",
+    "thoiGianTriVi": "1767-1782 "
+  },
+  {
+    "ten": "Dien Do Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Xung Man Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trinh Can",
+    "theThu": "con thu Trinh Sam",
+    "thoiGianTriVi": "1782-1782 "
+  },
+  {
+    "ten": "Doan Nam Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Anh Liet Linh Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trinh Khai Trinh Tong",
+    "theThu": "con truong Trinh Sam",
+    "thoiGianTriVi": "1782-1786 "
+  },
+  {
+    "ten": "An Do Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Hue Dinh Cong",
+    "nienHieu": "khong co",
+    "tenHuy": "Trinh Bong",
+    "theThu": "con Trinh Giang, anh ho Trinh Sam",
+    "thoiGianTriVi": "1786-1787 "
+  },
+  {
+    "ten": "Tien Vuong",
+    "mieuHieu": "Liet To, Thai To",
+    "thuyHieu": "Trieu Co Tuy Thong Kham Minh Cung Y Can Nghia Dat Ly Hien Ung Chieu Huu Dieu Linh Gia Du Hoang De",
+    "nienHieu": "khong co",
+    "tenHuy": "Nguyen Hoang",
+    "theThu": "con ut Nguyen Kim",
+    "thoiGianTriVi": "1558-1613 "
+  },
+  {
+    "ten": "Sai Vuong Phat Vuong",
+    "mieuHieu": "Tuyen To, Hy Tong",
+    "thuyHieu": "Hien Mo Quang Liet On Cung Minh Due Duc Thien Tuy Du Hieu Van Hoang De",
+    "nienHieu": "khong co",
+    "tenHuy": "Nguyen Phuc Nguyen",
+    "theThu": "con trai thu sau Chua Tien",
+    "thoiGianTriVi": "1613-1635 "
+  },
+  {
+    "ten": "Thuong Vuong",
+    "mieuHieu": "Than To, Than Tong",
+    "thuyHieu": "Thua Co Toan Thong Quan Minh Hung Nghi Uy Doan Anh Vu Hieu Chieu Hoang De",
+    "nienHieu": "khong co",
+    "tenHuy": "Nguyen Phuc Lan",
+    "theThu": "con trai thu hai Chua Sai",
+    "thoiGianTriVi": "1635-1648 "
+  },
+  {
+    "ten": "Hien Vuong",
+    "mieuHieu": "Nghi To, Thai Tong",
+    "thuyHieu": "Tuyen Uy Kien Vu Anh Minh Trang Chinh Thanh Duc Than Cong Hieu Triet Hoang De",
+    "nienHieu": "khong co",
+    "tenHuy": "Nguyen Phuc Tan Nguyen Phuc Can",
+    "theThu": "con trai thu hai Chua Thuong",
+    "thoiGianTriVi": "1648-1687 "
+  },
+  {
+    "ten": "Nghia Vuong",
+    "mieuHieu": "Anh Tong",
+    "thuyHieu": "Thieu Hu Toan Nghiep Khoan Hong Bac Hau On Hue Tu Tuong Hieu Nghia Hoang De",
+    "nienHieu": "khong co",
+    "tenHuy": "Nguyen Phuc Thai Nguyen Phuc Tran Nguyen Phuc Ngan",
+    "theThu": "con trai thu hai Chua Hien",
+    "thoiGianTriVi": "1687-1691 "
+  },
+  {
+    "ten": "Minh Vuong Quoc Chua",
+    "mieuHieu": "Hien Tong",
+    "thuyHieu": "Anh Mo Hung Luoc Thanh Minh Tuyen Dat Khoan Tu Nhan Thu Hieu Minh Hoang De",
+    "nienHieu": "khong co",
+    "tenHuy": "Nguyen Phuc Chu Nguyen Phuc Tung",
+    "theThu": "con truong Chua Nghia",
+    "thoiGianTriVi": "1691-1725 "
+  },
+  {
+    "ten": "Ninh Vuong",
+    "mieuHieu": "Tuc Tong",
+    "thuyHieu": "Tuyen Quang Thieu Liet Tuan Triet Tinh Uyen Kinh Van Vi Vu Hieu Ninh Hoang De",
+    "nienHieu": "khong co",
+    "tenHuy": "Nguyen Phuc Chu Nguyen Phuc Tru Nguyen Phuc Thu Nguyen Phuc Vuong",
+    "theThu": "con truong Chua Minh",
+    "thoiGianTriVi": "1725-1738 "
+  },
+  {
+    "ten": "Vu Vuong",
+    "mieuHieu": "The Tong",
+    "thuyHieu": "Kien Cuong Uy Doan Than Nghi Thanh Du Nhan Tu Due Tri Hieu Vu Hoang De",
+    "nienHieu": "khong co",
+    "tenHuy": "Nguyen Phuc Khoat Nguyen Phuc Hieu",
+    "theThu": "con truong Chua Ninh",
+    "thoiGianTriVi": "1738-1765 "
+  },
+  {
+    "ten": "Dinh Vuong",
+    "mieuHieu": "Due Tong",
+    "thuyHieu": "Thong Minh Khoan Hau Anh Man Hue Hoa Hieu Dinh Hoang De",
+    "nienHieu": "khong co",
+    "tenHuy": "Nguyen Phuc Thuan Nguyen Phuc Han",
+    "theThu": "con trai thu 16 Chua Vu",
+    "thoiGianTriVi": "1765-1776 "
+  },
+  {
+    "ten": "Tan Chinh Vuong",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Cung Man Anh Doan Huyen Mac Vi Van Muc Vuong",
+    "nienHieu": "khong co",
+    "tenHuy": "Nguyen Phuc Duong",
+    "theThu": "con Nguyen Phuc Hieu, chau noi Chua Vu, em con chu voi vua Gia Long",
+    "thoiGianTriVi": "1776-1777 "
+  },
+  {
+    "ten": "Thai Duc",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Minh Duc Hoang De",
+    "nienHieu": "Thai Duc (1778-1788)",
+    "tenHuy": "Ho Nhac Nguyen Nhac Nguyen Van Nhac",
+    "theThu": "con truong Ho Phi Phuc, sang lap trieu dai",
+    "thoiGianTriVi": "1778-1788 "
+  },
+  {
+    "ten": "Quang Trung",
+    "mieuHieu": "Thai To",
+    "thuyHieu": "Vu Hoang De Trung Thuan Vuong",
+    "nienHieu": "Quang Trung (1788-1792)",
+    "tenHuy": "Nguyen Hue Nguyen Quang Binh Nguyen Van Hue Ho Thom",
+    "theThu": "con thu Ho Phi Phuc, em Nguyen Nhac, con re Le Hien Tong",
+    "thoiGianTriVi": "1788-1792 "
+  },
+  {
+    "ten": "Nguyen Quang Toan",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "Canh Thinh (1792-1801) Bao Hung (1801-1802)",
+    "tenHuy": "Nguyen Quang Toan Nguyen Trat",
+    "theThu": "con thu Quang Trung, con re Le Hien Tong",
+    "thoiGianTriVi": "1792-1802 "
+  },
+  {
+    "ten": "Gia Long",
+    "mieuHieu": "The To",
+    "thuyHieu": "Khai Thien Hoang Dao Lap Ky Thuy Thong Than Van Thanh Vu Tuan Duc Long Cong Chi Nhan Dai Hieu Cao Hoang De",
+    "nienHieu": "Gia Long (1802-1820)",
+    "tenHuy": "Nguyen Phuc Anh Nguyen Phuc Chung Nguyen Phuc Noan",
+    "theThu": "Sang lap trieu dai. Con thu ba cua Nguyen Phuc Luan, chau noi Nguyen Phuc Khoat, con re Le Hien Tong",
+    "thoiGianTriVi": "1802-1820 "
+  },
+  {
+    "ten": "Minh Mang",
+    "mieuHieu": "Thanh To",
+    "thuyHieu": "The Thien Xuong Van Chi Hieu Thuan Duc Van Vu Minh Doan Sang Thuat Dai Thanh Hau Trach Phong Cong Nhan Hoang De",
+    "nienHieu": "Minh Mang (1820-1841)",
+    "tenHuy": "Nguyen Phuc Dam Nguyen Phuc Kieu",
+    "theThu": "Con thu tu Gia Long",
+    "thoiGianTriVi": "1820-1841 "
+  },
+  {
+    "ten": "Thieu Tri",
+    "mieuHieu": "Hien To",
+    "thuyHieu": "Thieu Thien Long Van Chi Thien Thuan Hieu Khoan Minh Due Doan Van Tri Vu Cong Thanh Triet Chuong Hoang De",
+    "nienHieu": "Thieu Tri (1841-1847)",
+    "tenHuy": "Nguyen Phuc Mien Tong Nguyen Phuc Tuyen Nguyen Phuc Dung",
+    "theThu": "Con truong Minh Mang",
+    "thoiGianTriVi": "1841-1847 "
+  },
+  {
+    "ten": "Tu Duc",
+    "mieuHieu": "Duc Tong",
+    "thuyHieu": "The Thien Hanh Van Chi Thanh Dat Hieu The Kien Don Nhan Khiem Cung Minh Luoc Due Van Anh Hoang De",
+    "nienHieu": "Tu Duc (1847-1883)",
+    "tenHuy": "Nguyen Phuc Hong Nham Nguyen Phuc Thi",
+    "theThu": "Con thu Thieu Tri",
+    "thoiGianTriVi": "1847-1883 "
+  },
+  {
+    "ten": "Duc Duc",
+    "mieuHieu": "Cung Tong",
+    "thuyHieu": "Hue Hoang De",
+    "nienHieu": "khong co",
+    "tenHuy": "Nguyen Phuc Ung Chan Nguyen Phuc Ung Ai",
+    "theThu": "Con thu Nguyen Phuc Hong Y, chau noi Thieu Tri, con nuoi Tu Duc",
+    "thoiGianTriVi": "1883-1883 "
+  },
+  {
+    "ten": "Hiep Hoa",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Phe De",
+    "nienHieu": "Hiep Hoa (1883)",
+    "tenHuy": "Nguyen Phuc Hong Dat Nguyen Phuc Thang",
+    "theThu": "Con thu 29 Thieu Tri",
+    "thoiGianTriVi": "1883-1883 "
+  },
+  {
+    "ten": "Kien Phuc",
+    "mieuHieu": "Gian Tong",
+    "thuyHieu": "Thieu Duc Chi Hieu Uyen Due Nghi Hoang De",
+    "nienHieu": "Kien Phuc (1883-1884)",
+    "tenHuy": "Nguyen Phuc Ung Dang",
+    "theThu": "Con thu Nguyen Phuc Hong Cai, chau noi Thieu Tri",
+    "thoiGianTriVi": "1883-1884 "
+  },
+  {
+    "ten": "Ham Nghi",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Xuat De",
+    "nienHieu": "Ham Nghi (1884-1885)",
+    "tenHuy": "Nguyen Phuc Ung Lich Nguyen Phuc Minh",
+    "theThu": "Em trai Kien Phuc",
+    "thoiGianTriVi": "1884-1885 "
+  },
+  {
+    "ten": "Dong Khanh",
+    "mieuHieu": "Canh Tong",
+    "thuyHieu": "Hoang Liet Thong Thiet Man Hue Thuan Hoang De",
+    "nienHieu": "Dong Khanh (1885-1889)",
+    "tenHuy": "Nguyen Phuc Ung Ky Nguyen Phuc Ung Duong Nguyen Phuc Ung Thi Nguyen Phuc Bien Chanh Mong",
+    "theThu": "Con truong Nguyen Phuc Hong Cai, anh Kien Phuc va Ham Nghi",
+    "thoiGianTriVi": "1885-1889 "
+  },
+  {
+    "ten": "Thanh Thai",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Phe De",
+    "nienHieu": "Thanh Thai (1889-1907)",
+    "tenHuy": "Nguyen Phuc Buu Lan Nguyen Phuc Chieu",
+    "theThu": "Con Duc Duc",
+    "thoiGianTriVi": "1889-1907 "
+  },
+  {
+    "ten": "Duy Tan",
+    "mieuHieu": "khong co",
+    "thuyHieu": "Phe De",
+    "nienHieu": "Duy Tan (1907-1916)",
+    "tenHuy": "Nguyen Phuc Vinh San Nguyen Phuc Hoang",
+    "theThu": "Con thu Thanh Thai",
+    "thoiGianTriVi": "1907-1916 "
+  },
+  {
+    "ten": "Khai Dinh",
+    "mieuHieu": "Hoang Tong",
+    "thuyHieu": "Tu Thien Gia Van Thanh Minh Than Tri Nhan Hieu Thanh Kinh Di Mo Thua Liet Tuyen Hoang De",
+    "nienHieu": "Khai Dinh (1916-1925)",
+    "tenHuy": "Nguyen Phuc Buu Dao",
+    "theThu": "Con truong Dong Khanh",
+    "thoiGianTriVi": "1916-1925 "
+  },
+  {
+    "ten": "Bao Dai",
+    "mieuHieu": "khong co",
+    "thuyHieu": "khong co",
+    "nienHieu": "Bao Dai (1925-1945)",
+    "tenHuy": "Nguyen Phuc Vinh Thuy Nguyen Phuc Thien",
+    "theThu": "Con Khai Dinh",
+    "thoiGianTriVi": "1925-1945 "
+  }
+]
