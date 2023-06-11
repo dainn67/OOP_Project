@@ -1,4 +1,4 @@
-package main_package23;
+package figures_scraper;
 import java.io.IOException;
 import java.text.Normalizer;
 import java.util.regex.Matcher;
