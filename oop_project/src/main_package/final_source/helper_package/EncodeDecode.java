@@ -17,13 +17,14 @@ import objects.Figure;
 
 public class EncodeDecode {
 
-	public static void encodeToFile(List<Object> list) {
+	public static void encodeToFile(List<Object> list, String fileName) {
 
 		Object tmpObject = list.get(0);
+		String filePath = fileName +  ".json";
+		
 		if (tmpObject instanceof Figure) {
 			Gson gson = new GsonBuilder().registerTypeAdapter(Figure.class, new FigureGsonAdapter()).setPrettyPrinting()
 					.create();
-			String filePath = "figures.json";
 
 			try (Writer writer = new FileWriter(filePath)) {
 				gson.toJson(list, writer);
@@ -34,7 +35,6 @@ public class EncodeDecode {
 		} else if (tmpObject instanceof Dynasty) {
 			Gson gson = new GsonBuilder().registerTypeAdapter(Dynasty.class, new DynastyGsonAdapter()).setPrettyPrinting()
 					.create();
-			String filePath = "dynasties.json";
 
 			try (Writer writer = new FileWriter(filePath)) {
 				gson.toJson(list, writer);
@@ -44,41 +44,13 @@ public class EncodeDecode {
 			}
 		}
 	}
-//
-//	public static void encodeFigureList(List<Figure> figures) {
-//		Gson gson = new GsonBuilder().registerTypeAdapter(Figure.class, new FigureGsonAdapter()).setPrettyPrinting()
-//				.create();
-//		String filePath = "figures.json";
-//
-//		try (Writer writer = new FileWriter(filePath)) {
-//			gson.toJson(figures, writer);
-//			System.out.println("Encode & Write complete");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
-//
-//	public static void encodeDynastyList(List<Dynasty> dynasties) {
-//		Gson gson = new GsonBuilder().registerTypeAdapter(Dynasty.class, new DynastyGsonAdapter()).setPrettyPrinting()
-//				.create();
-//		String filePath = "dynasties.json";
-//
-//		try (Writer writer = new FileWriter(filePath)) {
-//			gson.toJson(dynasties, writer);
-//			System.out.println("Encode & Write complete");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
 
-	public static List<Dynasty> decodedDynastyList() {
+	public static List<Dynasty> decodedDynastyList(Boolean isExtra) {
 		Gson gson = new GsonBuilder().registerTypeAdapter(Dynasty.class, new DynastyGsonAdapter()).setPrettyPrinting()
 				.create();
 
 		List<Dynasty> newDynastyList = null;
-		String filePath = "dynasties.json";
+		String filePath = isExtra ? "extra_dynasties.json" : "dynasty.json";
 
 		try (Reader reader = new FileReader(filePath)) {
 			Type listType = new TypeToken<List<Dynasty>>() {
