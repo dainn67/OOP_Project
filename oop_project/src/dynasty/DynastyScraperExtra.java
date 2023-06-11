@@ -1,4 +1,4 @@
-package main_package;
+package dynasty_scraper;
 
 import java.io.IOException;
 import java.text.Normalizer;
@@ -13,7 +13,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import helper_package.EncodeDecode;
-import object.Dynasty;
+import objects.Dynasty;
 
 public class DynastyScraperExtra {
 	static int urlCounter = 0;
