@@ -59,10 +59,7 @@ public class NguoiKeSuScraper {
 		}
 
 		// encode the list to Json, write to a file and decode back to check
-		EncodeDecode.encodeToFile(figures);
-		
-//		List<Figure> newList = EncodeDecode.decodedFigureList();
-//		prtList(newList);
+		EncodeDecode.encodeToFile(figures, "figures");
 	}
 
 	static void getFiguresPage(Document doc) {
