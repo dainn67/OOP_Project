@@ -7,7 +7,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
-public class ScaperUtilWiki {
+public class ScraperUtilWiki {
     public static void EventScrapper(String url){
         try{
             Document doc = Jsoup.connect(url).userAgent("Mozilla").get();
