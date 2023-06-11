@@ -1,15 +1,15 @@
 package objects;
 
 public class Figure {
-	public String name;
-	public String otherName;
-	public String bornYear;
-	public String deathYear;
-	public String father;
-	public String mother;
-	public String dynasty;
-	public String home;
-	public String desc;
+	protected String name;
+	protected String otherName;
+	protected String bornYear;
+	protected String deathYear;
+	protected String father;
+	protected String mother;
+	protected String dynasty;
+	protected String home;
+	protected String desc;
 
 	public Figure() {
 	}

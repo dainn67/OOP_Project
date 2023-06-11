@@ -1,11 +1,6 @@
 package figures_scraper;
 
-import java.io.FileWriter;
-
 import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
-import java.lang.reflect.Type;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,18 +8,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import java.io.FileReader;
-import com.google.gson.reflect.TypeToken;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import objects.Figure;
-import helper_package.GsonAdapter;
+import helper_package.EncodeDecode;
 
 public class NguoiKeSuScraper {
 	static int figureCount = 0;
@@ -45,7 +35,7 @@ public class NguoiKeSuScraper {
 			"Thai Nguyen", "Thanh Hoa", "Thua Thien Hue", "Tien Giang", "Tra Vinh", "Tuyen Quang", "Vinh Long",
 			"Vinh Phuc", "Yen Bai", "Thua Thien", "Thang Long");
 
-	public static List<Figure> figures = new ArrayList<Figure>();
+	public static List<Object> figures = new ArrayList<Object>();
 	static String[] figureAttributes = new String[9];
 
 	public static void main(String[] args) {
@@ -55,13 +45,6 @@ public class NguoiKeSuScraper {
 		while (true) {
 			if (urlCounter > 1450)
 				break;
-//			/*
-			if (urlCounter < 0) {
-				urlCounter += 5;
-				continue;
-			} else if (urlCounter > 0)
-				break;
-//			 */
 			if (urlCounter == 0)
 				url = "https://nguoikesu.com/nhan-vat";
 			else
@@ -74,13 +57,12 @@ public class NguoiKeSuScraper {
 				e.printStackTrace();
 			}
 		}
-		
-		prtList(figures);
-		System.out.println("DONE 1");
-		encodeFigureList();
-		prtList(decodedFigureList());
 
-		System.out.println("DONE 2");
+		// encode the list to Json, write to a file and decode back to check
+		EncodeDecode.encodeToFile(figures);
+		
+//		List<Figure> newList = EncodeDecode.decodedFigureList();
+//		prtList(newList);
 	}
 
 	static void getFiguresPage(Document doc) {
@@ -107,7 +89,7 @@ public class NguoiKeSuScraper {
 			Figure myFigure = new Figure(figureAttributes[0], figureAttributes[1], figureAttributes[2],
 					figureAttributes[3], figureAttributes[4], figureAttributes[5], figureAttributes[6],
 					figureAttributes[7], figureAttributes[8]);
-			
+
 			NguoiKeSuScraper.figures.add(myFigure);
 
 //			System.out.println("			Nam sinh/mat: " + bitrhDeathCount + "/" + figureCount);
@@ -517,11 +499,11 @@ public class NguoiKeSuScraper {
 	}
 
 	static void prtList(List<Figure> list) {
-		for(Figure figure: list) {
+		for (Figure figure : list) {
 			prtAttributes(figure);
 		}
 	}
-	
+
 	static void prtAttributes(Figure myFigure) {
 		System.out.println(myFigure.getName());
 		System.out.println("	Ten khac: " + myFigure.getOtherName());
@@ -532,46 +514,6 @@ public class NguoiKeSuScraper {
 		System.out.println("	Trieu dai: " + myFigure.getDynasty());
 		System.out.println("	Que quan: " + myFigure.getHome());
 		System.out.println("	Mo ta: " + myFigure.getDesc());
-	}
-
-	static void encodeFigureList() {
-		Gson gson = new GsonBuilder()
-		        .registerTypeAdapter(Figure.class, new GsonAdapter())
-		        .setPrettyPrinting()
-		        .create();
-//		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-		String filePath = "figures.json";
-//		String json = gson.toJson(figures);
-//		System.out.println(json);
-		
-		try (Writer writer = new FileWriter(filePath)) {
-		    gson.toJson(figures, writer);
-		    System.out.println("Write complete");
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-
-	}
-
-	static List<Figure> decodedFigureList() {
-		Gson gson = new GsonBuilder()
-		        .registerTypeAdapter(Figure.class, new GsonAdapter())
-		        .setPrettyPrinting()
-		        .create();
-//		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        List<Figure> newFigureList = null;
-        String filePath = "figures.json";
-        
-        try (Reader reader = new FileReader(filePath)) {
-            Type listType = new TypeToken<List<Figure>>() {}.getType();
-            newFigureList = gson.fromJson(reader, listType);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return newFigureList;
 	}
 
 	static String normalizeString(String s) {
