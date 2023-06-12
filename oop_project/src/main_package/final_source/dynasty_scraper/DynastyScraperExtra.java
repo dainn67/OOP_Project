@@ -1,4 +1,4 @@
-package main_package;
+package dynasty_scraper;
 
 import java.io.IOException;
 import java.text.Normalizer;
@@ -13,7 +13,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import helper_package.EncodeDecode;
-import object.Dynasty;
+import objects.Dynasty;
 
 public class DynastyScraperExtra {
 	static int urlCounter = 0;
@@ -133,6 +133,8 @@ public class DynastyScraperExtra {
 	}
 
 	static Boolean extractYearTable(String text) {
+		
+//		abx-xyz
 		Pattern pattern = Pattern.compile("(\\d+)( TCN)?-(\\d+)( TCN)?");
 		Matcher matcher = pattern.matcher(text);
 
@@ -160,6 +162,7 @@ public class DynastyScraperExtra {
 			return true;
 		}
 		
+//		từ đến
 		 pattern = Pattern.compile("từ (\\d+)( TCN)? cho đến (\\d+)( TCN)?");
 		 matcher = pattern.matcher(text);
 
@@ -181,6 +184,7 @@ public class DynastyScraperExtra {
 		        return true;
 		    }
 		 
+//		 từ  đến
 		 pattern = Pattern.compile("từ (\\d+)( TCN)? đến (\\d+)( TCN)?");
 		 matcher = pattern.matcher(text);
 
@@ -202,6 +206,7 @@ public class DynastyScraperExtra {
 		        return true;
 		    }
 		 
+//		 special pattern
 		 pattern = Pattern.compile("vào năm 1407");
 		 matcher = pattern.matcher(text);
 
