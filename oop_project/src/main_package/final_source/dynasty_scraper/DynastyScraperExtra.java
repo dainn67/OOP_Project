@@ -1,4 +1,4 @@
-package dynasty_scraper;
+package main_package;
 
 import java.io.IOException;
 import java.text.Normalizer;
@@ -13,7 +13,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import helper_package.EncodeDecode;
-import objects.Dynasty;
+import object.Dynasty;
 
 public class DynastyScraperExtra {
 	static int urlCounter = 0;
@@ -44,8 +44,8 @@ public class DynastyScraperExtra {
 				getDynastyPage(doc);
 			}
 
-			EncodeDecode.encodeToFile(extraList);
-			List<Dynasty> newList = EncodeDecode.decodedDynastyList();
+			EncodeDecode.encodeToFile(extraList,"extra_dynasties");
+			List<Dynasty> newList = EncodeDecode.decodedDynastyList(true);
 			for (Dynasty dynasty : newList) {
 				prtDynasty(dynasty);
 			}			
@@ -64,10 +64,10 @@ public class DynastyScraperExtra {
 		for (Element dynasty : dynasties) {
 			Element nameElement = dynasty.selectFirst("h2");
 
-			String name = normalizeString(nameElement.text());
+			String name = (nameElement.text());
 			String detailLink = nameElement.select("a").attr("href");
 
-			if (name.startsWith("nha") || name.startsWith("Nha")) {
+			if (name.startsWith("nhà") || name.startsWith("Nhà")) {
 //				System.out.println("TRIEU DAI: " + name);
 				if (dynastyDetail(detailLink)) {
 
@@ -109,7 +109,7 @@ public class DynastyScraperExtra {
 
 			StringBuilder sb = new StringBuilder();
 			for (Element trTag : trTags) {
-				sb.append("\n		" + normalizeString(trTag.text()));
+				sb.append("\n		" + (trTag.text()));
 			}
 
 			alreadyExtractYear = extractYearTable(sb.toString());
@@ -123,7 +123,7 @@ public class DynastyScraperExtra {
 		for (Element pTag : pTags) {
 			pCounter++;
 			if(pCounter > 3) break;
-			sb.append("\n	" + normalizeString(pTag.text()));
+			sb.append("\n	" + (pTag.text()));
 		}
 		dynastyAttributes[2] = sb.toString();
 		
@@ -152,11 +152,74 @@ public class DynastyScraperExtra {
 
 			break; // Assuming we only need the first occurrence
 		}
+		
+		
 		if (startYear != null && endYear != null) {
 			dynastyAttributes[0] = startYear;
 			dynastyAttributes[1] = endYear;
 			return true;
 		}
+		
+		 pattern = Pattern.compile("từ (\\d+)( TCN)? cho đến (\\d+)( TCN)?");
+		 matcher = pattern.matcher(text);
+
+		 while (matcher.find()) {
+		        startYear = matcher.group(1);
+		        endYear = matcher.group(3);
+		        if (matcher.group(2) != null) {
+					startYear += " TCN";
+				}
+				if (matcher.group(4) != null) {
+					endYear += " TCN";
+				}
+
+				break; // Assuming we only need the first occurrence
+			}
+		 if (startYear != null && endYear != null) {
+		        dynastyAttributes[0] = startYear;
+		        dynastyAttributes[1] = endYear;
+		        return true;
+		    }
+		 
+		 pattern = Pattern.compile("từ (\\d+)( TCN)? đến (\\d+)( TCN)?");
+		 matcher = pattern.matcher(text);
+
+		 while (matcher.find()) {
+		        startYear =matcher.group(1);
+		        endYear = matcher.group(3);
+		        if (matcher.group(2) != null) {
+					startYear += " TCN";
+				}
+				if (matcher.group(4) != null) {
+					endYear += " TCN";
+				}
+
+				break; // Assuming we only need the first occurrence
+			}
+		 if (startYear != null && endYear != null) {
+		        dynastyAttributes[0] = startYear;
+		        dynastyAttributes[1] = endYear;
+		        return true;
+		    }
+		 
+		 pattern = Pattern.compile("vào năm 1407");
+		 matcher = pattern.matcher(text);
+
+		 while (matcher.find()) {
+		        startYear ="1400";
+		        endYear = "1407";
+		        
+
+				break; // Assuming we only need the first occurrence
+			}
+		 if (startYear != null && endYear != null) {
+		        dynastyAttributes[0] = startYear;
+		        dynastyAttributes[1] = endYear;
+		        return true;
+		    }
+		 
+		 	 
+		    
 		return false;
 	}
 
@@ -169,7 +232,7 @@ public class DynastyScraperExtra {
 
 		for (Element paragraph : paragraphs) {
 			if (paragraph.parent() == containerDiv && count < 3) {
-				String text = normalizeString(paragraph.text());
+				String text = (paragraph.text());
 				paragraphTexts[count] = text;
 				count++;
 			}
@@ -178,7 +241,7 @@ public class DynastyScraperExtra {
 		for (int i = 0; i < paragraphTexts.length; i++) {
 			String text = paragraphTexts[i];
 
-			if (text.toLowerCase().contains("trung quoc"))
+			if (text.toLowerCase().contains("trung quốc"))
 				return false;
 
 		}
@@ -192,8 +255,10 @@ public class DynastyScraperExtra {
 		System.out.println("	" + dynasty.getDesc());
 	}
 
-	static String normalizeString(String s) {
-		return Normalizer.normalize(s, Normalizer.Form.NFD).replaceAll("\\p{M}", "").replace("Đ", "D").replace("đ", "d")
-				.replace(" – ", "-").replace("- ", "-").replace(" -", "-").replace("–", "-");
-	}
+//	static String normalizeString(String s) {
+//		return Normalizer.normalize(s, Normalizer.Form.NFD).replaceAll("\\p{M}", "").replace("Đ", "D").replace("đ", "d")
+//				.replace(" – ", "-").replace("- ", "-").replace(" -", "-").replace("–", "-");
+//	}
 }
+
+
