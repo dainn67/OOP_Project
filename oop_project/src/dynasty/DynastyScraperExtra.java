@@ -1,4 +1,4 @@
-package dynasty_scraper;
+package dynasty;
 
 import java.io.IOException;
 import java.text.Normalizer;
@@ -62,7 +62,7 @@ public class DynastyScraperExtra {
 
 		// loop each dynasties in a page
 		for (Element dynasty : dynasties) {
-			Element nameElement = dynasty.selectFirst("h2");
+			Element nameElement = dynasty.select("h2").first();
 
 			String name = (nameElement.text());
 			String detailLink = nameElement.select("a").attr("href");
@@ -103,7 +103,7 @@ public class DynastyScraperExtra {
 		dynastyAttributes[1] = null;
 		dynastyAttributes[2] = null;
 
-		Element infobox = doc.selectFirst("div.infobox");
+		Element infobox = doc.select("div.infobox").first();
 		if (infobox != null) {
 			Elements trTags = infobox.select("tr");
 
@@ -161,7 +161,7 @@ public class DynastyScraperExtra {
 	}
 
 	static Boolean getCountry(Document doc) {
-		Element containerDiv = doc.selectFirst("div.com-content-article__body");
+		Element containerDiv = doc.select("div.com-content-article__body").first();
 		Elements paragraphs = containerDiv.select("p");
 		String[] paragraphTexts = new String[3]; // Array to store the paragraph texts
 

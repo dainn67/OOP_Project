@@ -1,5 +1,6 @@
 package HistoricalEvent;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Event {
@@ -10,7 +11,9 @@ public class Event {
     private Set<String> relatedFigures;
     private String dynasty;
     private String description;
-    public Event(){}
+    public Event(){
+        this.relatedFigures = new HashSet<>();
+    }
     public Event(String title, String time, String location) {
         this.title = title;
         this.time = time;
@@ -21,6 +24,30 @@ public class Event {
         this.time = time;
         this.location = location;
         this.description = description;
+    }
+
+    // not yet finished
+    public int takeYear(){
+        String time = this.getTime();
+        int year = 0;
+        int startIndex = time.length()-1;
+        int flag = 0;
+        int endIndex = time.length()-1;
+        for(int i = time.length()-1; i >= 0; i --){
+            if(!Character.isDigit(time.charAt(i))){
+                if(flag == 0){
+                    endIndex = i;
+                    flag = 1;
+                }else if(flag == 1){
+                    startIndex = i+1;
+                    break;
+                }
+            }else {
+                continue;
+            }
+        }
+        year = Integer.parseInt(time.substring(startIndex, endIndex));
+        return 1000;
     }
     @Override
     public String toString(){
@@ -41,6 +68,9 @@ public class Event {
     }
     public void setRelatedFigure(Set<String> relatedFigure) {
         this.relatedFigures = relatedFigure;
+    }
+    public void setRelatedFigures(String fig){
+        this.relatedFigures.add(fig);
     }
     public String getDynasty() {
         return dynasty;

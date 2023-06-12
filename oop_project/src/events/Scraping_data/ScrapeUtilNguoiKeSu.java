@@ -2,27 +2,48 @@ package Scraping_data;
 
 import HistoricalEvent.Event;
 import HistoricalEvent.EventWrapper;
+import com.google.gson.Gson;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.sql.Ref;
 import java.util.*;
-
 public class ScrapeUtilNguoiKeSu {
     private static final List<Event> eventList = new ArrayList<Event>();
 
     private static final List<String> keyWords = new ArrayList<>();
 
-    private static Map<HashMap<Integer, Integer>, String> dynasties = new HashMap<>();
+    private static Map<ArrayList<Integer>, String> RefDynasty = new HashMap<>(25);
     static {
         keyWords.add("Thời gian");
         keyWords.add("Địa điểm");
         keyWords.add("Kết quả");
 
-        dynasties.put(new HashMap<>(-207, 40), "Bắc thuộc lần I");
-//        dynasties.put(new HashMap<>())
-
+        RefDynasty.put(new ArrayList<>(){{add(-218); add(39);}}, "Bắc thuộc lần I");
+        RefDynasty.put(new ArrayList<>(){{add(40);add(43);}}, "Trưng Nữ Vương" );
+        RefDynasty.put(new ArrayList<>(){{add(34);add(543);}}, "Bắc thuộc lần II");
+        RefDynasty.put(new ArrayList<>(){{add(544); add(602);}}, "Nhà Lý \u0026 Nhà Triệu");
+        RefDynasty.put(new ArrayList<>(){{add(602); add(905);}}, "Bắc thuộc lần III");
+        RefDynasty.put(new ArrayList<>(){{add(905); add(938);}}, "Thời kỳ xây nền tự chủ");
+        RefDynasty.put(new ArrayList<>(){{add(939); add(965);}}, "Nhà Ngô");
+        RefDynasty.put(new ArrayList<>(){{add(968);add(980);}}, "Nhà Đinh");
+        RefDynasty.put(new ArrayList<>(){{add(980);add(1009);}}, "Nhà Tiền Lê");
+        RefDynasty.put(new ArrayList<>(){{add(1010); add(1225);}}, "Nhà Lý");
+        RefDynasty.put(new ArrayList<>(){{add(1225);add(1400);}}, "Nhà Trần");
+        RefDynasty.put(new ArrayList<>(){{add(1400); add(1407);}}, "Nhà Hồ");
+        RefDynasty.put(new ArrayList<>(){{add(1407); add(1413);}}, "Nhà Hậu Trần");
+        RefDynasty.put(new ArrayList<>(){{add(1407); add(1427);}}, "Bắc thuộc lần IV");
+        RefDynasty.put(new ArrayList<>(){{add(1427); add(1789);}}, "Nhà Hậu Lê");
+        RefDynasty.put(new ArrayList<>(){{add(1533); add(1592);}}, "Nam Bắc Triều");
+        RefDynasty.put(new ArrayList<>(){{add(1627); add( 1777);}}, "Trịnh Nguyễn Phân Tranh");
+        RefDynasty.put(new ArrayList<>(){{add(1778); add( 1802);}}, "Nhà Tây Sơn");
+        RefDynasty.put(new ArrayList<>(){{add(1802); add( 1945);}}, "Nhà Nguyễn");
+        RefDynasty.put(new ArrayList<>(){{add(1884); add( 1945);}}, "Pháp Thuộc");
+        RefDynasty.put(new ArrayList<>(){{add(1945); add( 1975);}}, "Việt Nam Dân Chủ Cộng Hoà");
+        RefDynasty.put(new ArrayList<>(){{add(1976); add( 10000);}}, "Cộng hoà xã hội chủ nghĩa Việt Nam");
     }
 
     public static List<Event> standardizedEvents(String url, String baseURL){
@@ -43,6 +64,18 @@ public class ScrapeUtilNguoiKeSu {
                     }
                 }
             }
+            // adding dynasty fields -> not yet finished
+//            if(e.getDynasty() == null){
+//                for(int i = 0; i < e.getTime().length(); i ++){
+//                    int year = e.takeYear();
+//                    for(Map.Entry<ArrayList<Integer>, String> entry : RefDynasty.entrySet()){
+//                       if(year >= entry.getKey().get(0) && year <= entry.getKey().get(1)){
+//                           e.setDynasty(entry.getValue());
+//                       }
+//                       System.out.println(entry);
+//                    }
+//                }
+//            }
         }
         return eventNguoiKeSu;
     }

@@ -1,4 +1,4 @@
-package dynasty_scraper;
+package dynasty;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -27,8 +27,7 @@ public class NguoikesuDynastyScraper {
 	public static int foundYearCount = 0;
 	public static int actualCount = 0;
 
-	static List<Dynasty> dynasties = new ArrayList<Dynasty>();
-
+	public static List<Dynasty> dynasties = new ArrayList<Dynasty>();
 	public static void main(String[] args) {
 		try {
 			String url = "https://nguoikesu.com";
@@ -55,7 +54,8 @@ public class NguoikesuDynastyScraper {
 			years[1] = null;
 
 			// title
-			Element title = dynasty.selectFirst("h3");
+			Element title = dynasty.select("h3").first(); // ? selectFirst
+
 			System.out.println(title.text());
 
 			// link to detail page

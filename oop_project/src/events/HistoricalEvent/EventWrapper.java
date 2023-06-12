@@ -6,8 +6,5 @@ import java.util.List;
 
 public class EventWrapper {
     public final List<Event> eventList = new ArrayList<Event>();
-
-
-
     public EventWrapper(){};
 }
