@@ -1,4 +1,6 @@
 package helper_package;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import objects.Dynasty;
@@ -65,10 +67,15 @@ public class RemoveDuplicate {
 		List<Dynasty> list2 = EncodeDecode.decodedDynastyList(true);
 
 		List<Dynasty> newList = removeDuplicateDynastyAndMerge(list, list2);
+		List<Object> newList2 = new ArrayList<Object>();
+		for(Dynasty dynasty: newList) {
+			newList2.add(dynasty);
+		}
 
 		for (Dynasty dynasty : newList) {
-			if (dynasty.getStartYear() != null)
 				System.out.println(NormalizeString.normalizeString(dynasty.getName()));
 		}
+		
+		EncodeDecode.encodeToFile(newList2, "final_dynasties");
 	}
 }
