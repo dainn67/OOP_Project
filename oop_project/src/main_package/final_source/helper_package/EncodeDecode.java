@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 
 import objects.Dynasty;
 import objects.Figure;
+import objects.Poinsettia;
 
 public class EncodeDecode {
 
@@ -22,8 +23,8 @@ public class EncodeDecode {
 		Object tmpObject = list.get(0);
 		String filePath = fileName +  ".json";
 		
-		if (tmpObject instanceof Figure) {
-			Gson gson = new GsonBuilder().registerTypeAdapter(Figure.class, new FigureGsonAdapter()).setPrettyPrinting()
+		if (tmpObject instanceof Poinsettia) {
+			Gson gson = new GsonBuilder().registerTypeAdapter(Poinsettia.class, new PoinsettiaGsonAdapter()).setPrettyPrinting()
 					.create();
 
 			try (Writer writer = new FileWriter(filePath)) {
@@ -42,6 +43,16 @@ public class EncodeDecode {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		} else if (tmpObject instanceof Figure) {
+			Gson gson = new GsonBuilder().registerTypeAdapter(Figure.class, new FigureGsonAdapter()).setPrettyPrinting()
+					.create();
+
+			try (Writer writer = new FileWriter(filePath)) {
+				gson.toJson(list, writer);
+				System.out.println("Encode & Write dynasty list complete");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -50,7 +61,7 @@ public class EncodeDecode {
 				.create();
 
 		List<Dynasty> newDynastyList = null;
-		String filePath = isExtra ? "extra_dynasties.json" : "dynasty.json";
+		String filePath = isExtra ? "extra_dynasties.json" : "dynasties.json";
 
 		try (Reader reader = new FileReader(filePath)) {
 			Type listType = new TypeToken<List<Dynasty>>() {

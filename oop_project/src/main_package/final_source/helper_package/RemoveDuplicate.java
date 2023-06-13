@@ -31,18 +31,14 @@ public class RemoveDuplicate {
 			resList.add(0, dynasty);
 			return;
 		}
+		
+		//if biggest
+		if (parseYear(resList.get(resList.size()-1).getStartYear()) < parseYear(dynasty.getStartYear())) {
+			resList.add(dynasty);
+			return;
+		}
 
 		for (int i = 0; i < resList.size(); i++) {
-			
-			//if biggest
-			if (i == resList.size() - 1) {
-				if(parseYear(resList.get(i).getStartYear()) < parseYear(dynasty.getStartYear())) {					
-					resList.add(dynasty);
-					return;
-				}
-			}
-			
-			//else, find correct position
 			if (parseYear(resList.get(i).getStartYear()) < parseYear(dynasty.getStartYear())
 					&& parseYear(dynasty.getStartYear()) < parseYear(resList.get(i + 1).getStartYear())) {
 				resList.add(i + 1, dynasty);
@@ -73,7 +69,7 @@ public class RemoveDuplicate {
 		}
 
 		for (Dynasty dynasty : newList) {
-				System.out.println(NormalizeString.normalizeString(dynasty.getName()));
+				System.out.println(HelperFunctions.normalizeString(dynasty.getName()));
 		}
 		
 		EncodeDecode.encodeToFile(newList2, "final_dynasties");
