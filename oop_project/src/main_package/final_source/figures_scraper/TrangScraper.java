@@ -1,5 +1,4 @@
 package figures_scraper;
-
 import java.io.IOException;
 import java.text.Normalizer;
 import java.util.ArrayList;
@@ -61,7 +60,7 @@ public class TrangScraper {
 						String trangYear = cells.get(4).text();
 						String king = cells.get(5).text();
 
-						String annotation = linkElement.selectFirst("a").attr("title");
+//						String annotation = linkElement.selectFirst("a").attr("title");
 						
 						Poinsettia myPoinsettia = new Poinsettia(
 								name,
@@ -73,7 +72,7 @@ public class TrangScraper {
 								myFigure.getDynasty(),
 								home,
 								king,
-								annotation,
+								myFigure.getDesc(),
 								trangYear);
 						
 						poinsettias.add(myPoinsettia);
@@ -153,21 +152,11 @@ public class TrangScraper {
 	}
 	
 	static Figure search(List<Figure> sortedList, String target) {
-	    int left = 0;
-	    int right = sortedList.size() - 1;
 
-	    while (left <= right) {
-	        int mid = left + (right - left) / 2;
-	        int compare = sortedList.get(mid).getName().compareTo(target);
-
-	        if (compare == 0) {
-	            return sortedList.get(mid);
-	        } else if (compare < 0) {
-	            left = mid + 1;
-	        } else {
-	            right = mid - 1;
-	        }
-	    }
+		for (Figure figure: sortedList)
+			if (figure.getName().equals(target))
+				return figure;
+					
 
 	    // Target string not found
 	    return null;
