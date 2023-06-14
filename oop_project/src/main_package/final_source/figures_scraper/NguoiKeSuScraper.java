@@ -39,7 +39,8 @@ public class NguoiKeSuScraper {
 		String url;
 		Document doc;
 		while (true) {
-			if (urlCounter > 1450)
+			//1450
+			if (urlCounter > 10)
 				break;
 			if (urlCounter == 0)
 				url = "https://nguoikesu.com/nhan-vat";
@@ -80,8 +81,8 @@ public class NguoiKeSuScraper {
 			Figure myFigure = new Figure(
 					figureAttributes[0],
 					figureAttributes[1],
-					"" + HelperFunctions.parseYear(figureAttributes[2]),
-					"" + HelperFunctions.parseYear(figureAttributes[3]),
+					HelperFunctions.parseYear(figureAttributes[2]),
+					HelperFunctions.parseYear(figureAttributes[3]),
 					figureAttributes[4],
 					figureAttributes[5],
 					figureAttributes[6],
@@ -108,8 +109,13 @@ public class NguoiKeSuScraper {
 			// get description inside detail page for data scrapping
 			StringBuilder desc = new StringBuilder();
 			Elements pTags = doc.select("p");
-			for (Element pTag : pTags)
+			
+			int count = 0;
+			for (Element pTag : pTags) {
+				if(count > 5) break;
 				desc.append(pTag.text() + " ");
+				count++;
+			}
 
 			// assign the name first
 			figureAttributes[8] = desc.toString();
@@ -162,7 +168,8 @@ public class NguoiKeSuScraper {
 				}
 				case "Sinh": {
 					figureAttributes[2] = content;
-					getHome(content);
+//					getHome(content);
+					extractHome(content);
 					break;
 				}
 				case "Mất": {
@@ -193,21 +200,49 @@ public class NguoiKeSuScraper {
 		if (otherNameElements.size() >= 2 && otherNameElements.get(1) != null)
 			otherName = otherNameElements.get(1).text();
 
-		figureAttributes[1] = otherName;
+		if(otherName.equals("Không rõ")) extractOtherNameNew(desc);
+		else figureAttributes[1] = otherName;
 
 		// get dynasty and remaining data if not found in table
 //		getDynasty(desc);
-		extractDynastyName(desc);
-		if (figureAttributes[2] == null && figureAttributes[3] == null)
+		extractDynastyNameNew(desc);
+		if (figureAttributes[2] == "Không rõ" && figureAttributes[3] == "Không rõ")
 			getYears(desc);
-		if (figureAttributes[4] == null && figureAttributes[5] == null)
-			getParent(desc);
-		if (figureAttributes[7] == null)
-			getHome(desc);
+		if (figureAttributes[4] == "Không rõ" && figureAttributes[5] == "Không rõ")
+			extractParentsName(desc);
+		if (figureAttributes[7] == "Không rõ")
+			extractHome(desc);
+//			getHome(desc);
 	}
+	
+	static void extractOtherName(String text) {
+        String[] keywords = {"tên thật", "hay còn gọi là"};
 
-	static boolean getHome(String text) {
+        String pattern = "(?i)(" + String.join("|", keywords) + ")\\s+([A-ZÀ-Ỹ][a-zà-ỹ]+)";
 
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(text);
+
+        if (matcher.find()) {
+        	String name = matcher.group(2);
+        	if(Character.isUpperCase(name.charAt(0))) {
+        		figureAttributes[1] = name; 
+        		return;
+        	}
+        }
+    }
+	
+	static void extractOtherNameNew(String input) {
+        String pattern = "(?:tên thật|hay còn gọi là) ([A-ZÀ-Ỹ][a-zà-ỹ]+(?: [A-ZÀ-Ỹ][a-zà-ỹ]+)*)";
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(input);
+
+        if (matcher.find()) {
+        	figureAttributes[1] = matcher.group(1);
+        }
+    }
+
+	static void extractHome(String text) {
 		String[] words = text.split("\\s+");
 		StringBuilder cityNameBuilder = new StringBuilder();
 		for (String word : words) {
@@ -216,30 +251,26 @@ public class NguoiKeSuScraper {
 			for (String city : cities) {
 				if (cityNameBuilder.toString().contains(city)) {
 					figureAttributes[7] = city;
-					return true;
+					return;
 				}
 			}
 		}
+		
+        String[] keywords = {"làng", "tại", "ở"};
 
-		if (homePattern(text, "làng\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)"))
-			return true;
-		if (homePattern(text, "tại\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)"))
-			return true;
+        String pattern = "(?i)(" + String.join("|", keywords) + ")\\s+([A-ZÀ-Ỹ][a-zà-ỹ]+)";
 
-		return false;
-	}
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(text);
 
-	static Boolean homePattern(String text, String patternString) {
-		Pattern pattern = Pattern.compile(patternString);
-		Matcher matcher = pattern.matcher(text);
-
-		if (matcher.find()) {
-			figureAttributes[7] = matcher.group(1);
-			return true;
-		}
-
-		return false;
-	}
+        if (matcher.find()) {
+        	String home = matcher.group(2);
+        	if(Character.isUpperCase(home.charAt(0))) {
+        		figureAttributes[7] = home; 
+        		return;
+        	}
+        }
+    }
 	
 	static void extractDynastyName(String text) {
 		if (text.contains("vua Lê chúa Trịnh")) {
@@ -262,19 +293,40 @@ public class NguoiKeSuScraper {
         	}
         }
     }
-
-	static void getParent(String text) {
-		Pattern pattern = Pattern.compile("là con trai của\\s+([A-Z][a-z]*(\\s+[A-Z][a-z]*)*)");
-		Matcher matcher = pattern.matcher(text);
-
-		String father;
-		if (matcher.find()) {
-			father = matcher.group(1);
-
-			figureAttributes[4] = father;
+	
+	public static void extractDynastyNameNew(String input) {
+		if (input.contains("vua Lê chúa Trịnh")) {
+			figureAttributes[6] = "Vua Lê chúa Trịnh";
 			return;
 		}
-	}
+		
+        String pattern = "(?:Nhà|nhà|triều đại|triều) ([A-ZÀ-Ỹ][a-zà-ỹ]+(?: [A-ZÀ-Ỹ][a-zà-ỹ]+)*)";
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(input);
+        
+        if (matcher.find()) {
+        	if(!(matcher.group(1).contains("đình") || matcher.group(1).contains("nho") || matcher.group(1).contains("Nho") || matcher.group(1).contains("đại")))
+        		figureAttributes[6] = matcher.group(1);
+        }
+    }
+	
+	static void extractParentsName(String text) {
+		
+        String[] keywords = {"là con trai của"};
+
+        String pattern = "(?i)(" + String.join("|", keywords) + ")\\s+([A-ZÀ-Ỹ][a-zà-ỹ]+)";
+
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(text);
+
+        if (matcher.find()) {
+        	String dynastyName = matcher.group(2);
+        	if(Character.isUpperCase(dynastyName.charAt(0))) {
+        		figureAttributes[6] = dynastyName; 
+        		return;
+        	}
+        }
+    }
 
 	static void getYears(String str) {
 		int birthYear = 0, deathYear = 0;
@@ -434,19 +486,7 @@ public class NguoiKeSuScraper {
 
 	static void prtList(List<Figure> list) {
 		for (Figure figure : list) {
-			prtAttributes(figure);
+			HelperFunctions.prtFigureAttributes(figure);
 		}
-	}
-
-	static void prtAttributes(Figure myFigure) {
-		System.out.println(myFigure.getName());
-		System.out.println("	Ten khac: " + myFigure.getOtherName());
-		System.out.println("	Sinh: " + myFigure.getBornYear());
-		System.out.println("	Mat: " + myFigure.getDeathYear());
-		System.out.println("	Cha: " + myFigure.getFather());
-		System.out.println("	Me: " + myFigure.getMother());
-		System.out.println("	Trieu dai: " + myFigure.getDynasty());
-		System.out.println("	Que quan: " + myFigure.getHome());
-		System.out.println("	Mo ta: " + myFigure.getDesc());
 	}
 }
