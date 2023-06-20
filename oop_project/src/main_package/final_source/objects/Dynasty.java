@@ -1,4 +1,4 @@
-package objects;
+package main_package.final_source.objects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ public class Dynasty {
 	String startYear;
 	String endYear;
 	String desc;
-	List<King> kings = new ArrayList<King>();
+	List<objects.King> kings = new ArrayList<objects.King>();
 	
 	public Dynasty() {}
 	

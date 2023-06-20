@@ -1,0 +1,27 @@
+page in a link:
+
+-> visit a link
+-> .vevent -> checked
+-> .infobox -> but no used
+-> plain text
+
+figure:
+- no table .infobox - plain text only
+- table .infobox
+
+dynasty:
+- table infobox - too much infomation
+- table infobox - structured infomation
+
+event:
+- table .infobox .vevent - 25% -> checked
+- table .infobox .vevent -> special cases -> checked
+- no table .infobox - plain text only -> handle plain text
+
+location:
+- table .infobox .geography |.vcard
+- no table .infobox - plain text only
+
+others:
+- describe an action
+- describe an organization

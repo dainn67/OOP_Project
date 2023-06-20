@@ -101,6 +101,18 @@
     "desc": "Nhà Hậu Lê (1427-1789) do Lê Thái Tổ lập ra, được phân biệt với nhà Tiền Lê (980-1009) do Lê Đại Hành lập ra cuối thế kỷ 10. Nhà Hậu Lê gồm có 2 giai đoạn: - Nhà Lê sơ (1428-1527): kéo dài 100 năm, bắt đầu từ khi khởi nghĩa Lam Sơn thắng lợi, Lê Lợi gạt bỏ vua bù nhìn Trần Cảo, tự làm vua, lập ra triều đại mới và kết thúc khi quyền thần Mạc Đăng Dung phế bỏ vua Lê Cung Hoàng lập ra nhà Mạc. - Nhà Lê trung hưng(1533-1789): kéo dài 256 năm, bắt đầu từ khi Thượng tướng quân Nguyễn Kim lập tông thất Lê Duy Ninh lên ngôi, tức Lê Trang Tông tại Ai Lao để khôi phục nhà Hậu Lê; kết thúc khi Lê Chiêu Thống chạy sang lưu vong tại Trung Quốc dưới thời Thanh Cao Tông. Cách gọi nhà Hậu Lê bao gồm cả hai giai đoạn Lê sơ và Lê trung hưng. Đặc biệt, thời Lê Trung hưng tuy kéo dài nhưng các Hoàng đế nhà Lê mất thực quyền, chỉ tồn tại trên danh nghĩa. Thời kỳ đầu gọi là Nam Bắc triều, nhà Lê và nhà Mạc chia đôi nước Đại Việt. "
   },
   {
+    "name": "nhà Lê",
+    "startYear": "1460",
+    "endYear": "1497",
+    "desc": "\n\tNhà Lê sơ hay Lê sơ triều (chữ Nôm: 家黎初, chữ Hán: 初黎朝), là giai đoạn đầu của triều đại nhà Hậu Lê, một triều đại quân chủ chuyên chế trong lịch sử Việt Nam, được thành lập sau khi Lê Lợi phát động khởi nghĩa Lam Sơn đánh bại quân đội nhà Minh. Ông đổi tên Giao Chỉ (交阯), vốn tồn tại trong thời gian nội thuộc nhà Minh, trở về Đại Việt (大越), quốc hiệu có từ đời Lý Thánh Tông.\n\tThời đại Lê sơ có 10 vị Hoàng đế thuộc 6 thế hệ, đây là thời kỳ các Hoàng đế nhà Lê nắm trọn được quyền hành, cũng là thời kỳ vĩ đại, hoàng kim của chế độ phong kiến Việt Nam. Đời Lê Thái Tổ (Lê Lợi) và đặc biệt là đời Lê Thái Tông, xã hội được đi vào ổn định, phát triển thịnh vượng một cách mau chóng sau thời kỳ chiến tranh trước đó. Có câu đồng dao sau: \"Đời vua Thái Tổ, Thái Tông; Con bế con dắt, con bồng, con mang...Đời vua Thái Tổ, Thái Tông; Thóc lúa đầy đồng trâu chẳng buồn ăn\".\n\tDưới thời Lê Thánh Tông, Đại Việt phát triển cực thịnh về mọi mặt từ kinh tế, văn hóa, xã hội, giáo dục, quân sự. Nước Đại Việt từ trước chưa bao giờ cường thịnh và mạnh mẽ, có sức ảnh hưởng toàn khu vực lớn bằng thời này, thời kỳ này được gọi là Hồng Đức thịnh thế (洪德晟世)[cần dẫn nguồn], tính đến ảnh hưởng các đời sau là Lê Hiến Tông, Lê Túc Tông, là hơn 30 năm."
+  },
+  {
+    "name": "nhà Mạc",
+    "startYear": "1527",
+    "endYear": "1529",
+    "desc": "\n\tNhà Mạc (chữ Hán: 莫朝 / Mạc triều) là triều đại phong kiến trong lịch sử Việt Nam, bắt đầu khi Mạc Đăng Dung, sau khi dẹp được các bè phái trong cung đình, đã ép vua Lê Cung Hoàng nhà Hậu Lê nhường ngôi tháng 6 năm 1527 và chấm dứt khi vua Mạc Mậu Hợp bị quân đội Lê-Trịnh do Trịnh Tùng chỉ huy đánh bại vào cuối năm 1592– tổng cộng thời gian tồn tại chính thức của triều đại là gần 66 năm.\n\tTuy nhiên, giai đoạn sau đó hậu duệ nhà Mạc như Mạc Kính Cung, Mạc Kính Khoan, Mạc Kính Vũ vẫn còn tiếp tục chống lại nhà Hậu Lê thời kỳ trung hưng đến tận năm 16771 tại khu vực Cao Bằng.\n\tThời kỳ 1533-1592 trong lịch sử Việt Nam còn được gọi là thời kỳ Nam-Bắc triều, do chính quyền nhà Mạc chỉ thực sự có quyền lực từ địa phận Ninh Bình ngày nay trở ra, còn từ Thanh Hóa trở vào là thế lực lấy danh nghĩa gây dựng lại nhà Lê từ năm 1533."
+  },
+  {
     "name": "Nam Bắc Triều",
     "startYear": "1533",
     "endYear": "1592",

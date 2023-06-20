@@ -10,71 +10,145 @@ public class Event {
     private String location;
     private Set<String> relatedFigures;
     private String dynasty;
-    private String description;
-    public Event(){
+    private StringBuilder description;
+
+    public Event() {
+        this.description = new StringBuilder();
         this.relatedFigures = new HashSet<>();
     }
+
     public Event(String title, String time, String location) {
         this.title = title;
         this.time = time;
         this.location = location;
     }
-    public Event(String title, String time, String location, String description){
+
+    public Event(String title, String time, String location, String description) {
         this.title = title;
         this.time = time;
         this.location = location;
-        this.description = description;
+        this.description = new StringBuilder(description);
     }
 
-    // not yet finished
-    public int takeYear(){
-        String time = this.getTime();
-        int year = 0;
-        int startIndex = time.length()-1;
-        int flag = 0;
-        int endIndex = time.length()-1;
-        for(int i = time.length()-1; i >= 0; i --){
-            if(!Character.isDigit(time.charAt(i))){
-                if(flag == 0){
-                    endIndex = i;
-                    flag = 1;
-                }else if(flag == 1){
-                    startIndex = i+1;
-                    break;
+    // finised for nguoi ke su
+    public int takeYear() {
+        if (this.getId().equals("wiki")) {
+            int year = 0;
+            String[] words = this.getTime().split(" ");
+
+            if (this.getTime().contains("TCN")) {
+                if (this.getTime().contains("VII")) {
+                    year = -700;
+                    return year;
+                } else {
+                    year = Integer.parseInt(words[0]) * -1;
+                    return year;
                 }
-            }else {
-                continue;
             }
+
+            if (words[0].contains("-")) {
+                String[] temp = words[0].split("-");
+                year = Integer.parseInt(temp[0]);
+                return year;
+            } else if (words[0].contains("–")) {
+                String[] temp = words[0].split("–");
+                year = Integer.parseInt(temp[0]);
+                return year;
+            } else {
+                year = Integer.parseInt(words[0]);
+                return year;
+            }
+        } else {
+            // take year in case of nguoi ke su
+            String eventTitle = this.getTitle();
+            String time = this.getTime();
+
+            String[] words = eventTitle.split(" "); // regular format
+            int year = 0;
+            for (String word : words) {
+                if (time.contains(word)) {
+                    try {
+                        if (Integer.parseInt(word) > 31) {
+                            year = Integer.parseInt(word);
+                            break;
+                        } else {
+                            continue;
+                        }
+                    } catch (NumberFormatException e) {
+                        continue;
+                    }
+                }
+            }
+            if (year != 0) {
+                System.out.println(year);
+            } else {
+                if (eventTitle.contains("(")) {
+                    String[] splitInTime = time.split(" ");
+                    try {
+                        year = Integer.parseInt(splitInTime[splitInTime.length - 1]);
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    String[] wordsInTime = time.split(" ");
+                    if (wordsInTime.length > 1) {
+                        try {
+                            if (wordsInTime[wordsInTime.length - 1].contains("-")) {
+                                String[] temp = wordsInTime[wordsInTime.length - 1].split("-");
+                                year = Integer.parseInt(temp[1]);
+                            } else
+                                year = Integer.parseInt(wordsInTime[wordsInTime.length - 1]);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        String[] splitByHyphen = time.split("-");
+                        try {
+                            year = Integer.parseInt(splitByHyphen[splitByHyphen.length - 1]);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            return year;
         }
-        year = Integer.parseInt(time.substring(startIndex, endIndex));
-        return 1000;
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return this.title + "\n" + this.time + "\n" + this.location + "\n" + this.description + "\n"
                 + this.dynasty + "\n" + this.relatedFigures;
     }
-    public void addDescription(String description){
-        this.setDescription(getDescription() + "\n" + description);
+
+    public void addDescription(String description) {
+        this.description.append(description);
     }
+
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
+
     public Set<String> getRelatedFigure() {
         return relatedFigures;
     }
+
     public void setRelatedFigure(Set<String> relatedFigure) {
         this.relatedFigures = relatedFigure;
     }
-    public void setRelatedFigures(String fig){
+
+    public void setRelatedFigures(String fig) {
         this.relatedFigures.add(fig);
     }
+
     public String getDynasty() {
         return dynasty;
     }
+
     public void setDynasty(String dynasty) {
         this.dynasty = dynasty;
     }
@@ -103,11 +177,11 @@ public class Event {
         this.location = location;
     }
 
-    public String getDescription() {
+    public StringBuilder getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = new StringBuilder(description);
     }
 }
