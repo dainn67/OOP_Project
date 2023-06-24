@@ -1,5 +1,7 @@
 package objects;
 
+import java.util.ArrayList;
+
 public class King extends Figure {
 	private String kingYear;
 	private String mieuHieu;
@@ -16,9 +18,8 @@ public class King extends Figure {
 			String otherName, 	// 0
 			String bornYear,	// 1
 			String deathYear,	// 2
-			String father, 		// 3
-			String mother,		// 4
-			String dynasty, 	// 5
+			ArrayList<Figure> parents,
+			Dynasty dynasty, 	// 5
 			String home,		// 6
 			String kingYear, 	// 7
 			String desc,		// 8
@@ -28,7 +29,7 @@ public class King extends Figure {
 			String tenHuy,		// 12
 			String theThu		// 13
 	) {
-		super(name, otherName, bornYear, deathYear, father, mother, dynasty, home, desc);
+		super(name, otherName, bornYear, deathYear, parents, dynasty, home, desc);
 		this.kingYear = kingYear;
 		this.mieuHieu = mieuHieu;
 		this.thuyHieu = thuyHieu;

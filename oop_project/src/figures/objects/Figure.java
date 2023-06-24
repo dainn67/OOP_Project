@@ -1,30 +1,28 @@
 package objects;
 
+import java.util.ArrayList;
+
 public class Figure {
 	protected String name;
 	protected String otherName;
-	protected String bornYear;
-	protected String deathYear;
-	protected String father;
-	protected String mother;
-	protected String dynasty;
+	protected int bornYear;
+	protected int deathYear;
+	ArrayList<Figure> parents = new ArrayList<>();
+	Dynasty dynasty = null;
 	protected String home;
 	protected String desc;
 
 	public Figure() {
 	}
 
-	public Figure(String name, String otherName, String bornYear, String deathYear, String father, String mother,
-			String dynasty, String home, String desc) {
+	public Figure(String name, String otherName, int bornYear, int deathYear,
+			String home, String desc) {
 		this.name = name; 				// 0 ok
 		this.otherName = otherName; 	// 1 ok
 		this.bornYear = bornYear; 		// 2 ok
 		this.deathYear = deathYear; 	// 3 ok
-		this.father = father; 			// 4 ok
-		this.mother = mother; 			// 5 ok
-		this.dynasty = dynasty; 		// 6 hmmm...
-		this.home = home; 				// 7 ok
-		this.desc = desc; 				// 8 ok
+		this.home = home; 				// 4 ok
+		this.desc = desc; 				// 5 ok
 	}
 
 	public String getName() {
@@ -35,24 +33,20 @@ public class Figure {
 		return otherName;
 	}
 
-	public String getBornYear() {
+	public int getBornYear() {
 		return bornYear;
 	}
 
-	public String getDeathYear() {
+	public int getDeathYear() {
 		return deathYear;
 	}
 
-	public String getDynasty() {
+	public Dynasty getDynasty() {
 		return dynasty;
 	}
 
-	public String getFather() {
-		return father;
-	}
-
-	public String getMother() {
-		return mother;
+	public ArrayList<Figure> getParents() {
+		return parents;
 	}
 	
 	public String getHome() {
@@ -71,23 +65,19 @@ public class Figure {
 		this.otherName = otherName;
 	}
 	
-	public void setBornYear(String bornYear) {
+	public void setBornYear(int bornYear) {
 		this.bornYear = bornYear;
 	}
 	
-	public void setDeathYear(String deathYear) {
+	public void setDeathYear(int deathYear) {
 		this.deathYear = deathYear;
 	}
 	
-	public void setFather(String father) {
-		this.father = father;
+	public void setParents(ArrayList<Figure> parents) {
+		this.parents = parents;
 	}
 	
-	public void setMother(String mother) {
-		this.mother = mother;
-	}
-	
-	public void setDynasty(String dynasty) {
+	public void setDynasty(Dynasty dynasty) {
 		this.dynasty = dynasty;
 	}
 	
