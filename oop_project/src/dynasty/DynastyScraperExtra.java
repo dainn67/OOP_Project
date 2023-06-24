@@ -1,7 +1,6 @@
-package dynasty;
+package dynasty_scraper;
 
 import java.io.IOException;
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -13,6 +12,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import helper_package.EncodeDecode;
+import helper_package.HelperFunctions;
 import objects.Dynasty;
 
 public class DynastyScraperExtra {
@@ -44,12 +44,7 @@ public class DynastyScraperExtra {
 				getDynastyPage(doc);
 			}
 
-			EncodeDecode.encodeToFile(extraList,"extra_dynasties");
-			List<Dynasty> newList = EncodeDecode.decodedDynastyList(true);
-			for (Dynasty dynasty : newList) {
-				prtDynasty(dynasty);
-			}			
-			
+			EncodeDecode.encodeToFile(extraList, "extra_dynasties");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,7 +57,7 @@ public class DynastyScraperExtra {
 
 		// loop each dynasties in a page
 		for (Element dynasty : dynasties) {
-			Element nameElement = dynasty.select("h2").first();
+			Element nameElement = dynasty.selectFirst("h2");
 
 			String name = (nameElement.text());
 			String detailLink = nameElement.select("a").attr("href");
@@ -71,8 +66,12 @@ public class DynastyScraperExtra {
 //				System.out.println("TRIEU DAI: " + name);
 				if (dynastyDetail(detailLink)) {
 
+					
 					// after get data, add to list
-					Dynasty myDynasty = new Dynasty(name, dynastyAttributes[0], dynastyAttributes[1],
+					Dynasty myDynasty = new Dynasty(
+							name,
+							HelperFunctions.parseYear(dynastyAttributes[0]),
+							HelperFunctions.parseYear(dynastyAttributes[1]),
 							dynastyAttributes[2]);
 					extraList.add(myDynasty);
 				}
@@ -103,7 +102,7 @@ public class DynastyScraperExtra {
 		dynastyAttributes[1] = null;
 		dynastyAttributes[2] = null;
 
-		Element infobox = doc.select("div.infobox").first();
+		Element infobox = doc.selectFirst("div.infobox");
 		if (infobox != null) {
 			Elements trTags = infobox.select("tr");
 
@@ -161,7 +160,7 @@ public class DynastyScraperExtra {
 	}
 
 	static Boolean getCountry(Document doc) {
-		Element containerDiv = doc.select("div.com-content-article__body").first();
+		Element containerDiv = doc.selectFirst("div.com-content-article__body");
 		Elements paragraphs = containerDiv.select("p");
 		String[] paragraphTexts = new String[3]; // Array to store the paragraph texts
 
@@ -191,11 +190,4 @@ public class DynastyScraperExtra {
 		System.out.println("	" + dynasty.getEndYear());
 		System.out.println("	" + dynasty.getDesc());
 	}
-
-//	static String normalizeString(String s) {
-//		return Normalizer.normalize(s, Normalizer.Form.NFD).replaceAll("\\p{M}", "").replace("Đ", "D").replace("đ", "d")
-//				.replace(" – ", "-").replace("- ", "-").replace(" -", "-").replace("–", "-");
-//	}
 }
-
-
