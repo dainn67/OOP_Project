@@ -151,9 +151,12 @@ public class HelperFunctions {
 		return resList;
 	}
 	
-	public static String parseYear(String _input) {
+	public static int parseYear(String _input) {
+		if(_input == null) return 0;
+		
 		String input = normalizeString(_input);
-        Pattern pattern = Pattern.compile("\\d+"); // Regular expression to match one or more digits
+		// Regular expression to match one or more digits
+        Pattern pattern = Pattern.compile("\\d+"); 
         Matcher matcher = pattern.matcher(input);
         
         int largestNumber = 0; // Default value if no numbers are found
@@ -165,9 +168,9 @@ public class HelperFunctions {
             }
         }
         
-        if(input.contains("TCN")) largestNumber = -largestNumber;
+        if(input.contains("TCN")) largestNumber *= -1;
         
-        return largestNumber == 0 ? "Không rõ" : largestNumber + "";
+        return largestNumber;
     }
 
 //	public static void main(String[] args) {
