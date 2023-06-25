@@ -1,73 +1,49 @@
 package adapters;
 
-import java.io.IOException;
+import java.lang.reflect.Type;
 
 import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 import objects.King;
 
-public class KingGsonAdapter extends TypeAdapter<King> {
-	@Override
-	public void write(JsonWriter out, King king) throws IOException {
-		out.beginObject();
-		out.name("name").value(king.getName());
-		out.name("otherName").value(king.getOtherName());
-		out.name("born").value(king.getBornYear());
-		out.name("death").value(king.getDeathYear());
-		out.name("father").value(king.getFather());
-		out.name("mother").value(king.getMother());
-		out.name("dynasty").value(king.getDynasty());
-		out.name("home").value(king.getHome());
-		out.name("kingYear").value(king.getKingYear());
-		out.name("desc").value(king.getDesc());
-		out.name("mieuHieu").value(king.getMieuHieu());
-		out.name("thuyHieu").value(king.getThuyHieu());
-		out.name("nienHieu").value(king.getNienHieu());
-		out.name("tenHuy").value(king.getTenHuy());
-		out.name("theThu").value(king.getTheThu());
-		out.endObject();
-	}
+public class KingGsonAdapter implements JsonDeserializer<King>, JsonSerializer<King> {
 
-	@Override
-	public King read(JsonReader in) throws IOException {
-		King king = new King();
-		in.beginObject();
-		while (in.hasNext()) {
-			String fieldName = in.nextName();
-			if (fieldName.equals("name")) {
-				king.setName(in.nextString());
-			} else if (fieldName.equals("otherName")) {
-				king.setOtherName(in.nextString());
-			} else if (fieldName.equals("born")) {
-				king.setBornYear(in.nextString());
-			} else if (fieldName.equals("death")) {
-				king.setDeathYear(in.nextString());
-			} else if (fieldName.equals("father")) {
-				king.setFather(in.nextString());
-			} else if (fieldName.equals("mother")) {
-				king.setMother(in.nextString());
-			} else if (fieldName.equals("dynasty")) {
-				king.setDynasty(in.nextString());
-			} else if (fieldName.equals("home")) {
-				king.setHome(in.nextString());
-			} else if (fieldName.equals("kingYear")) {
-				king.setKingYear(in.nextString());
-			} else if (fieldName.equals("desc")) {
-				king.setDesc(in.nextString());
-			} else if (fieldName.equals("mieuHieu")) {
-				king.setMieuHieu(in.nextString());
-			} else if (fieldName.equals("thuyHieu")) {
-				king.setThuyHieu(in.nextString());
-			} else if (fieldName.equals("nienHieu")) {
-				king.setNienHieu(in.nextString());
-			} else if (fieldName.equals("tenHuy")) {
-				king.setTenHuy(in.nextString());
-			} else if (fieldName.equals("theThu")) {
-				king.setTheThu(in.nextString());
-			}
-		}
-		in.endObject();
-		return king;
-	}
+    @Override
+    public King deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        JsonObject jsonObject = json.getAsJsonObject();
+        String id = jsonObject.get("id").getAsString();
+        String name = jsonObject.get("name").getAsString();
+        String otherName = jsonObject.get("otherName").getAsString();
+        int bornYear = jsonObject.get("bornYear").getAsInt();
+        int deathYear = jsonObject.get("deathYear").getAsInt();
+        String home = jsonObject.get("home").getAsString();
+        String kingYear = jsonObject.get("kingYear").getAsString();
+        String desc = jsonObject.get("desc").getAsString();
+        String mieuHieu = jsonObject.get("mieuHieu").getAsString();
+        String thuyHieu = jsonObject.get("thuyHieu").getAsString();
+        String nienHieu = jsonObject.get("nienHieu").getAsString();
+        String tenHuy = jsonObject.get("tenHuy").getAsString();
+        String theThu = jsonObject.get("theThu").getAsString();
+
+        return new King(id, name, otherName, bornYear, deathYear, home, kingYear, desc, mieuHieu, thuyHieu, nienHieu, tenHuy, theThu);
+    }
+
+    @Override
+    public JsonElement serialize(King king, Type typeOfSrc, JsonSerializationContext context) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("id", king.getId());
+        jsonObject.addProperty("name", king.getName());
+        jsonObject.addProperty("otherName", king.getOtherName());
+        jsonObject.addProperty("bornYear", king.getBornYear());
+        jsonObject.addProperty("deathYear", king.getDeathYear());
+        jsonObject.addProperty("home", king.getHome());
+        jsonObject.addProperty("kingYear", king.getKingYear());
+        jsonObject.addProperty("desc", king.getDesc());
+        jsonObject.addProperty("mieuHieu", king.getMieuHieu());
+        jsonObject.addProperty("thuyHieu", king.getThuyHieu());
+        jsonObject.addProperty("nienHieu", king.getNienHieu());
+        jsonObject.addProperty("tenHuy", king.getTenHuy());
+        jsonObject.addProperty("theThu", king.getTheThu());
+
+        return jsonObject;
+    }
 }

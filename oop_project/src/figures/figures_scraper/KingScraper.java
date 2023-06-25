@@ -97,14 +97,14 @@ public class KingScraper {
 
 		accessDetailKing(detailLink);
 
+		String id = HelperFunctions.normalizeString(ten).replaceAll(" ", "");
+		
 		King newKing =  new King(
+				id, 
 				ten,											//ten
 				kingAttributes[0],								//ten khac
 				HelperFunctions.parseYear(kingAttributes[1]),	//sinh
 				HelperFunctions.parseYear(kingAttributes[2]),	//mat
-				kingAttributes[3],								//cha
-				kingAttributes[4],								//me
-				kingAttributes[5],								//trieu dai
 				kingAttributes[6],								//que quan
 				extractNumbers(namTriVi),						//tri vi
 				kingAttributes[8],								//mo ta
@@ -113,8 +113,10 @@ public class KingScraper {
 				kingAttributes[11],								//nien hieu
 				kingAttributes[12],								//ten huy
 				kingAttributes[13]);							//the thu
-		
-		//prt
+
+		//TODO: Thêm parent, dynasty
+
+		//check print
 		HelperFunctions.prtKingAttributes(newKing);
 		
 		return newKing;
