@@ -1,9 +1,10 @@
 package figures_scraper;
 
-import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +15,10 @@ import org.jsoup.select.Elements;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import adapters.DynastyGsonAdapter;
+import objects.Dynasty;
 import objects.Figure;
 import helper_package.EncodeDecode;
 import helper_package.HelperFunctions;
@@ -22,17 +26,35 @@ import helper_package.HelperFunctions;
 public class NguoiKeSuFigureScraper {
 
 	static int urlCounter = 0;
-	
-	static List<Figure> figures = new ArrayList<Figure>();
-	static String[] figureAttributes = new String[9];
+
+	static ArrayList<Figure> figures = new ArrayList<Figure>();
+	static String[] figureAttributes = new String[6];
+	static ArrayList<Dynasty> refDynastiesList = new ArrayList<>();
 
 	public static void main(String[] args) {
+		//get the reference list
+		Gson gson = new GsonBuilder().registerTypeAdapter(Dynasty.class, new DynastyGsonAdapter()).create();
+		Type type = new TypeToken<ArrayList<Dynasty>>() {
+		}.getType();
+
+		try (BufferedReader reader = new BufferedReader(new FileReader("final_dynasties.json"))) {
+			StringBuilder json = new StringBuilder();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				json.append(line);
+			}
+
+			// Deserialize the JSON string into ArrayList<Dynasty>
+			refDynastiesList = gson.fromJson(json.toString(), type);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		String url;
 		Document doc;
 		while (true) {
-			//1450
-			if (urlCounter > 10)
+			// 1450
+			if (urlCounter > 1450)
 				break;
 			if (urlCounter == 0)
 				url = "https://nguoikesu.com/nhan-vat";
@@ -48,9 +70,7 @@ public class NguoiKeSuFigureScraper {
 		}
 
 		// encode the list to Json, write to a file and decode back to check
-//		EncodeDecode.encodeToFile(figures, "figures");
-//		EncodeDecode.encodeList(new ArrayList<>(figures), "figures");
-		encodeData();
+		EncodeDecode.encodeToFile(new ArrayList<>(figures), "figures_draft");
 	}
 
 	static void getFiguresPage(Document doc) {
@@ -72,20 +92,22 @@ public class NguoiKeSuFigureScraper {
 
 			accessDetail(_figureDetail);
 
-			Figure myFigure = new Figure(
-					figureAttributes[0],
-					figureAttributes[1],
-					HelperFunctions.parseYear(figureAttributes[2]),
-					HelperFunctions.parseYear(figureAttributes[3]),
-					figureAttributes[4],
-					figureAttributes[5],
-					figureAttributes[6],
-					figureAttributes[7],
-					figureAttributes[8]);
+			// assign id and add to list
+			String id = HelperFunctions.normalizeString(figureAttributes[0].toLowerCase()).replaceAll(" ", "");
+			if (!figureAttributes[1].equals("Không rõ"))
+				id += HelperFunctions.normalizeString(figureAttributes[1].toLowerCase()).replaceAll(" ", "");
 
-			figures.add(myFigure);
+			Figure myFigure = new Figure(id, figureAttributes[0], figureAttributes[1],
+					HelperFunctions.parseYear(figureAttributes[2]), HelperFunctions.parseYear(figureAttributes[3]),
+					figureAttributes[4], figureAttributes[5]);
+
+			// add parent, get dynasty here
+			myFigure.setDynasties(HelperFunctions.extractDynasty(figureAttributes[5], refDynastiesList));
+			myFigure.setParents(HelperFunctions.extractParentsName(figureAttributes[5]));
 			
-			HelperFunctions.prtFigureAttributes(myFigure);
+			// add to list & check print
+			figures.add(myFigure);
+//			HelperFunctions.prtFigureAttributes(myFigure);
 		}
 		urlCounter += 5;
 	}
@@ -103,21 +125,20 @@ public class NguoiKeSuFigureScraper {
 			// get description inside detail page for data scrapping
 			StringBuilder desc = new StringBuilder();
 			Elements pTags = doc.select("p");
-			
+
 			int count = 0;
 			for (Element pTag : pTags) {
-				if(count > 5) break;
+				if (count > 5)
+					break;
 				desc.append(pTag.text() + " ");
 				count++;
 			}
 
-			// assign the name first
-			figureAttributes[8] = desc.toString();
+			// assign description
+			figureAttributes[5] = desc.toString();
 
-			// find tr tags to search whether there's a table or not
+			// get data from table and paragraph
 			Elements rows = doc.select("tr");
-
-			// get data from table
 			if (rows != null)
 				getDataFromTable(rows);
 
@@ -146,7 +167,7 @@ public class NguoiKeSuFigureScraper {
 
 			String content = subDivContent != null ? subDivContent.text() : null;
 
-			if(content != null) {				
+			if (content != null) {
 				switch (title.text()) {
 				case "Tên đầy đủ": {
 					figureAttributes[1] = content;
@@ -194,32 +215,30 @@ public class NguoiKeSuFigureScraper {
 		if (otherNameElements.size() >= 2 && otherNameElements.get(1) != null)
 			otherName = otherNameElements.get(1).text();
 
-		if(otherName.equals("Không rõ")) extractOtherName(desc);
-		else figureAttributes[1] = otherName;
+		if (otherName.equals("Không rõ"))
+			extractOtherName(desc);
+		else
+			figureAttributes[1] = otherName;
 
-		// get dynasty and remaining data if not found in table
-//		getDynasty(desc);
-		extractDynastyName(desc);
+		// get remaining data if not found in table
 		if (figureAttributes[2] == "Không rõ" && figureAttributes[3] == "Không rõ")
 			getYears(desc);
-		if (figureAttributes[4] == "Không rõ" && figureAttributes[5] == "Không rõ")
-			extractParentsName(desc);
-		if (figureAttributes[7] == "Không rõ")
+		if (figureAttributes[4] == "Không rõ")
 			extractHome(desc);
-//			getHome(desc);
 	}
-	
-	static void extractOtherName(String input) {
-        String pattern = "(?:tên thật|hay còn gọi là|hay|hoặc) ([A-ZÀ-Ỹ][a-zà-ỹ]+(?: [A-ZÀ-Ỹ][a-zà-ỹ]+)*)";
-        Pattern regex = Pattern.compile(pattern);
-        Matcher matcher = regex.matcher(input);
 
-        if (matcher.find()) {
-        	figureAttributes[1] = matcher.group(1);
-        }
-    }
+	static void extractOtherName(String input) {
+		String pattern = "(?:tên thật|hay còn gọi là|hay|hoặc) ([A-ZÀ-Ỹ][a-zà-ỹ]+(?: [A-ZÀ-Ỹ][a-zà-ỹ]+)*)";
+		Pattern regex = Pattern.compile(pattern);
+		Matcher matcher = regex.matcher(input);
+
+		if (matcher.find()) {
+			figureAttributes[1] = matcher.group(1);
+		}
+	}
 
 	static void extractHome(String text) {
+		//search for cities
 		String[] words = text.split("\\s+");
 		StringBuilder cityNameBuilder = new StringBuilder();
 		for (String word : words) {
@@ -227,61 +246,26 @@ public class NguoiKeSuFigureScraper {
 
 			for (String city : HelperFunctions.cities) {
 				if (cityNameBuilder.toString().contains(city)) {
-					figureAttributes[7] = city;
+					figureAttributes[4] = city;
 					return;
 				}
 			}
 		}
-		
-        String[] keywords = {"làng", "tại", "ở"};
 
-        String pattern = "(?i)(" + String.join("|", keywords) + ")\\s+([A-ZÀ-Ỹ][a-zà-ỹ]+)";
+		String[] keywords = { "làng", "tại", "ở" };
 
-        Pattern regex = Pattern.compile(pattern);
-        Matcher matcher = regex.matcher(text);
+		String pattern = "(?i)(" + String.join("|", keywords) + ")\\s+([A-ZÀ-Ỹ][a-zà-ỹ]+)";
+		Pattern regex = Pattern.compile(pattern);
+		Matcher matcher = regex.matcher(text);
 
-        if (matcher.find()) {
-        	String home = matcher.group(2);
-        	if(Character.isUpperCase(home.charAt(0))) {
-        		figureAttributes[7] = home; 
-        		return;
-        	}
-        }
-    }
-	
-	static void extractDynastyName(String input) {
-		if (input.contains("vua Lê chúa Trịnh")) {
-			figureAttributes[6] = "Vua Lê chúa Trịnh";
-			return;
+		if (matcher.find()) {
+			String home = matcher.group(2);
+			if (Character.isUpperCase(home.charAt(0))) {
+				figureAttributes[4] = home;
+				return;
+			}
 		}
-		
-        String pattern = "(?:Nhà|nhà|triều đại|triều) ([A-ZÀ-Ỹ][a-zà-ỹ]+(?: [A-ZÀ-Ỹ][a-zà-ỹ]+)*)";
-        Pattern regex = Pattern.compile(pattern);
-        Matcher matcher = regex.matcher(input);
-        
-        if (matcher.find()) {
-        	if(!(matcher.group(1).contains("đình") || matcher.group(1).contains("nho") || matcher.group(1).contains("Nho") || matcher.group(1).contains("đại")))
-        		figureAttributes[6] = matcher.group(1);
-        }
-    }
-	
-	static void extractParentsName(String text) {
-		
-        String[] keywords = {"là con trai của"};
-
-        String pattern = "(?i)(" + String.join("|", keywords) + ")\\s+([A-ZÀ-Ỹ][a-zà-ỹ]+)";
-
-        Pattern regex = Pattern.compile(pattern);
-        Matcher matcher = regex.matcher(text);
-
-        if (matcher.find()) {
-        	String dynastyName = matcher.group(2);
-        	if(Character.isUpperCase(dynastyName.charAt(0))) {
-        		figureAttributes[6] = dynastyName; 
-        		return;
-        	}
-        }
-    }
+	}
 
 	static void getYears(String str) {
 		int birthYear = 0, deathYear = 0;
@@ -436,24 +420,6 @@ public class NguoiKeSuFigureScraper {
 			figureAttributes[3] = "" + deathYear;
 
 			return;
-		}
-	}
-
-	static void prtList(List<Figure> list) {
-		for (Figure figure : list) {
-			HelperFunctions.prtFigureAttributes(figure);
-		}
-	}
-	
-	static void encodeData() {
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String json = gson.toJson(figures);
-
-		try (FileWriter writer = new FileWriter("figures.json")) {
-			writer.write(json);
-			System.out.println("Data saved to figures.json");
-		} catch (IOException e) {
-			System.err.println("Failed to save data: " + e.getMessage());
 		}
 	}
 }

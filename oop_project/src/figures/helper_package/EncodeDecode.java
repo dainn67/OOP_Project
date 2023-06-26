@@ -1,11 +1,13 @@
 package helper_package;
 
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -22,76 +24,59 @@ import objects.King;
 import objects.Poinsettia;
 
 public class EncodeDecode {
-	
-	public static void encodeList(List<Object> list, String fileName) {
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String json = gson.toJson(list);
-		String filePath = fileName + ".json";
-
-		try (FileWriter writer = new FileWriter(filePath)) {
-			writer.write(json);
-			System.out.println("Data saved to " + filePath);
-		} catch (IOException e) {
-			System.err.println("Failed to save to " + filePath + "\n" + e.getMessage());
-		}
-	}
 
 	public static void encodeToFile(List<Object> list, String fileName) {
 
 		Object tmpObject = list.get(0);
-		String filePath = fileName +  ".json";
-		
-		if (tmpObject instanceof Poinsettia) {
-			Gson gson = new GsonBuilder().registerTypeAdapter(Poinsettia.class, new PoinsettiaGsonAdapter()).setPrettyPrinting()
-					.create();
+		String filePath = fileName + ".json";
+		Gson gson = null;
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 
-			try (Writer writer = new FileWriter(filePath)) {
-				gson.toJson(list, writer);
-				System.out.println("Encode & Write poinsettia list complete");
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (tmpObject instanceof Poinsettia) {
+				System.out.println("IS INSTANCE OF POINSETTIA");
+				gson = new GsonBuilder().registerTypeAdapter(Poinsettia.class, new PoinsettiaGsonAdapter())
+						.setPrettyPrinting().create();
 			}
-		} else if (tmpObject instanceof Dynasty) {
-			Gson gson = new GsonBuilder().registerTypeAdapter(Dynasty.class, new DynastyGsonAdapter()).setPrettyPrinting()
-					.create();
-
-			try (Writer writer = new FileWriter(filePath)) {
-				gson.toJson(list, writer);
-				System.out.println("Encode & Write dynasty list complete");
-			} catch (IOException e) {
-				e.printStackTrace();
+			else if (tmpObject instanceof Dynasty) {
+				System.out.println("IS INSTANCE OF DYNASTY");
+				gson = new GsonBuilder().registerTypeAdapter(Dynasty.class, new DynastyGsonAdapter())
+						.setPrettyPrinting().create();
 			}
-		}
-		else if (tmpObject instanceof King) {
-			Gson gson = new GsonBuilder().registerTypeAdapter(King.class, new KingGsonAdapter()).setPrettyPrinting()
-					.create();
+			else if (tmpObject instanceof King) {
+				System.out.println("IS INSTANCE OF KING");
+				gson = new GsonBuilder().registerTypeAdapter(King.class, new KingGsonAdapter()).setPrettyPrinting()
+						.create();
+			}
+			else if (tmpObject instanceof Figure) {
+				System.out.println("IS INSTANCE OF FIGURE");
+				gson = new GsonBuilder().registerTypeAdapter(Figure.class, new FigureGsonAdapter()).setPrettyPrinting()
+						.create();
+			}
+			String jsonString = gson.toJson(list);
+			writer.write(jsonString);
 			
-			try (Writer writer = new FileWriter(filePath)) {
-				gson.toJson(list, writer);
-				System.out.println("Encode & Write king list complete");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		else if (tmpObject instanceof Figure) {
-			Gson gson = new GsonBuilder().registerTypeAdapter(Figure.class, new FigureGsonAdapter()).setPrettyPrinting()
-					.create();
-			
-			try (Writer writer = new FileWriter(filePath)) {
-				gson.toJson(list, writer);
-				System.out.println("Encode & Write figure list complete");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} 
 	}
 
-	public static List<Dynasty> decodedDynastyList(Boolean isExtra) {
+	public static ArrayList<Dynasty> decodedDynastyList(int type) {
 		Gson gson = new GsonBuilder().registerTypeAdapter(Dynasty.class, new DynastyGsonAdapter()).setPrettyPrinting()
 				.create();
 
-		List<Dynasty> newDynastyList = null;
-		String filePath = isExtra ? "extra_dynasties.json" : "dynasties.json";
+		ArrayList<Dynasty> newDynastyList = null;
+		String filePath;
+		switch(type) {
+			case 1:{
+				filePath = "dynasties.json";
+				break;
+			}
+			case 2: {
+				filePath = "extra_dynasties.json";
+				break;
+			}
+			default: filePath = "final_dynasties.json";
+		}
 
 		try (Reader reader = new FileReader(filePath)) {
 			Type listType = new TypeToken<List<Dynasty>>() {
@@ -104,13 +89,25 @@ public class EncodeDecode {
 		return newDynastyList;
 	}
 
-	public static List<Figure> decodedFigureList() {
+	public static ArrayList<Figure> decodedFigureList(int type) {
 		Gson gson = new GsonBuilder().registerTypeAdapter(Figure.class, new FigureGsonAdapter()).setPrettyPrinting()
 				.create();
 
-		List<Figure> newFigureList = null;
-		String filePath = "figures.json";
-
+		ArrayList<Figure> newFigureList = null;
+		String filePath;
+		switch (type) {
+		case 1: {
+			filePath = "figures.json";
+			break;
+		}
+		case 2: {
+			filePath = "vansu_figures.json";
+			break;
+		}
+		default:
+			filePath = "final_figures.json";
+		}
+		
 		try (Reader reader = new FileReader(filePath)) {
 			Type listType = new TypeToken<List<Figure>>() {
 			}.getType();
@@ -121,13 +118,14 @@ public class EncodeDecode {
 
 		return newFigureList;
 	}
-	
-	public static List<Poinsettia> decodedPoinsettiaList() {
-		Gson gson = new GsonBuilder().registerTypeAdapter(Poinsettia.class, new PoinsettiaGsonAdapter()).setPrettyPrinting().create();
-		
-		List<Poinsettia> newPoinsettiaList = null;
+
+	public static ArrayList<Poinsettia> decodedPoinsettiaList() {
+		Gson gson = new GsonBuilder().registerTypeAdapter(Poinsettia.class, new PoinsettiaGsonAdapter())
+				.setPrettyPrinting().create();
+
+		ArrayList<Poinsettia> newPoinsettiaList = null;
 		String filePath = "poinsettias.json";
-		
+
 		try (Reader reader = new FileReader(filePath)) {
 			Type listType = new TypeToken<List<Poinsettia>>() {
 			}.getType();
@@ -135,7 +133,7 @@ public class EncodeDecode {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return newPoinsettiaList;
 	}
 }
