@@ -8,8 +8,8 @@ public class Dynasty {
 	private int startYear;
 	private int endYear;
 	private String desc;
-	private ArrayList<King> kings = new ArrayList<King>();
-	private ArrayList<Figure> figures = new ArrayList<Figure>();
+	private ArrayList<String> kings = new ArrayList<String>();
+	private ArrayList<String> figures = new ArrayList<String>();
 	
 	public Dynasty() {}
 	
@@ -36,19 +36,19 @@ public class Dynasty {
 		return desc;
 	}
 	
-	public ArrayList<King> getListKings() {
+	public ArrayList<String> getListKings() {
 		return kings;
 	}
 	
-	public ArrayList<Figure> getListFigures() {
+	public ArrayList<String> getListFigures() {
 		return figures;
 	}
 	
-	public void addFigure(Figure fig) {
+	public void addFigure(String fig) {
 		figures.add(fig);
 	}
 	
-	public void addKing(King king) {
+	public void addKing(String king) {
 		kings.add(king);
 	}
 	
