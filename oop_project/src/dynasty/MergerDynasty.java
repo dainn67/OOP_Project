@@ -21,8 +21,7 @@ public class MergerDynasty {
 		ArrayList<Dynasty> dynasties1 = new ArrayList<>();
 		ArrayList<Dynasty> dynasties2 = new ArrayList<>();
 		ArrayList<Dynasty> dynasties3 = new ArrayList<>();
-		
-		
+
 		String[] fileNames = { "dynasties.json", "extra_dynasties.json", "vansu_dynasty.json" };
 
 		// Create Gson object
@@ -51,37 +50,31 @@ public class MergerDynasty {
 				e.printStackTrace();
 			}
 		}
-		
-		//after deserialization, merge
+
+		// after deserialization, merge
 		mergeDynasty(dynasties1, dynasties2, dynasties3);
 		EncodeDecode.encodeToFile(new ArrayList<>(finalDynasties), "final_dynasties");
 	}
 
-	static public void mergeDynasty(ArrayList<Dynasty> list1, ArrayList<Dynasty> list2,
-			ArrayList<Dynasty> list3) {
-		
-		//het dynasties from 1st list
+	static public void mergeDynasty(ArrayList<Dynasty> list1, ArrayList<Dynasty> list2, ArrayList<Dynasty> list3) {
+
+		// get dynasties from 1st list
 		finalDynasties = new ArrayList<>(list1);
-		
 
-		//get longer list's size to ultilize only 1 for loop
-		int largerSize = list2.size() > list3.size() ? list2.size() : list3.size();
-
-		for (int i = 0; i < largerSize; i++) {
-			if (i < list2.size())
-				addToList(list2.get(i));
-			if (i < list3.size())
-				addToList(list3.get(i));
-		}
+		for (int i = 0; i < list2.size(); i++)
+			addToList(list2.get(i));
+		for (int i = 0; i < list3.size(); i++)
+			addToList(list3.get(i));
 	}
 
 	static public void addToList(Dynasty targetDynasty) {
 
 		// check if exist or not
 		for (Dynasty dynasty : finalDynasties) {
-			String targetName = targetDynasty.getName().toLowerCase();
-			String currentName = dynasty.getName().toLowerCase();
-			if (targetName.contains(currentName) || currentName.contains(targetName))
+			String targetName = targetDynasty.getName().toLowerCase().replaceAll("nhà", "").replaceAll("Nhà", "").trim();
+			String currentName = dynasty.getName().toLowerCase().replaceAll("nhà", "").replaceAll("Nhà", "").trim();
+			if (targetName.contains(currentName) || currentName.contains(targetName)
+					|| (targetName.contains("phân tranh") && currentName.contains("phân tranh")))
 				return;
 		}
 
@@ -94,20 +87,20 @@ public class MergerDynasty {
 			return;
 		}
 
-		//if biggest
+		// if biggest
 		currentDynastyYear = finalDynasties.get(finalDynasties.size() - 1).getStartYear();
 		if (currentDynastyYear < targetDynastyYear) {
 			finalDynasties.add(targetDynasty);
 			return;
 		}
 
-		//loop from end to top till find the correct position
+		// loop from end to top till find the correct position
 		for (int i = finalDynasties.size() - 2; i >= 0; i--) {
 			currentDynastyYear = finalDynasties.get(i).getStartYear();
 //			nextDynastyYear = parseYear(finalDynasties.get(i + 1).getStartYear());
 			if (currentDynastyYear < targetDynastyYear
 //					&& targetDynastyYear < nextDynastyYear
-					) {
+			) {
 				finalDynasties.add(i + 1, targetDynasty);
 				return;
 			}
