@@ -1,56 +1,70 @@
 package adapters;
 
-import java.io.IOException;
-
 import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
+import objects.Dynasty;
 import objects.Figure;
 
-public class FigureGsonAdapter extends TypeAdapter<Figure> {
-	@Override
-	public void write(JsonWriter out, Figure figure) throws IOException {
-		out.beginObject();
-		out.name("name").value(figure.getName());
-		out.name("otherName").value(figure.getOtherName());
-		out.name("bornYear").value(figure.getBornYear());
-		out.name("deathYear").value(figure.getDeathYear());
-		out.name("father").value(figure.getFather());
-		out.name("mother").value(figure.getMother());
-		out.name("dynasty").value(figure.getDynasty());
-		out.name("home").value(figure.getHome());
-		out.name("desc").value(figure.getDesc());
-		out.endObject();
-	}
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
-	@Override
-	public Figure read(JsonReader in) throws IOException {
-		Figure figure = new Figure();
-		in.beginObject();
-		while (in.hasNext()) {
-			String fieldName = in.nextName();
-			if (fieldName.equals("name")) {
-				figure.setName(in.nextString());
-			} else if (fieldName.equals("otherName")) {
-				figure.setOtherName(in.nextString());
-			} else if (fieldName.equals("bornYear")) {
-				figure.setBornYear(in.nextString());
-			} else if (fieldName.equals("deathYear")) {
-				figure.setDeathYear(in.nextString());
-			} else if (fieldName.equals("father")) {
-				figure.setFather(in.nextString());
-			} else if (fieldName.equals("mother")) {
-				figure.setMother(in.nextString());
-			} else if (fieldName.equals("dynasty")) {
-				figure.setDynasty(in.nextString());
-			} else if (fieldName.equals("home")) {
-				figure.setHome(in.nextString());
-			} else if (fieldName.equals("desc")) {
-				figure.setDesc(in.nextString());
-			}
-		}
-		in.endObject();
-		return figure;
-	}
+public class FigureGsonAdapter implements JsonSerializer<Figure>, JsonDeserializer<Figure> {
+    @Override
+    public JsonElement serialize(Figure figure, Type type, JsonSerializationContext context) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("id", figure.getId());
+        jsonObject.addProperty("name", figure.getName());
+        jsonObject.addProperty("otherName", figure.getOtherName());
+        jsonObject.addProperty("bornYear", figure.getBornYear());
+        jsonObject.addProperty("deathYear", figure.getDeathYear());
+        jsonObject.addProperty("home", figure.getHome());
+        jsonObject.addProperty("desc", figure.getDesc());
+
+        // Serialize parents
+        JsonArray parentsArray = new JsonArray();
+        for (String parent : figure.getParents()) {
+            parentsArray.add(new JsonPrimitive(parent));
+        }
+        jsonObject.add("parents", parentsArray);
+
+        // Serialize dynasties
+        JsonArray dynastiesArray = new JsonArray();
+        for (String dynasty : figure.getDynasties()) {
+            dynastiesArray.add(new JsonPrimitive(dynasty));
+        }
+        jsonObject.add("dynasties", dynastiesArray);
+
+        return jsonObject;
+    }
+
+    @Override
+    public Figure deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+            throws JsonParseException {
+        JsonObject jsonObject = json.getAsJsonObject();
+        String id = jsonObject.get("id").getAsString();
+        String name = jsonObject.get("name").getAsString();
+        String otherName = jsonObject.get("otherName").getAsString();
+        int bornYear = jsonObject.get("bornYear").getAsInt();
+        int deathYear = jsonObject.get("deathYear").getAsInt();
+        String home = jsonObject.get("home").getAsString();
+        String desc = jsonObject.get("desc").getAsString();
+
+        Figure figure = new Figure(id, name, otherName, bornYear, deathYear, home, desc);
+
+        JsonArray parentsArray = jsonObject.getAsJsonArray("parents");
+        ArrayList<String> parents = new ArrayList<>();
+        for (JsonElement parent : parentsArray) {
+            parents.add(parent.getAsString());
+        }
+        figure.setParents(parents);
+
+        JsonArray dynastiesArray = jsonObject.getAsJsonArray("dynasties");
+        ArrayList<String> dynasties = new ArrayList<>();
+        for (JsonElement dynasty : dynastiesArray) {
+            dynasties.add(dynasty.getAsString());
+        }
+        figure.setDynasties(dynasties);
+
+        return figure;
+    }
 }
