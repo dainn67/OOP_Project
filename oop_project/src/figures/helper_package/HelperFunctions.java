@@ -51,9 +51,8 @@ public class HelperFunctions {
 		System.out.println("	Ten khac: " + myFigure.getOtherName());
 		System.out.println("	Sinh: " + myFigure.getBornYear());
 		System.out.println("	Mat: " + myFigure.getDeathYear());
-		System.out.println("	Cha: " + myFigure.getFather());
-		System.out.println("	Me: " + myFigure.getMother());
-		System.out.println("	Trieu dai: " + myFigure.getDynasty());
+		System.out.println("	Cha/Me: " + myFigure.getParents());
+		System.out.println("	Trieu dai: " + myFigure.getDynasties());
 		System.out.println("	Que quan: " + myFigure.getHome());
 		System.out.println("	Trieu vua: " + myFigure.getKingYear());
 		System.out.println("	Nam do trang nguyen: " + myFigure.getGraduatedYear());
