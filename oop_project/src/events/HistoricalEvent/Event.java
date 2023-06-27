@@ -1,7 +1,9 @@
-package HistoricalEvent;
+package events.HistoricalEvent;
 
+import java.text.Normalizer;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class Event {
     private String id;
@@ -23,11 +25,20 @@ public class Event {
         this.location = location;
     }
 
-    public Event(String title, String time, String location, String description) {
+    public Event(String title, String time, String location, String dynasty, String description) {
         this.title = title;
         this.time = time;
         this.location = location;
+        this.dynasty = dynasty;
         this.description = new StringBuilder(description);
+    }
+
+    public void buildId() {
+        String input = this.getTitle().toLowerCase().replaceAll(" ", "");
+        String temp = Normalizer.normalize(input, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        temp = pattern.matcher(temp).replaceAll("");
+        this.setId(temp.replaceAll("đ", "d"));
     }
 
     // finised for nguoi ke su
