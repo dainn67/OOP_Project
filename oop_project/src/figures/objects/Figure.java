@@ -16,15 +16,41 @@ public class Figure {
 	public Figure() {
 	}
 
-	public Figure(String id, String name, String otherName, int bornYear, int deathYear,
-			String home, String desc) {
-		this.id = id;
-		this.name = name; 				// 0 ok
-		this.otherName = otherName; 	// 1 ok
-		this.bornYear = bornYear; 		// 2 ok
-		this.deathYear = deathYear; 	// 3 ok
-		this.home = home; 				// 4 ok
-		this.desc = desc; 				// 5 ok
+	public Figure(String id,String name, String otherName, int bornYear, int deathYear, ArrayList<String> parents,
+			ArrayList<String> dynasties, String home, String desc) {
+		this.id=id;						// 0 OK
+		this.name = name; 				// 1 OK
+		this.otherName = otherName; 	// 2 OK
+		this.bornYear = bornYear; 		// 3 OK
+		this.deathYear = deathYear; 	// 4 OK
+		this.parents = parents; 		// ? OK
+		this.dynasties = dynasties; 	// ? hmmm...
+		this.home = home; 				// 5 OK
+		this.desc = desc; 				// 6 OK
+	}
+	
+	public Figure(String id, String name, String otherName, int bornYear, int deathYear,ArrayList<String> dynasties, String home, String desc) {
+		this.id=id;						// 0 OK
+		this.name = name; 				// 1 OK
+		this.otherName = otherName; 	// 2 OK
+		this.bornYear = bornYear; 		// 3 OK
+		this.deathYear = deathYear; 	// 4 OK
+//		this.parents = parents; 		// ? OK
+		this.dynasties = dynasties; 	// ? hmmm...
+		this.home = home; 				// 5 OK
+		this.desc = desc; 				// 6 OK
+	}
+	
+	public Figure(String id,String name, String otherName, int bornYear, int deathYear, String home, String desc) {
+		this.id=id;						// 0 OK
+		this.name = name; 				// 1 OK
+		this.otherName = otherName; 	// 2 OK
+		this.bornYear = bornYear; 		// 3 OK
+		this.deathYear = deathYear; 	// 4 OK
+//		this.parents = parents; 		// ? OK
+//		this.dynasties = dynasties; 	// ? hmmm...
+		this.home = home; 				// 5 OK
+		this.desc = desc; 				// 5 OK
 	}
 	
 	public String getId() {
@@ -63,8 +89,6 @@ public class Figure {
 		return desc;
 	}
 	
-	
-	//setters
 	public void setId(String id) {
 		this.id = id;
 	}
