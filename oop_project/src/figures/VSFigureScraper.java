@@ -1,14 +1,7 @@
-package figures_scraper;
+package figures;
 
-import java.io.FileWriter;
-
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,13 +15,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
+import dynasties.objects.Dynasty;
+import figures.helpers.HelperFunctions;
+import figures.objects.Figure;
 
-import objects.Dynasty;
-import objects.Figure;
-//import helper_package.EncodeDecode;
-import helper_package.HelperFunctions;
-
-public class VanSuFigureScraper {
+public class VSFigureScraper {
 	static int figureCount = 0;
 	static int homeCount = 0;
 	static int dynastyCount = 0;
@@ -40,40 +31,8 @@ public class VanSuFigureScraper {
 	
 	public static ArrayList<Figure> figures = new ArrayList<Figure>();
 	static String[] figureAttributes = new String[9];
-	static ArrayList<String> refDynastiesList = new ArrayList<>();
-	public static void main(String[] args) {
-		 
-		
-		// Read the JSON file into a string
-		// Read the JSON file into a string
-		String json = HelperFunctions.readFile("final_dynasties2.json");
-		// Read the JSON file into a string
-//        String json = readFile("final_dynasties2.json");
-
-        // Create a Gson object with the custom adapter
-        Gson gson = new GsonBuilder().create();
-
-        // Convert the JSON to ArrayList<Dynasty>
-        Type dynastyListType = new TypeToken<ArrayList<Dynasty>>() {}.getType();
-        ArrayList<Dynasty> decodedList = gson.fromJson(json, dynastyListType);
-
-        // Extract names into an ArrayList<String>
-        
-        for (Dynasty dynasty : decodedList) {
-            String name = dynasty.getName();
-            refDynastiesList.add(name);
-        }
-	    
-        // Extract names into an ArrayList<String>
-        
-//        for (Dynasty dynasty : decodedList) {
-//            String name = dynasty.getName();
-//            refDynastiesList.add(name);
-//        }
-//        for (String dynasty : refDynastiesList) {
-//            System.out.println(dynasty);
-//        }
-		 
+	
+	public static void crawl() { 
 		String url;
 		Document doc;
 		while (true) {
@@ -94,33 +53,7 @@ public class VanSuFigureScraper {
 			}
 		}
 		
-		HelperFunctions.encodeListToJson(figures,"after_vsfigures.json");
-		
-//		Gson gson2 = new GsonBuilder().setPrettyPrinting().create();
-//
-//        // Convert ArrayList to JSON string
-//        String json2 = gson2.toJson(figures);
-//
-//        // Specify the file path
-//        String filePath = "VanSuBruh.json";
-//
-//        try {
-//            // Create FileWriter object
-//            FileWriter fileWriter = new FileWriter(filePath);
-//
-//            // Write JSON string to the file
-//            fileWriter.write(json2);
-//
-//            // Close the FileWriter
-//            fileWriter.close();
-//
-//            System.out.println("JSON file created successfully.");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-		// encode the list to Json, write to a file and decode back to check
-		//EncodeDecode.encodeToFile(figures, "tmpVanSufiguresTestParentsDynasty");
+		HelperFunctions.encodeListToJson(figures,"vs_figures.json");
 	}
 
 	static void getFiguresPage(Document doc) {
@@ -225,7 +158,6 @@ public class VanSuFigureScraper {
                 
                 if (foundName==false)
                 	extractOtherName(desc.toString());
-                	System.out.println("HEHE");
                 
                 //assign description
                 figureAttributes[5] = desc.toString();
@@ -275,7 +207,7 @@ public class VanSuFigureScraper {
 		ArrayList<String> resDynasties = new ArrayList<>();
 
         for (String input : inputs) {
-            for (String dynasty : refDynastiesList) {
+            for (String dynasty : FigureScraper.refDynasties) {
                 String targetName = dynasty.toLowerCase();
                 if (targetName.contains(input.toLowerCase())) {
                     resDynasties.add(dynasty);

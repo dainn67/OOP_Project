@@ -1,12 +1,7 @@
-package figures_scraper;
+package figures;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,46 +10,23 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import objects.Dynasty;
-import objects.Figure;
-import helper_package.HelperFunctions;
+import figures.objects.Figure;
+import figures.helpers.HelperFunctions;
 
 public class NKSFigureScraper {
 
 	static int urlCounter = 0;
 
-	static ArrayList<Figure> figures = new ArrayList<Figure>();
+	static ArrayList<figures.objects.Figure> figures = new ArrayList<Figure>();
 	static String[] figureAttributes = new String[6];
-	static ArrayList<Dynasty> refDynastiesList = new ArrayList<>();
 
-	public static void main(String[] args) {
-		//get the reference list
-		Gson gson = new GsonBuilder().create();
-		Type type = new TypeToken<ArrayList<Dynasty>>() {
-		}.getType();
-
-		try (BufferedReader reader = new BufferedReader(new FileReader("final_dynasties2.json"))) {
-			StringBuilder json = new StringBuilder();
-			String line;
-			while ((line = reader.readLine()) != null) {
-				json.append(line);
-			}
-
-			// Deserialize the JSON string into ArrayList<Dynasty>
-			refDynastiesList = gson.fromJson(json.toString(), type);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public static void crawl() {
 
 		String url;
 		Document doc;
 		while (true) {
 			// 1450
-			if (urlCounter > 1450)
+			if (urlCounter > 5)
 				break;
 			if (urlCounter == 0)
 				url = "https://nguoikesu.com/nhan-vat";
@@ -70,7 +42,7 @@ public class NKSFigureScraper {
 		}
 
 		// encode the list to Json, write to a file and decode back to check
-		HelperFunctions.encodeListToJson(new ArrayList<>(figures), "after_nks_figures.json");
+		HelperFunctions.encodeListToJson(figures, "nks_figures.json");
 	}
 
 	static void getFiguresPage(Document doc) {
@@ -102,12 +74,11 @@ public class NKSFigureScraper {
 					figureAttributes[4], figureAttributes[5]);
 
 			// add parent, get dynasty here
-			myFigure.setDynasties(HelperFunctions.extractDynasty(figureAttributes[5], refDynastiesList));
+			myFigure.setDynasties(HelperFunctions.extractDynasty(figureAttributes[5], FigureScraper.refDynasties));
 			myFigure.setParents(HelperFunctions.extractParentsName(figureAttributes[5]));
 			
 			// add to list & check print
 			figures.add(myFigure);
-//			HelperFunctions.prtFigureAttributes(myFigure);
 		}
 		urlCounter += 5;
 	}

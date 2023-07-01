@@ -1,22 +1,22 @@
-package figures_scraper;
+package figures.helpers;
 
 import java.util.ArrayList;
 
 
-import helper_package.HelperFunctions;
-import objects.Figure;
+import figures.objects.Figure;
 
 public class MergeFigures {
 	
 	//merge dynasty
-	static public ArrayList<Figure> mergeDynasty(ArrayList<Figure> list1, ArrayList<Figure> list2) {
+	static public void mergeDynasty() {
+		ArrayList<Figure> list1 = HelperFunctions.decodeFromJson("nks_figures.json");
+		ArrayList<Figure> list2 = HelperFunctions.decodeFromJson("vs_figures.json");
 		ArrayList<Figure> resList = new ArrayList<>(list1);
 
-		for (Figure fig2 : list2) {
+		for (Figure fig2 : list2)
 				addToList(resList, fig2);
-		}
 
-		return resList;
+		HelperFunctions.encodeListToJson(resList, "merged_figures.json");
 	}
 
 	static public void addToList(ArrayList<Figure> resList, Figure targetFig) {
@@ -49,18 +49,5 @@ public class MergeFigures {
 			}
 		}
 		resList.add(targetFig);
-	}
-
-//	//test main function
-	public static void main(String[] args) {
-		ArrayList<Figure> figures = HelperFunctions.decodeFromJson("after_nks_figures.json");
-		ArrayList<Figure> figures2 = HelperFunctions.decodeFromJson("after_vsfigures.json");
-		System.out.println(figures.size());
-		System.out.println(figures2.size());
-		
-		ArrayList<Figure> resList = mergeDynasty(figures, figures2);
-		System.out.println(resList.size());
-		HelperFunctions.encodeListToJson(resList, "after_figures.json");
-		
 	}
 }

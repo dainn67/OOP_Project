@@ -1,4 +1,4 @@
-package objects;
+package figures.objects;
 
 public class King extends Figure {
 	private String kingYear;

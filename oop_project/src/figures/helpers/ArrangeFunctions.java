@@ -1,28 +1,24 @@
-package helper_package;
+package figures.helpers;
 
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.io.BufferedReader;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import objects.Dynasty;
-import objects.Figure;
-import objects.King;
+import figures.objects.*;
+import dynasties.objects.Dynasty;
 
 public class ArrangeFunctions {
-	static String filePath1 = "after_dynasties.json";
-	static String filePath2 = "after_append.json";
+	static String filePath1 = "final_dynasties.json";
+	static String filePath2 = "appended_figures.json";
 	static ArrayList<Dynasty> dynasties = decodeJsonFileToList(filePath1, Dynasty.class);
 	static ArrayList<Figure> figures = HelperFunctions.decodeFromJson(filePath2);
+	
 	public static void arrangeFiguresToDynasties() {
-		
-
 		int[] counter = new int[40];
 		for (int i = 0; i < figures.size(); i++) {
 			Figure fig = figures.get(i);
@@ -60,6 +56,8 @@ public class ArrangeFunctions {
 				}
 			}
 		}
+		
+		HelperFunctions.encodeListToJson(dynasties, "arranged_figures_dynasties.json");
 	}
 
 	public static <T> ArrayList<T> decodeJsonFileToList(String filePath, Class<T> elementType) {
@@ -78,17 +76,6 @@ public class ArrangeFunctions {
         Type listType = TypeToken.getParameterized(ArrayList.class, elementType).getType();
         return gson.fromJson(content.toString(), listType);
     }
-	
-
-	public static void main(String[] args) {
-	   
-		System.out.println(figures.size());
-		arrangeFiguresToDynasties();
-		
-		HelperFunctions.encodeListToJson(dynasties, "after_dynasties_sorted.json");
-		
-	}
-
 }
 
 

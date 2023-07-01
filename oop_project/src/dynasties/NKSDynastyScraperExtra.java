@@ -1,4 +1,4 @@
-package dynasty_scraper;
+package dynasties;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,10 +11,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import helper_package.HelperFunctions;
-import objects.Dynasty;
+import dynasties.objects.Dynasty;
+import figures.helpers.HelperFunctions;
 
-public class DynastyScraperExtra {
+public class NKSDynastyScraperExtra {
 	static int urlCounter = 0;
 	static int figureCounter = 0;
 	static int parentCounter = 0;
@@ -23,7 +23,7 @@ public class DynastyScraperExtra {
 	static ArrayList<Dynasty> extraList = new ArrayList<Dynasty>();
 	static String[] dynastyAttributes = new String[3];
 
-	public static void main(String[] args) {
+	public static void crawl() {
 
 		try {
 			String url;
@@ -43,7 +43,7 @@ public class DynastyScraperExtra {
 				getDynastyPage(doc);
 			}
 
-			HelperFunctions.encodeListToJson(extraList, "after_nks_dynasties_extra.json");
+			HelperFunctions.encodeListToJson(extraList, "nks_dynasties_extra.json");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
