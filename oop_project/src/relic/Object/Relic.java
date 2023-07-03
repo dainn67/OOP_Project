@@ -2,10 +2,10 @@ package relic.Object;
 
 import java.util.ArrayList;
 
-import objects.Figure;
+import Figures.Figure;
 
-public class Locate extends Type {
-    private String relic;
+public class Relic extends Type {
+    private String namerelic;
     private String location;
     private String time;
     private String note;
@@ -13,14 +13,14 @@ public class Locate extends Type {
     private String id;
     private ArrayList<Figure> figures = new ArrayList<Figure>();
 
-    public void setRelic(String relic) {
-        this.relic = relic;
+    public void setNameRelic(String namerelic) {
+        this.namerelic = namerelic;
     }
 
     public void setLocation(String location) {
         this.location = location;
     }
-
+    
     public void setTime(String time) {
         this.time = time;
     }
@@ -47,5 +47,18 @@ public class Locate extends Type {
 
     public String getDescription() {
         return this.description;
+    }
+    public Relic() {
+		super();
+	}
+    @Override
+    public String toString() {
+    	String strRelic = new String();
+    	strRelic += "Name: " + this.namerelic +"\n";
+    	strRelic += "ID: " + this.id +"\n";
+    	strRelic += "Location: " + this.location +"\n";
+    	strRelic += "Time: " + this.time +"\n";
+    	strRelic += "Description: " + this.description +"\n";
+    	return strRelic;
     }
 }

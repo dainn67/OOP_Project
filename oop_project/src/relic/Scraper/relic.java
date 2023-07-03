@@ -13,11 +13,11 @@ import org.jsoup.select.Elements;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import relic.Object.Locate;
+import relic.Object.Relic;
 
 public class relic {
     static Document document;
-    static ArrayList<Locate> locals = new ArrayList<Locate>();
+    static ArrayList<Relic> locals = new ArrayList<Relic>();
 
     static String normalizeString(String s) {
         return Normalizer.normalize(s, Normalizer.Form.NFD).replaceAll("\\p{M}", "").replace("Đ", "D").replace("đ", "d")
@@ -51,8 +51,8 @@ public class relic {
         Element pro = new Element("div.mw-parser-output section h3 span.mw-headline");
         pro.html("Thu do Ha Noi");
         provinces.add(24, pro);
-        File file1 = new File("src/Relic/Data/data2.txt");
-        File file2 = new File("src/Relic/Data/data3.json");
+        File file1 = new File("E:/data2.txt");
+        File file2 = new File("E:/data3.json");
         FileWriter writer2 = new FileWriter(file1);
         FileWriter writer3 = new FileWriter(file2);
         int j = 0;
@@ -62,13 +62,13 @@ public class relic {
             for (Element his : historicals) {
                 writer2.write("\n");
                 Elements infos = his.select("td");
-                Locate local = new Locate();
+                Relic local = new Relic();
                 int i = 0;
                 for (Element info : infos) {
                     switch (i) {
                         case 0:
                             writer2.write("Di tich: ");
-                            local.setRelic(removeBrackets(info.text()));
+                            local.setNameRelic(info.text());
 
                             Elements links = info.select("a[href]");
                             for (Element link : links) {
@@ -78,7 +78,7 @@ public class relic {
                                     Elements description = doc.select("div.mw-parser-output section.mf-section-0");
                                     if (!description.isEmpty()) {
                                         for (Element des : description) {
-                                            desString += normalizeString(des.text()) + " ";
+                                            desString += des.text() + " ";
                                         }
                                         local.setDescripton(desString);
                                     } else {
@@ -100,15 +100,15 @@ public class relic {
                             break;
                         case 1:
                             writer2.write("Vi tri: ");
-                            local.setLocation(removeBrackets(info.text()));
+                            local.setLocation(info.text());
                             break;
                         case 2:
                             writer2.write("Loai di tich: ");
-                            local.setType(removeBrackets(info.text()));
+                            local.setType(info.text());
                             break;
                         case 3:
                             writer2.write("Thoi gian: ");
-                            local.setTime(removeBrackets(info.text()));
+                            local.setTime(info.text());
                             break;
                     }
                     local.setProvince(provinces.get(k).text());
