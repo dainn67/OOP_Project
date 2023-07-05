@@ -60,66 +60,96 @@ public class relic {
         for (Element table : tables) {
             Elements historicals = table.select("tr");
             for (Element his : historicals) {
-                writer2.write("\n");
-                Elements infos = his.select("td");
-                Relic local = new Relic();
-                int i = 0;
-                for (Element info : infos) {
-                    switch (i) {
-                        case 0:
-                            writer2.write("Di tich: ");
-                            local.setNameRelic(info.text());
-
-                            Elements links = info.select("a[href]");
-                            for (Element link : links) {
-                                if (!link.attr("abs:href").isEmpty()) {
-                                    String desString = "";
-                                    Document doc = Jsoup.connect(link.attr("abs:href")).get();
-                                    Elements description = doc.select("div.mw-parser-output section.mf-section-0");
-                                    if (!description.isEmpty()) {
-                                        for (Element des : description) {
-                                            desString += des.text() + " ";
-                                        }
-                                        local.setDescripton(desString);
-                                    } else {
-                                        local.setDescripton("Khong co");
-                                    }
-                                    /*
-                                     * if (!desString.isEmpty()) {
-                                     * for (int count = 0; count < 10; count++) {
-                                     * if (desString.contains(normalizeString(Figures.get(count).getName()))) {
-                                     * local.setFigure(Figures.get(count));
-                                     * }
-                                     * }
-                                     * }
-                                     */
-                                }
-                            }
-
-                            local.setID(normalizeString(info.text()).toLowerCase().replace(" ", ""));
-                            break;
-                        case 1:
-                            writer2.write("Vi tri: ");
-                            local.setLocation(info.text());
-                            break;
-                        case 2:
-                            writer2.write("Loai di tich: ");
-                            local.setType(info.text());
-                            break;
-                        case 3:
-                            writer2.write("Thoi gian: ");
-                            local.setTime(info.text());
-                            break;
-                    }
-                    local.setProvince(provinces.get(k).text());
-                    writer2.write(normalizeString(info.text().replaceAll("\\[.?\\]", "")));
-                    writer2.write("\n");
-                    i++;
-                }
-                writer2.write(normalizeString(provinces.get(k).text()));
-                writer2.write("\n");
-                locals.add(local);
-                j++;
+            	if(!his.html().contains("th"))
+            	{
+	            	Relic local = new Relic();
+	            	local.setProvince(provinces.get(k).text());
+	                writer2.write("\n");
+	                Elements infos = his.select("td");
+	                int i = 0;
+	                if(local.getProvince().contains("Ninh Bình")) {
+	                	for (Element info : infos) {
+		                    switch (i) {
+		                        case 1:
+		                            writer2.write("Di tich: ");
+		                            local.setName(info.text());
+		
+		                            
+		                            local.setID(normalizeString(info.text()).toLowerCase().replace(" ", ""));
+		                            break;
+		                        case 2:
+		                            writer2.write("Vi tri: ");
+		                            local.setLocation(info.text());
+		                            break;
+		                        case 3:
+		                            writer2.write("Loai di tich: ");
+		                            local.setType(info.text());
+		                            break;
+		                       
+		                    }
+		                    writer2.write(normalizeString(info.text().replaceAll("\\[.?\\]", "")));
+		                    writer2.write("\n");
+		                    i++;
+		                }
+	                	continue;
+	                }
+	                for (Element info : infos) {
+	                    switch (i) {
+	                        case 0:
+	                            writer2.write("Di tich: ");
+	                            local.setName(info.text());
+	
+	                            Elements links = info.select("a[href]");
+	                            for (Element link : links) {
+	                                if (!link.attr("abs:href").isEmpty()) {
+	                                    String desString = "";
+	                                    Document doc = Jsoup.connect(link.attr("abs:href")).get();
+	                                    Elements description = doc.select("div.mw-parser-output section.mf-section-0");
+	                                    if (!description.isEmpty()) {
+	                                        for (Element des : description) {
+	                                            desString += des.text() + " ";
+	                                        }
+	                                        local.setDesc(desString);
+	                                    } else {
+	                                        local.setDesc("");
+	                                    }
+	                                    /*
+	                                     * if (!desString.isEmpty()) {
+	                                     * for (int count = 0; count < 10; count++) {
+	                                     * if (desString.contains(normalizeString(Figures.get(count).getName()))) {
+	                                     * local.setFigure(Figures.get(count));
+	                                     * }
+	                                     * }
+	                                     * }
+	                                     */
+	                                }
+	                            }
+	
+	                            local.setID(normalizeString(info.text()).toLowerCase().replace(" ", ""));
+	                            break;
+	                        case 1:
+	                            writer2.write("Vi tri: ");
+	                            local.setLocation(info.text());
+	                            break;
+	                        case 2:
+	                            writer2.write("Loai di tich: ");
+	                            local.setType(info.text());
+	                            break;
+	                        case 3:
+	                            writer2.write("Thoi gian: ");
+	                            local.setTime(info.text());
+	                            break;
+	                    }
+	                    
+	                    writer2.write(normalizeString(info.text().replaceAll("\\[.?\\]", "")));
+	                    writer2.write("\n");
+	                    i++;
+	                }
+	                writer2.write(normalizeString(provinces.get(k).text()));
+	                writer2.write("\n");
+	                locals.add(local);
+	                j++;
+            	}
             }
             k++;
 

@@ -6,4 +6,7 @@ public class Province {
     public void setProvince(String province) {
         this.province = province;
     }
+    public String getProvince() {
+    	return this.province;
+    }
 }

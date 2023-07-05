@@ -52,15 +52,23 @@ public class Decode {
             Type listType2 = new TypeToken<List<Figure>>() {
             }.getType();
             figures = gson2.fromJson(reader2, listType2);
+            /*for(int i = 0; i<locals.size();i++) {
+            	if(locals.get(i).getProvince().contains("Ninh Bình")) locals.remove(i);
+            	if(locals.get(i).getProvince().contains("Ninh Bình")) locals.remove(i);
+            	if(locals.get(i).getProvince().contains("Ninh Bình")) locals.remove(i);
+
+            }*/
             for (Relic loc : locals) {
-                for (Figure figure : figures) {
-                	if (loc.getDescription() == null)
-                        break;
-                    if (normalizeString(loc.getDescription()).contains(normalizeString(figure.getName()))) {
-                        loc.addFigure(figure);                    }
-                }
-                fommatedLocal.add(loc);
-            }
+            	
+	                for (Figure figure : figures) {
+	                	if (loc.getDesc() == null)
+	                        break;
+	                    if (normalizeString(loc.getDesc()).contains(normalizeString(figure.getName()))) {
+	                        loc.addFigure(figure);                    }
+	                }
+	                fommatedLocal.add(loc);
+            	}
+            
             String json = gson3.toJson(fommatedLocal);
             writer1.write(json);
             writer1.close();

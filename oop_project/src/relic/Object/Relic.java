@@ -5,16 +5,15 @@ import figures.objects.Figure;
 import java.util.ArrayList;
 
 public class Relic extends Type {
-    private String namerelic;
+    private String name;
     private String location;
     private String time;
-    private String note;
-    private String description;
+    private String desc;
     private String id;
     private ArrayList<Figure> figures = new ArrayList<Figure>();
 
-    public void setNameRelic(String namerelic) {
-        this.namerelic = namerelic;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setLocation(String location) {
@@ -25,12 +24,8 @@ public class Relic extends Type {
         this.time = time;
     }
 
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public void setDescripton(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public void setID(String id) {
@@ -45,20 +40,21 @@ public class Relic extends Type {
         return this.id;
     }
 
-    public String getDescription() {
-        return this.description;
+    public String getDesc() {
+        return this.desc;
     }
+    
     public Relic() {
 		super();
 	}
     @Override
     public String toString() {
     	String strRelic = new String();
-    	strRelic += "Name: " + this.namerelic +"\n";
+    	strRelic += "Name: " + this.name +"\n";
     	strRelic += "ID: " + this.id +"\n";
     	strRelic += "Location: " + this.location +"\n";
     	strRelic += "Time: " + this.time +"\n";
-    	strRelic += "Description: " + this.description +"\n";
+    	strRelic += "Description: " + this.desc +"\n";
     	return strRelic;
     }
 }
