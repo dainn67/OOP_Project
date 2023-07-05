@@ -1,17 +1,16 @@
-package dynasty_scraper;
+package dynasties.helpers;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import helper_package.HelperFunctions;
+import objects.Dynasty;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import helper_package.HelperFunctions;
-import objects.Dynasty;
 
 public class MergerDynasty {
 	static ArrayList<Dynasty> finalDynasties = new ArrayList<>();

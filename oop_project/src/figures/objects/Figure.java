@@ -1,4 +1,4 @@
-package objects;
+package figures.objects;
 
 import java.util.ArrayList;
 

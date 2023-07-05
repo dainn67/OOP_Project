@@ -11,5 +11,7 @@ module oop_project {
     requires jsoup;
     requires gson;
     requires rt;
+    requires org.jsoup;
+    requires com.google.gson;
     opens main_package to com.google.gson;
 }

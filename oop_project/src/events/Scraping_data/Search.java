@@ -1,6 +1,6 @@
-package events.Scraping_data;
+package Scraping_data;
 
-import events.HistoricalEvent.Event;
+import HistoricalEvent.Event;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -9,11 +9,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.regex.Pattern;
 
-public abstract class Search {
-    private ArrayList<Event> defaultEvent;
+public class Search implements ReadFromJson {
+    public Search() {
+        this.resultList = new ArrayList<>();
+    }
+
+    private ArrayList<Event> resultList;
 
     private static String standardize(String input) {
         String query = input.toLowerCase().replaceAll(" ", "");
@@ -23,11 +26,14 @@ public abstract class Search {
         return temp.replaceAll("đ", "d");
     }
 
-    public static ArrayList<Event> eventSearch(String input) {
+    public ArrayList<Event> eventSearch(String input) {
         String query = standardize(input);
-        String path1 = "./OOP_Project/OOP_Project/oop_project/src/events/Resources/events.json";
-        String path2 = "./OOP_Project/OOP_Project/oop_project/src/events/Resources/eventsWiki.json";
-        ArrayList<Event> resultList = new ArrayList<Event>();
+        String currentDir = System.getProperty("user.dir");
+
+        String path = currentDir + "\\" + "OOP_Project" + "\\" + "oop_project" + "\\" + "src" + "\\" + "events" + "\\" + "Resources" + "\\";
+
+        String path1 = path + "eventsNKS.json";
+        String path2 = path + "eventsWiki.json";
         ArrayList<Event> resourcesWiki = loadFromJson(path2);
         ArrayList<Event> resourcesNKS = loadFromJson(path1);
         for (Event e : resourcesWiki) {
@@ -44,7 +50,7 @@ public abstract class Search {
         return resultList;
     }
 
-    public static ArrayList<Event> loadFromJson(String path) {
+    public ArrayList<Event> loadFromJson(String path) {
         ArrayList<Event> resources = new ArrayList<Event>();
         JsonParser jsonParser = new JsonParser();
         try (FileReader reader = new FileReader(path)) {
@@ -64,7 +70,7 @@ public abstract class Search {
 //                        eventObj.get("dynasty").getAsString(),
 //                        eventObj.get("description").getAsString());
                 Event newEvent = new Event();
-                newEvent.setTitle(eventObj.get("title").getAsString());
+                newEvent.setName(eventObj.get("name").getAsString());
                 newEvent.setTime(eventObj.get("time").getAsString());
                 if (eventObj.get("location") != null) {
                     newEvent.setLocation(eventObj.get("location").getAsString());
@@ -75,6 +81,7 @@ public abstract class Search {
 
                 newEvent.setId(eventObj.get("id").getAsString());
 //                Set<>
+//                System.out.println(newEvent.getName());
                 resources.add(newEvent);
             });
 

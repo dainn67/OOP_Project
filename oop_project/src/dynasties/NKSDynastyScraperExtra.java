@@ -1,4 +1,4 @@
-package dynasty_scraper;
+package dynasties;
 
 import java.io.IOException;
 import java.util.ArrayList;

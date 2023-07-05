@@ -1,19 +1,12 @@
 package Scraping_data;
 
 import HistoricalEvent.Event;
-import HistoricalEvent.EventWrapper;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.lang.reflect.Type;
-//import java.sql.Ref;
 import java.util.*;
 
 public class ScrapeUtilNguoiKeSu {
@@ -27,107 +20,107 @@ public class ScrapeUtilNguoiKeSu {
         keyWords.add("Địa điểm");
         keyWords.add("Kết quả");
 
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add((-2879));
             add(-258);
         }}, "Hồng Bàng \u0026 Văn Lang");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add((-258));
             add(-217);
         }}, "Âu Lạc \u0026 Nam Việt");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add((1460));
             add(1497);
         }}, "nhà Lê");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add((1527));
             add(1529);
         }}, "nhà Mạc");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(-218);
             add(39);
         }}, "Bắc thuộc lần I");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(40);
             add(43);
         }}, "Trưng Nữ Vương");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(34);
             add(543);
         }}, "Bắc thuộc lần II");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(544);
             add(602);
         }}, "Nhà Lý \u0026 Nhà Triệu");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(602);
             add(905);
         }}, "Bắc thuộc lần III");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(905);
             add(938);
         }}, "Thời kỳ xây nền tự chủ");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(939);
             add(965);
         }}, "Nhà Ngô");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(968);
             add(980);
         }}, "Nhà Đinh");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(980);
             add(1009);
         }}, "Nhà Tiền Lê");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(1010);
             add(1225);
         }}, "Nhà Lý");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(1225);
             add(1400);
         }}, "Nhà Trần");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(1400);
             add(1407);
         }}, "Nhà Hồ");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(1407);
             add(1413);
         }}, "Nhà Hậu Trần");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(1407);
             add(1427);
         }}, "Bắc thuộc lần IV");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(1427);
             add(1789);
         }}, "Nhà Hậu Lê");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(1533);
             add(1592);
         }}, "Nam Bắc Triều");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(1627);
             add(1777);
         }}, "Trịnh Nguyễn Phân Tranh");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(1778);
             add(1802);
         }}, "Nhà Tây Sơn");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(1802);
             add(1945);
         }}, "Nhà Nguyễn");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(1884);
             add(1945);
         }}, "Pháp Thuộc");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(1945);
             add(1975);
         }}, "Việt Nam Dân Chủ Cộng Hoà");
-        RefDynasty.put(new ArrayList<>() {{
+        RefDynasty.put(new ArrayList<Integer>() {{
             add(1976);
             add(10000);
         }}, "Cộng hoà xã hội chủ nghĩa Việt Nam");
@@ -149,13 +142,14 @@ public class ScrapeUtilNguoiKeSu {
         // set time and desc for null fields
         for (Event e : eventNguoiKeSu) {
             if (e.getTime() == null) {
-                String[] words = e.getTitle().split(" ");
+                String[] words = e.getName().split(" ");
                 e.setTime(words[words.length - 1]);
             }
         }
         // assign dynasty
         for (Event e : eventNguoiKeSu) {
             e.setDynasty(assignDynasty(e.takeYear()));
+            e.buildId();
         }
         return eventNguoiKeSu;
     }
@@ -199,7 +193,7 @@ public class ScrapeUtilNguoiKeSu {
                 }
             }
 
-            newEvent.setTitle(header.text());
+            newEvent.setName(header.text());
             Elements rows = table.select("tbody tr");
             for (Element row : rows) {
                 Elements cells = row.select("td");

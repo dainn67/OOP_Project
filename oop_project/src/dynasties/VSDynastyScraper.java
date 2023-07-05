@@ -1,4 +1,4 @@
-package dynasty_scraper;
+package dynasties;
 
 import java.util.ArrayList;
 import java.util.HashSet;

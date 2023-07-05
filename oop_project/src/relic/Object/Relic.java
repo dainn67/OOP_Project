@@ -1,8 +1,8 @@
 package relic.Object;
 
-import java.util.ArrayList;
+import figures.objects.Figure;
 
-import Figures.Figure;
+import java.util.ArrayList;
 
 public class Relic extends Type {
     private String namerelic;

@@ -1,4 +1,4 @@
-package events.HistoricalEvent;
+package HistoricalEvent;
 
 import java.text.Normalizer;
 import java.util.HashSet;
@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class Event {
     private String id;
-    private String title;
+    private String name;
     private String time;
     private String location;
     private Set<String> relatedFigures;
@@ -19,14 +19,14 @@ public class Event {
         this.relatedFigures = new HashSet<>();
     }
 
-    public Event(String title, String time, String location) {
-        this.title = title;
+    public Event(String name, String time, String location) {
+        this.name = name;
         this.time = time;
         this.location = location;
     }
 
-    public Event(String title, String time, String location, String dynasty, String description) {
-        this.title = title;
+    public Event(String name, String time, String location, String dynasty, String description) {
+        this.name = name;
         this.time = time;
         this.location = location;
         this.dynasty = dynasty;
@@ -34,7 +34,7 @@ public class Event {
     }
 
     public void buildId() {
-        String input = this.getTitle().toLowerCase().replaceAll(" ", "");
+        String input = this.getName().toLowerCase().replaceAll(" ", "");
         String temp = Normalizer.normalize(input, Normalizer.Form.NFD);
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         temp = pattern.matcher(temp).replaceAll("");
@@ -71,9 +71,8 @@ public class Event {
             }
         } else {
             // take year in case of nguoi ke su
-            String eventTitle = this.getTitle();
+            String eventTitle = this.getName();
             String time = this.getTime();
-
             String[] words = eventTitle.split(" "); // regular format
             int year = 0;
             for (String word : words) {
@@ -91,12 +90,12 @@ public class Event {
                 }
             }
             if (year != 0) {
-                System.out.println(year);
+//                System.out.println(year);
             } else {
                 if (eventTitle.contains("(")) {
                     String[] splitInTime = time.split(" ");
                     try {
-                        year = Integer.parseInt(splitInTime[splitInTime.length - 1]);
+                        year = Integer.parseInt(splitInTime[splitInTime.length - 1].substring(0, 4));
                     } catch (NumberFormatException e) {
                         e.printStackTrace();
                     }
@@ -128,7 +127,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return this.title + "\n" + this.time + "\n" + this.location + "\n" + this.description + "\n"
+        return this.name + "\n" + this.time + "\n" + this.location + "\n" + this.description + "\n"
                 + this.dynasty + "\n" + this.relatedFigures;
     }
 
@@ -164,12 +163,12 @@ public class Event {
         this.dynasty = dynasty;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getTime() {

@@ -1,4 +1,4 @@
-package dynasty_scraper;
+package dynasties;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import org.jsoup.select.Elements;
 
 import helper_package.HelperFunctions;
 import objects.Dynasty;
+
 
 public class NguoikesuDynastyScraper {
 

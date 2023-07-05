@@ -20,6 +20,7 @@ public class ScraperUtilWiki {
         // assign dynasty
         for (Event e : eventList) {
             e.setDynasty(assignDynasty(e.takeYear()));
+            e.buildId();
         }
         return eventList;
     }
@@ -132,7 +133,7 @@ public class ScraperUtilWiki {
         for (Event e : eventList) {
             if (e.getDescription().length() < 5) {
                 nullDecription += 1;
-                System.out.println(e.getTitle());
+                System.out.println(e.getName());
             }
         }
         System.out.println("number of event has null desc: " + nullDecription);
@@ -188,7 +189,7 @@ public class ScraperUtilWiki {
 
                             Event newEvent = new Event();
                             newEvent.setTime(year.toString());
-                            newEvent.setTitle(title.toString());
+                            newEvent.setName(title.toString());
 
 //                            System.out.println("Rarely happened: " + title);
 
@@ -211,7 +212,7 @@ public class ScraperUtilWiki {
                         Elements relatedLinks = p.select("a[href]");
 
                         Event newEvent = new Event();
-                        newEvent.setTitle(title.toString());
+                        newEvent.setName(title.toString());
                         newEvent.setTime(year.toString());
 
 //                        System.out.println("Normal case: " + p.text().replace(year, ""));
@@ -245,7 +246,7 @@ public class ScraperUtilWiki {
 
                             Event newEvent = new Event();
                             newEvent.setTime(year.toString());
-                            newEvent.setTitle(title);
+                            newEvent.setName(title);
                             for (Element link : relatedLinks) {
                                 totalEventHaveInfobox += handleDetail(baseURL + link.attr("href"), newEvent);
                             }
