@@ -1,8 +1,6 @@
 package dynasties;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,18 +8,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
-import org.jsoup.nodes.TextNode;
-import org.jsoup.select.Elements;
 
-import helper_package.HelperFunctions;
-import objects.Dynasty;
-import objects.Figure;
+import dynasties.object.Dynasty;
+import figures.helpers.HelperFunctions;
 
-public class VanSuDynastyScraper {
+public class VSDynastyScraper {
 	static private ArrayList<Dynasty> dynasties = new ArrayList<Dynasty>();
 	static private String dynastyAttributes[] = new String[2];
 
-	public static void main(String[] args) {
+	public static void crawl() {
 		String url = "https://vansu.vn/viet-nam/nien-bieu-lich-su";
 		try {
 			Document doc = Jsoup.connect(url).get();
@@ -92,7 +87,7 @@ public class VanSuDynastyScraper {
 			e.printStackTrace();
 		}
 
-		HelperFunctions.encodeListToJson(dynasties, "after_vs_dynasies.json");
+		HelperFunctions.encodeListToJson(dynasties, "vs_dynasies.json");
 	}
 
 	static void extractYears(String text) {

@@ -1,11 +1,6 @@
-package figures_scraper;
+package figures;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -18,53 +13,33 @@ import org.jsoup.select.Elements;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-//import helper_package.EncodeDecode;
-import helper_package.HelperFunctions;
-import objects.Dynasty;
-import objects.King;
+import figures.objects.*;
+import figures.helpers.HelperFunctions;
 
-public class wiki_king_scraper_166 {
+public class WikiKingScraper {
 	static String[] kingAttributes = new String[14];
-	static List<King> kings = new ArrayList<King>();
-	static ArrayList<Dynasty> refDynastiesList = new ArrayList<>();
+	static ArrayList<King> kings = new ArrayList<King>();
 
 	Gson gson = new GsonBuilder().create();
 
-	public static void main(String[] args) throws Exception {
-		// get the reference list
-        Gson gson = new GsonBuilder().create();
-		Type type = new TypeToken<ArrayList<Dynasty>>() {
-		}.getType();
+	public static void crawl() {
+		String url = "https://vi.wikipedia.org/wiki/Vua_Vi%E1%BB%87t_Nam#Th%E1%BB%9Di_k%E1%BB%B3_chia_c%E1%BA%AFt";
+		Document doc;
+		try {
+			doc = Jsoup.connect(url).get();
+			Elements tables = doc.select("div.mw-parser-output table:not(.wikitable)[width!=\"1400\"]");
+			Elements tables_wikitable = doc.select("div.mw-parser-output table.wikitable[width!=\"1400\"]");
 
-		try (BufferedReader reader = new BufferedReader(new FileReader("final_dynasties2.json"))) {
-			StringBuilder json = new StringBuilder();
-			String line;
-			while ((line = reader.readLine()) != null) {
-				json.append(line);
-			}
-
-			// Deserialize the JSON string into ArrayList<Dynasty>
-			refDynastiesList = gson.fromJson(json.toString(), type);
+			loopTables(tables);
+			loopTables(tables_wikitable);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		// start crawling
-		String url = "https://vi.wikipedia.org/wiki/Vua_Vi%E1%BB%87t_Nam#Th%E1%BB%9Di_k%E1%BB%B3_chia_c%E1%BA%AFt";
-		Document doc = Jsoup.connect(url).get();
-
-		// there are 2 types of table
-		Elements tables = doc.select("div.mw-parser-output table:not(.wikitable)[width!=\"1400\"]");
-		Elements tables_wikitable = doc.select("div.mw-parser-output table.wikitable[width!=\"1400\"]");
-
-		loopTables(tables);
-		loopTables(tables_wikitable);
-
 		System.out.println("Total kings: " + kings.size());
 
-		HelperFunctions.encodeListToJson(new ArrayList<>(kings), "after_kings.json");
+		HelperFunctions.encodeListToJson(kings, "kings.json");
 	}
 
 	static void loopTables(Elements tables) {
@@ -169,7 +144,7 @@ public class wiki_king_scraper_166 {
 				kingAttributes[13]); // the thu
 
 		// TODO: Thêm parent, dynasty
-		newKing.setDynasties(HelperFunctions.extractDynasty(kingAttributes[8], refDynastiesList));
+		newKing.setDynasties(HelperFunctions.extractDynasty(kingAttributes[8], FigureScraper.refDynasties));
 
 		// check print
 //			HelperFunctions.prtKingAttributes(newKing);

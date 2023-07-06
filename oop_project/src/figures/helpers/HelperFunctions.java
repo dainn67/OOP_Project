@@ -1,9 +1,10 @@
-package helper_package;
+package figures.helpers;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,11 +18,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
-import objects.Dynasty;
-import objects.Figure;
-import objects.King;
-import objects.Poinsettia;
+import dynasties.object.Dynasty;
+import figures.objects.*;
 
 public class HelperFunctions {
 	
@@ -47,7 +47,6 @@ public class HelperFunctions {
 		System.out.println("	Sinh: " + myFigure.getBornYear());
 		System.out.println("	Mat: " + myFigure.getDeathYear());
 		System.out.println("	Cha/Me: " + myFigure.getParents());
-//		System.out.println("	Trieu dai: " + myFigure.getDynasty().getName());
 		System.out.println("	Trieu dai: " + myFigure.getDynasties());
 
 		System.out.println("	Que quan: " + myFigure.getHome());
@@ -221,12 +220,12 @@ public class HelperFunctions {
 		return content.toString();
 	}
 
-	public static ArrayList<String> extractDynasty(String input, ArrayList<Dynasty> refDynastiesList) {
+	public static ArrayList<String> extractDynasty(String input, ArrayList<String> refDynastiesList) {
 		ArrayList<String> resDynasties = new ArrayList<>();
 		if (input.contains("vua Lê chúa Trịnh")) {
-			for (Dynasty dynasty : refDynastiesList) {
-				if (dynasty.getName().equals("Trịnh Nguyễn Phân Tranh"))
-					resDynasties.add(dynasty.getName());
+			for (String dynasty : refDynastiesList) {
+				if (dynasty.equals("Trịnh Nguyễn Phân Tranh"))
+					resDynasties.add(dynasty);
 			}
 		}
 		String pattern = "(?:Nhà|nhà|triều đại|triều) ([A-ZÀ-Ỹ][a-zà-ỹ]+(?: [A-ZÀ-Ỹ][a-zà-ỹ]+)*)";
@@ -237,10 +236,10 @@ public class HelperFunctions {
 					|| matcher.group(1).contains("Nho") || matcher.group(1).contains("đại"))) {
 				String targetName = matcher.group(1).toLowerCase();
 				boolean found = false;
-				for (Dynasty dynasty : refDynastiesList)
-					if (dynasty.getName().toLowerCase().contains(targetName)) {
+				for (String dynasty : refDynastiesList)
+					if (dynasty.toLowerCase().contains(targetName)) {
 						found = true;
-						resDynasties.add(dynasty.getName());
+						resDynasties.add(dynasty);
 					}
 				if (!found)
 					System.out.println("Unknown: " + HelperFunctions.normalizeString(targetName));
@@ -264,10 +263,8 @@ public class HelperFunctions {
 					tmpKing.setName(figObject.get("name").getAsString());
 					tmpKing.setKingYear(figObject.get("kingYear").getAsString());
 					tmpKing.setDesc(figObject.get("desc").getAsString());
-//					tmpKing.setMieuHieu(figObject.get("mieuHieu").getAsString());
 					tmpKing.setThuyHieu(figObject.get("thuyHieu").getAsString());
 					tmpKing.setNienHieu(figObject.get("nienHieu").getAsString());
-//					tmpKing.setTenHuy(figObject.get("tenHuy").getAsString());
 					tmpKing.setTheThu(figObject.get("theThu").getAsString());
 					JsonArray parentsArray = figObject.getAsJsonArray("parents");
 					ArrayList<String> parents = new ArrayList<>();
@@ -333,6 +330,40 @@ public class HelperFunctions {
 		}
 		return resList;
 	}
+	
+	public static ArrayList<Dynasty> decodeDynastiesFromJson(String filePath) {
+        ArrayList<Dynasty> dynastyList = new ArrayList<>();
+
+        try (FileReader reader = new FileReader(filePath)) {
+            Gson gson = new GsonBuilder().create();
+            Type dynastyListType = new TypeToken<ArrayList<Dynasty>>(){}.getType();
+            dynastyList = gson.fromJson(reader, dynastyListType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return dynastyList;
+    }
+	
+	public static ArrayList<String> decodeDynastyNamesFromJson(String filepath) {
+		ArrayList<String> resList = new ArrayList<>();
+		JsonParser jParser = new JsonParser();
+		try (FileReader reader = new FileReader(filepath)) {
+			Object obj = jParser.parse(reader);
+			JsonArray dynList = (JsonArray) obj;
+			dynList.forEach(e -> {
+				JsonObject dynObject = (JsonObject) e;
+				if (dynObject.get("name") != null) {
+					resList.add(dynObject.get("name").getAsString());
+				}else {
+					System.out.println("ERROR");
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resList;
+	}
 
 	public static <T> void encodeListToJson(ArrayList<T> list, String filePath) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -347,5 +378,6 @@ public class HelperFunctions {
 		}
 	}
 
+	
 
 }
