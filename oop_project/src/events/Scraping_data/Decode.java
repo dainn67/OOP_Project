@@ -1,6 +1,6 @@
 package Scraping_data;
 
-import HistoricalEvent.Event;
+import HistoricalEvent.EventInit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class Decode {
 
-    public static ArrayList<Event> decode(String path) {
-        ArrayList<Event> resources = new ArrayList<Event>();
+    public static ArrayList<EventInit> decode(String path) {
+        ArrayList<EventInit> resources = new ArrayList<EventInit>();
         JsonParser jsonParser = new JsonParser();
         try (FileReader reader = new FileReader(path)) {
             //Read JSON file
@@ -21,16 +21,16 @@ public class Decode {
             JsonArray eventList = (JsonArray) obj;
 //            System.out.println(eventList);
 
-            //Iterate over event array
+            //Iterate over EventInit array
             eventList.forEach(e -> {
                 JsonObject eventObj = (JsonObject) e;
 //                System.out.println(eventObj.get("id"));
-//                Event newEvent = new Event(eventObj.get("title").getAsString(),
+//                EventInit newEvent = new EventInit(eventObj.get("title").getAsString(),
 //                        eventObj.get("time").getAsString(),
 //                        eventObj.get("location").getAsString(),
 //                        eventObj.get("dynasty").getAsString(),
 //                        eventObj.get("description").getAsString());
-                Event newEvent = new Event();
+                EventInit newEvent = new EventInit();
                 newEvent.setName(eventObj.get("title").getAsString());
                 newEvent.setTime(eventObj.get("time").getAsString());
                 if (eventObj.get("location") != null) {

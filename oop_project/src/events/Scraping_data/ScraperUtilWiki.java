@@ -1,6 +1,6 @@
 package Scraping_data;
 
-import HistoricalEvent.Event;
+import HistoricalEvent.EventInit;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,19 +13,19 @@ import java.util.List;
 import static Scraping_data.ScrapeUtilNguoiKeSu.assignDynasty;
 
 public class ScraperUtilWiki {
-    private static final List<Event> eventList = new ArrayList<>();
+    private static final List<EventInit> eventList = new ArrayList<>();
 
-    public static List<Event> standardizeEvent(String url, String baseURL) {
+    public static List<EventInit> standardizeEvent(String url, String baseURL) {
         EventScrapper(url, baseURL);
         // assign dynasty
-        for (Event e : eventList) {
+        for (EventInit e : eventList) {
             e.setDynasty(assignDynasty(e.takeYear()));
             e.buildId();
         }
         return eventList;
     }
 
-    private static void handleInfobox(Document detailDoc, Event newEvent) {
+    private static void handleInfobox(Document detailDoc, EventInit newEvent) {
         Elements table = detailDoc.select(".vevent"); // infobox table
         Element heading = detailDoc.getElementById("firstHeading");
 
@@ -87,7 +87,7 @@ public class ScraperUtilWiki {
         }
     }
 
-    private static void handlePlaintext(Document detailDoc, Event newEvent) {
+    private static void handlePlaintext(Document detailDoc, EventInit newEvent) {
         Elements des = detailDoc.select("p:has(b)");
         Element heading = detailDoc.getElementById("firstHeading");
 
@@ -118,7 +118,7 @@ public class ScraperUtilWiki {
         }
     }
 
-    private static void additionalDescription(String detailURL, Event newEvent) {
+    private static void additionalDescription(String detailURL, EventInit newEvent) {
         try {
             Document detailDoc = Jsoup.connect(detailURL).userAgent("Mozilla").get();
             handlePlaintext(detailDoc, newEvent);
@@ -130,7 +130,7 @@ public class ScraperUtilWiki {
 
     public static void eventReport() {
         int nullDecription = 0;
-        for (Event e : eventList) {
+        for (EventInit e : eventList) {
             if (e.getDescription().length() < 5) {
                 nullDecription += 1;
                 System.out.println(e.getName());
@@ -140,7 +140,7 @@ public class ScraperUtilWiki {
     }
 
     public static void showEvent() {
-        for (Event e : eventList) {
+        for (EventInit e : eventList) {
             System.out.println(e.toString());
 //            System.out.println("year: " + e.takeYear());
             System.out.println("___________________________________________");
@@ -187,7 +187,7 @@ public class ScraperUtilWiki {
                             }
                             Elements relatedLinks = dl.select("a[href]");
 
-                            Event newEvent = new Event();
+                            EventInit newEvent = new EventInit();
                             newEvent.setTime(year.toString());
                             newEvent.setName(title.toString());
 
@@ -211,7 +211,7 @@ public class ScraperUtilWiki {
                         // normal cases
                         Elements relatedLinks = p.select("a[href]");
 
-                        Event newEvent = new Event();
+                        EventInit newEvent = new EventInit();
                         newEvent.setName(title.toString());
                         newEvent.setTime(year.toString());
 
@@ -244,7 +244,7 @@ public class ScraperUtilWiki {
                             Elements relatedLinks = dd.select("a[href]");
 //                            System.out.println("in one year: " + " " + title);
 
-                            Event newEvent = new Event();
+                            EventInit newEvent = new EventInit();
                             newEvent.setTime(year.toString());
                             newEvent.setName(title);
                             for (Element link : relatedLinks) {
@@ -266,7 +266,7 @@ public class ScraperUtilWiki {
         }
     }
 
-    private static int handleDetail(String detailURL, Event newEvent) {
+    private static int handleDetail(String detailURL, EventInit newEvent) {
         try {
             Document detailDoc = Jsoup.connect(detailURL).userAgent("Mozilla").get();
             Element heading = detailDoc.getElementById("firstHeading");

@@ -1,6 +1,6 @@
 package Scraping_data;
 
-import HistoricalEvent.Event;
+import HistoricalEvent.EventInit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -16,7 +16,7 @@ public class Search implements ReadFromJson {
         this.resultList = new ArrayList<>();
     }
 
-    private ArrayList<Event> resultList;
+    private ArrayList<EventInit> resultList;
 
     private static String standardize(String input) {
         String query = input.toLowerCase().replaceAll(" ", "");
@@ -26,7 +26,7 @@ public class Search implements ReadFromJson {
         return temp.replaceAll("đ", "d");
     }
 
-    public ArrayList<Event> eventSearch(String input) {
+    public ArrayList<EventInit> eventSearch(String input) {
         String query = standardize(input);
         String currentDir = System.getProperty("user.dir");
 
@@ -34,15 +34,15 @@ public class Search implements ReadFromJson {
 
         String path1 = path + "eventsNKS.json";
         String path2 = path + "eventsWiki.json";
-        ArrayList<Event> resourcesWiki = loadFromJson(path2);
-        ArrayList<Event> resourcesNKS = loadFromJson(path1);
-        for (Event e : resourcesWiki) {
+        ArrayList<EventInit> resourcesWiki = loadFromJson(path2);
+        ArrayList<EventInit> resourcesNKS = loadFromJson(path1);
+        for (EventInit e : resourcesWiki) {
             if (e.getId().contains(query)) {
                 resultList.add(e);
             }
         }
 
-        for (Event e : resourcesNKS) {
+        for (EventInit e : resourcesNKS) {
             if (e.getId().contains(query)) {
                 resultList.add(e);
             }
@@ -50,8 +50,8 @@ public class Search implements ReadFromJson {
         return resultList;
     }
 
-    public ArrayList<Event> loadFromJson(String path) {
-        ArrayList<Event> resources = new ArrayList<Event>();
+    public ArrayList<EventInit> loadFromJson(String path) {
+        ArrayList<EventInit> resources = new ArrayList<EventInit>();
         JsonParser jsonParser = new JsonParser();
         try (FileReader reader = new FileReader(path)) {
             //Read JSON file
@@ -60,16 +60,16 @@ public class Search implements ReadFromJson {
             JsonArray eventList = (JsonArray) obj;
 //            System.out.println(eventList);
 
-            //Iterate over event array
+            //Iterate over EventInit array
             eventList.forEach(e -> {
                 JsonObject eventObj = (JsonObject) e;
 //                System.out.println(eventObj.get("id"));
-//                Event newEvent = new Event(eventObj.get("title").getAsString(),
+//                EventInit newEvent = new EventInit(eventObj.get("title").getAsString(),
 //                        eventObj.get("time").getAsString(),
 //                        eventObj.get("location").getAsString(),
 //                        eventObj.get("dynasty").getAsString(),
 //                        eventObj.get("description").getAsString());
-                Event newEvent = new Event();
+                EventInit newEvent = new EventInit();
                 newEvent.setName(eventObj.get("name").getAsString());
                 newEvent.setTime(eventObj.get("time").getAsString());
                 if (eventObj.get("location") != null) {

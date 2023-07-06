@@ -1,6 +1,6 @@
 package Scraping_data;
 
-import HistoricalEvent.Event;
+import HistoricalEvent.EventInit;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class ScrapeUtilNguoiKeSu {
-    private static final List<Event> eventList = new ArrayList<Event>();
+    private static final List<EventInit> eventList = new ArrayList<EventInit>();
     private static final List<String> keyWords = new ArrayList<>();
 
     private static Map<ArrayList<Integer>, String> RefDynasty = new HashMap<>(30);
@@ -136,25 +136,25 @@ public class ScrapeUtilNguoiKeSu {
         return "uncategorized";
     }
 
-    public static List<Event> standardizedEvents(String url, String baseURL) {
-        List<Event> eventNguoiKeSu = EventScrapper(url, baseURL);
+    public static List<EventInit> standardizedEvents(String url, String baseURL) {
+        List<EventInit> eventNguoiKeSu = EventScrapper(url, baseURL);
 
         // set time and desc for null fields
-        for (Event e : eventNguoiKeSu) {
+        for (EventInit e : eventNguoiKeSu) {
             if (e.getTime() == null) {
                 String[] words = e.getName().split(" ");
                 e.setTime(words[words.length - 1]);
             }
         }
         // assign dynasty
-        for (Event e : eventNguoiKeSu) {
+        for (EventInit e : eventNguoiKeSu) {
             e.setDynasty(assignDynasty(e.takeYear()));
             e.buildId();
         }
         return eventNguoiKeSu;
     }
 
-    public static List<Event> EventScrapper(String url, String baseURL) {
+    public static List<EventInit> EventScrapper(String url, String baseURL) {
         try {
             Document doc = Jsoup.connect(url).userAgent("Mozilla").get();
             Elements links = doc.select("p.readmore a[href]");
@@ -179,7 +179,7 @@ public class ScrapeUtilNguoiKeSu {
 
     public static void handleDetail(String detailURL) {
         try {
-            Event newEvent = new Event();
+            EventInit newEvent = new EventInit();
             newEvent.setId("nguoikesu");
             Document detailDoc = Jsoup.connect(detailURL).userAgent("Mozilla").get();
             Elements table = detailDoc.select("table[cellpadding=0][cellspacing=0][width=100%]");

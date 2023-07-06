@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class EventBuilder {
-    private ArrayList<EventWrapper> eventWrapperArrayList;
+    private ArrayList<Event> eventWrapperArrayList;
     public EventBuilder() {
         this.eventWrapperArrayList = new ArrayList<>();
     }
@@ -65,7 +65,7 @@ public class EventBuilder {
         }
         return dynasties;
     }
-    public ArrayList<EventWrapper> decodeEvents(String path) {
+    public ArrayList<Event> decodeEvents(String path) {
 
         String currentDir = System.getProperty("user.dir");
 
@@ -87,7 +87,7 @@ public class EventBuilder {
             //Iterate over event array
             eventList.forEach(e -> {
                 JsonObject eventObj = (JsonObject) e;
-                EventWrapper newEvent = new EventWrapper();
+                Event newEvent = new Event();
 
 //                Event newEvent = new Event();
                 newEvent.setId(eventObj.get("id").getAsString());
