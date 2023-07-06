@@ -48,7 +48,7 @@ public class EventBuilder {
                 }
                 if(e.get("endYear") != null){
                     if(e.get("endYear").getAsString().contains("TCN")){
-                        String temp = e.get("startYear").getAsString().split(" ")[0];
+                        String temp = e.get("endYear").getAsString().split(" ")[0];
                         newD.setEndYear(Integer.parseInt(temp) * -1);
                     }else{
                         newD.setEndYear(Integer.parseInt(e.get("endYear").getAsString()));
@@ -83,6 +83,7 @@ public class EventBuilder {
             JsonArray eventList = (JsonArray) obj;
 //            System.out.println(eventList);
             ArrayList<Figure> figList = HelperFunctions.decodeFromJson(path1);
+            ArrayList<Dynasty> dynasties = decodeDynasty(path2);
 
             //Iterate over event array
             eventList.forEach(e -> {
@@ -105,7 +106,6 @@ public class EventBuilder {
 
                 if(eventObj.get("dynasty") != null){
                     String temp = eventObj.get("dynasty").getAsString();
-                    ArrayList<Dynasty> dynasties = decodeDynasty(path2);
                     for(Dynasty d: dynasties){
                         if(d.getName().contains(temp)){
                             newDynasty = d;

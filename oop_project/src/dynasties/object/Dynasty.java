@@ -10,7 +10,7 @@ public class Dynasty {
 	int endYear;
 	String desc;
 //	ArrayList<King> kings = new ArrayList<King>();
-//	ArrayList<Figure> figures = new ArrayList<Figure>();
+	ArrayList<Figure> figures = new ArrayList<Figure>();
 //	ArrayList<Poinsettia> poinsettias = new ArrayList<Poinsettia>();
 
 	

@@ -1,14 +1,12 @@
 package ExternalObj;
 
-import java.util.ArrayList;
-
 public class Dynasty {
     String name;
     int startYear;
     int endYear;
     String desc;
     //	ArrayList<King> kings = new ArrayList<King>();
-    ArrayList<Figure> figures = new ArrayList<Figure>();
+//    ArrayList<Figure> figures = new ArrayList<Figure>();
 //	ArrayList<Poinsettia> poinsettias = new ArrayList<Poinsettia>();
 
 
@@ -56,9 +54,9 @@ public class Dynasty {
         this.desc = desc;
     }
 
-    public void addFigure(Figure fig) {
-        figures.add(fig);
-    }
+//    public void addFigure(Figure fig) {
+//        figures.add(fig);
+//    }
 
     @Override
     public String toString(){
