@@ -1,4 +1,4 @@
-package ExternalObj;
+package events.ExternalObj;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

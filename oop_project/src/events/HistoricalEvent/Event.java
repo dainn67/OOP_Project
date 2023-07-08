@@ -1,7 +1,7 @@
-package HistoricalEvent;
+package events.HistoricalEvent;
 
-import ExternalObj.Dynasty;
-import ExternalObj.Figure;
+import events.ExternalObj.Dynasty;
+import events.ExternalObj.Figure;
 
 import java.util.ArrayList;
 

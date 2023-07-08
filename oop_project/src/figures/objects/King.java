@@ -2,10 +2,8 @@ package figures.objects;
 
 public class King extends Figure {
 	private String kingYear;
-//	private String mieuHieu;
 	private String thuyHieu;
 	private String nienHieu;
-//	private String tenHuy;
 	private String theThu;
 	public King() {
 	};
@@ -26,19 +24,13 @@ public class King extends Figure {
 	) {
 		super(id, name, otherName, bornYear, deathYear, home, desc);
 		this.kingYear = kingYear;
-//		this.mieuHieu = mieuHieu;
 		this.thuyHieu = thuyHieu;
 		this.nienHieu = nienHieu;
-//		this.tenHuy = tenHuy;
 		this.theThu = theThu;
 	}
 	public String getKingYear() {
 		return kingYear;
 	}
-	
-//	public String getMieuHieu() {
-//		return mieuHieu;
-//	}
 	
 	public String getThuyHieu() {
 		return thuyHieu;
@@ -47,10 +39,6 @@ public class King extends Figure {
 	public String getNienHieu() {
 		return nienHieu;
 	}
-	
-//	public String getTenHuy() {
-//		return tenHuy;
-//	}
 	
 	public String getTheThu() {
 		return theThu;
@@ -62,10 +50,6 @@ public class King extends Figure {
 		this.kingYear = kingYear;
 	}
 	
-//	public void setMieuHieu(String mieuHieu) {
-//		this.mieuHieu = mieuHieu;
-//	}
-	
 	public void setThuyHieu(String thuyHieu) {
 		this.thuyHieu = thuyHieu;
 	}
@@ -73,10 +57,6 @@ public class King extends Figure {
 	public void setNienHieu(String nienHieu) {
 		this.nienHieu = nienHieu;
 	}
-	
-//	public void setTenHuy(String tenHuy) {
-//		this.tenHuy = tenHuy;
-//	}
 	
 	public void setTheThu(String theThu) {
 		this.theThu = theThu;

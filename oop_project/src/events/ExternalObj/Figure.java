@@ -1,4 +1,4 @@
-package ExternalObj;
+package events.ExternalObj;
 
 import java.util.ArrayList;
 

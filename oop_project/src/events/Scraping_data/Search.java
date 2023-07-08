@@ -1,6 +1,6 @@
-package Scraping_data;
+package events.Scraping_data;
 
-import HistoricalEvent.EventInit;
+import events.HistoricalEvent.EventInit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

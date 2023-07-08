@@ -68,7 +68,7 @@ public class NKSDynastyScraper {
 			dynasties.add(myDynasty);
 		}
 
-		HelperFunctions.encodeListToJson(dynasties, "nks_dynasties_test.json");
+		HelperFunctions.encodeListToJson(dynasties, "nks_dynasties.json");
 		
 		
 	}

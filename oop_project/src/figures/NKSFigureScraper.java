@@ -17,7 +17,7 @@ public class NKSFigureScraper {
 
 	static int urlCounter = 0;
 
-	static ArrayList<figures.objects.Figure> figures = new ArrayList<Figure>();
+	static ArrayList<Figure> figures = new ArrayList<Figure>();
 	static String[] figureAttributes = new String[6];
 
 	public static void crawl() {

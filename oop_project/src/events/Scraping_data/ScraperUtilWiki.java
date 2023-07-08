@@ -1,6 +1,6 @@
-package Scraping_data;
+package events.Scraping_data;
 
-import HistoricalEvent.EventInit;
+import events.HistoricalEvent.EventInit;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static Scraping_data.ScrapeUtilNguoiKeSu.assignDynasty;
+import static events.Scraping_data.ScrapeUtilNguoiKeSu.assignDynasty;
 
 public class ScraperUtilWiki {
     private static final List<EventInit> eventList = new ArrayList<>();

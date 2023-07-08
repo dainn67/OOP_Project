@@ -1,6 +1,6 @@
-package Scraping_data;
+package events.Scraping_data;
 
-import HistoricalEvent.EventInit;
+import events.HistoricalEvent.EventInit;
 
 import java.util.ArrayList;
 

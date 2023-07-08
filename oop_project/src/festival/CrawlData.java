@@ -13,7 +13,9 @@ import org.jsoup.select.Elements;
 
 import com.google.gson.Gson;
 
-import Figures.Figure;
+import figures.objects.Figure;
+
+
 
 public class CrawlData {
 	public static void main(String[] args) {

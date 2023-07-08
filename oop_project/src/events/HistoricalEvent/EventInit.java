@@ -1,4 +1,4 @@
-package HistoricalEvent;
+package events.HistoricalEvent;
 
 import java.text.Normalizer;
 import java.util.HashSet;

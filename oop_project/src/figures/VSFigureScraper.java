@@ -10,11 +10,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
-
 import dynasties.object.Dynasty;
 import figures.helpers.HelperFunctions;
 import figures.objects.Figure;
@@ -115,7 +110,7 @@ public class VSFigureScraper {
         String url = "https://vansu.vn" + tail;
         try {
         	boolean foundName = false;
-    		boolean foundBirth = false;
+  
 
             Document doc = Jsoup.connect(url).get();
             StringBuilder desc = new StringBuilder();
@@ -140,7 +135,7 @@ public class VSFigureScraper {
                          if (firstCellContent.equals("Năm sinh")) {
                         	 secondCell = firstRow.select("td").get(1);
                         	 extractBirth(secondCell.text().trim());
-                        	 foundBirth=true;
+                        	 
                          }
             			 
             		 }

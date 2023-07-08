@@ -1,3 +1,4 @@
+package runner;
 import dynasties.DynastyScraper;
 import figures.FigureScraper;
 import figures.helpers.ArrangeFunctions;

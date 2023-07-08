@@ -2,7 +2,9 @@ package festival;
 
 import java.util.ArrayList;
 
-import Figures.Figure;
+import figures.objects.Figure;
+
+
 
 public class Festival {
 	private String id;

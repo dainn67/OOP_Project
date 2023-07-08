@@ -1,6 +1,6 @@
-package Scraping_data;
+package events.Scraping_data;
 
-import HistoricalEvent.EventInit;
+import events.HistoricalEvent.Event;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,20 +43,20 @@ public class Scraper {
 //        }
 
 //
-        System.out.println("showing time");
-        Search s = new Search();
-        ArrayList<EventInit> res = s.eventSearch("bach dang");
-        for(EventInit e: res){
-            System.out.println(e.toString());
-        }
-//        String currentDir = System.getProperty("user.dir");
-//
-//        String path = currentDir + "\\" + "OOP_Project" + "\\" + "oop_project" + "\\" + "src" + "\\" + "events" + "\\" + "Resources" + "\\";
-//
-//        String path1 = path + "eventsWiki.json";
+//        System.out.println("showing time");
+//        Search s = new Search();
+//        ArrayList<EventInit> res = s.eventSearch("bach dang");
+//        for(EventInit e: res){
+//            System.out.println(e.toString());
+//        }
+        String currentDir = System.getProperty("user.dir");
+
+        String path = currentDir + "\\" + "OOP_Project" + "\\" + "oop_project" + "\\" + "src" + "\\" + "events" + "\\" + "Resources" + "\\";
+
+        String path1 = path + "eventsFinal.json";
 //        EventBuilder eb = new EventBuilder();
 //
-//        ArrayList<EventWrapper> ev = eb.decodeEvents(path1);
+//        ArrayList<Event> ev = eb.decodeEvents(path1);
 //        String json = new Gson().toJson(ev);
 //        String pathEvent = path + "eventsFinal.json";
 //        try (PrintWriter out = new PrintWriter(new FileWriter(pathEvent))) {
@@ -64,12 +64,18 @@ public class Scraper {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-
-//        System.out.println("***********************************");
-//        for(EventWrapper x: ev){
-//            System.out.println(x.toString());
+//        System.out.println("showing time");
+//        Search s = new Search();
+//        ArrayList<EventInit> res = s.eventSearch("bach dang");
+//        for(EventInit e: res){
+//            System.out.println(e.toString());
 //        }
-//        System.out.println(ev.size());
+        ArrayList<Event> eList = Decode.decode(path1);
+        System.out.println("***********************************");
+        for(Event x: eList){
+            System.out.println(x.toString());
+        }
+        System.out.println(eList.size());
 
     }
 }

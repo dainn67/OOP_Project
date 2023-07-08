@@ -5,7 +5,7 @@ import java.util.*;
 import figures.objects.Figure;
 
 public class RemoveDuplicate {
-	static ArrayList<Figure> figures = HelperFunctions.decodeFromJson("merged_figures_test.json");
+	static ArrayList<Figure> figures = HelperFunctions.decodeFromJson("merged_figures.json");
 	static ArrayList<Figure> kings = HelperFunctions.decodeFromJson("kings.json");
 	static ArrayList<Figure> poinsettias = HelperFunctions.decodeFromJson("poinsettias.json");
 	static ArrayList<String> delIDs = new ArrayList<>();
@@ -62,6 +62,6 @@ public class RemoveDuplicate {
 		objectList.addAll(figures);
 		objectList.addAll(kings);
 		objectList.addAll(poinsettias);
-		HelperFunctions.encodeListToJson(objectList, "appended_figures.json");
+		HelperFunctions.encodeListToJson(objectList, "figures.json");
 	}
 }
