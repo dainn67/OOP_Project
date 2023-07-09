@@ -1,6 +1,6 @@
-package events.Scraping_data;
+package Scraping_data;
 
-import events.HistoricalEvent.EventInit;
+import HistoricalEvent.EventInit;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

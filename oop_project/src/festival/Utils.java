@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import figures.objects.Figure;
-
+import Figures.Figure;
 
 public class Utils {
 	public static boolean SaveStringFile(String c, String path) {

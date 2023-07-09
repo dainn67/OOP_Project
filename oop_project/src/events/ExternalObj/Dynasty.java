@@ -1,4 +1,4 @@
-package events.ExternalObj;
+package ExternalObj;
 
 public class Dynasty {
     String name;

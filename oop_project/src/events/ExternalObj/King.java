@@ -1,4 +1,4 @@
-package events.ExternalObj;
+package ExternalObj;
 
 public class King extends Figure {
     private String kingYear;

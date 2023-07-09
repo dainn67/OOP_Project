@@ -1,8 +1,8 @@
-package events.HistoricalEvent;
+package HistoricalEvent;
 
-import events.ExternalObj.Dynasty;
-import events.ExternalObj.Figure;
-import events.ExternalObj.HelperFunctions;
+import ExternalObj.Dynasty;
+import ExternalObj.Figure;
+import ExternalObj.HelperFunctions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

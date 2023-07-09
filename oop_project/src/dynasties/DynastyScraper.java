@@ -1,8 +1,7 @@
 package dynasties;
 
 import dynasties.helpers.MergerDynasty;
-import scraper.Scraper;
-
+import figures.Scraper;
 
 public class DynastyScraper implements Scraper{
 

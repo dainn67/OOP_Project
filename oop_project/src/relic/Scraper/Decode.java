@@ -14,9 +14,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import figures.objects.Figure;
 import relic.Object.Relic;
-
+import Figures.Figure;
 
 public class Decode {
     static String normalizeString(String s) {

@@ -1,14 +1,20 @@
 package figures.helpers;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.io.BufferedReader;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import figures.objects.*;
 import dynasties.object.Dynasty;
 
 public class ArrangeFunctions {
 	static String filePath1 = "final_dynasties.json";
-	static String filePath2 = "figures.json";
+	static String filePath2 = "appended_figures.json";
 	static ArrayList<Dynasty> dynasties = HelperFunctions.decodeDynastiesFromJson(filePath1);
 	static ArrayList<Figure> figures = HelperFunctions.decodeFromJson(filePath2);
 	

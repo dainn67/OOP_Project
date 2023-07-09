@@ -6,7 +6,6 @@ import dynasties.object.Dynasty;
 import figures.helpers.HelperFunctions;
 import figures.helpers.MergeFigures;
 import figures.helpers.RemoveDuplicate;
-import scraper.Scraper;
 
 public class FigureScraper implements Scraper{
 	

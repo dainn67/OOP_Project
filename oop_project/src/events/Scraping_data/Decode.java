@@ -1,10 +1,10 @@
-package events.Scraping_data;
+package Scraping_data;
 
-import events.ExternalObj.Dynasty;
-import events.ExternalObj.Figure;
-import events.ExternalObj.King;
-import events.ExternalObj.Poinsettia;
-import events.HistoricalEvent.Event;
+import ExternalObj.Dynasty;
+import ExternalObj.Figure;
+import ExternalObj.King;
+import ExternalObj.Poinsettia;
+import HistoricalEvent.Event;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

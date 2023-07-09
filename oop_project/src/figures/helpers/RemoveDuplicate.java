@@ -62,6 +62,6 @@ public class RemoveDuplicate {
 		objectList.addAll(figures);
 		objectList.addAll(kings);
 		objectList.addAll(poinsettias);
-		HelperFunctions.encodeListToJson(objectList, "figures.json");
+		HelperFunctions.encodeListToJson(objectList, "appended_figures.json");
 	}
 }
