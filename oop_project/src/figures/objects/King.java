@@ -2,10 +2,8 @@ package figures.objects;
 
 public class King extends Figure {
 	private String kingYear;
-//	private String mieuHieu;
 	private String thuyHieu;
 	private String nienHieu;
-//	private String tenHuy;
 	private String theThu;
 	public King() {
 	};

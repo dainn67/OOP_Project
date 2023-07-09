@@ -1,4 +1,4 @@
-package objects;
+package figures.objects;
 
 import java.util.ArrayList;
 
@@ -35,12 +35,12 @@ public class Poinsettia extends Figure {
 			int bornYear, 	// 1
 			int deathYear, 	// 2// 5
 			String home, 		// 6
-			String kingYear, 	// 7
+			String king, 	// 7
 			String desc, 		// 8
 			String graduatedYear
 	) {
 		super(id,name, otherName,bornYear,deathYear, home, desc);
-		this.king = kingYear;
+		this.king = king;
 		this.graduatedYear = graduatedYear;
 	}
 	

@@ -1,15 +1,12 @@
-package figures_scraper;
-import java.io.FileWriter;
+package figures;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -18,21 +15,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-//import helper_package.EncodeDecode;
-import helper_package.HelperFunctions;
-import objects.Dynasty;
-import objects.Figure;
-import objects.Poinsettia;
+import figures.objects.Poinsettia;
+import figures.helpers.HelperFunctions;
+import figures.objects.Figure;
 
-public class TrangScraper {
-	//static List<Figure> figureList = EncodeDecode.decodedFigureList();
-	
-	static List<Poinsettia> poinsettias = new ArrayList<Poinsettia>();
 
-	public static void main(String[] args) {
+public class NKSPoinsettiaScraper {
+	static ArrayList<Poinsettia> poinsettias = new ArrayList<Poinsettia>();
+
+	public static void crawl() {
 		
 		// Read the JSON file into a string
-        String json = HelperFunctions.readFile("final_figures_final.json");
+        String json = HelperFunctions.readFile("merged_figures.json");
 
         // Create a Gson object with the custom adapter
         Gson gson = new GsonBuilder().create();
@@ -50,7 +44,8 @@ public class TrangScraper {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//EncodeDecode.encodeToFile(poinsettias, "tmpVanSufiguresTestParents");
+		
+		HelperFunctions.encodeListToJson(poinsettias, "poinsettias.json");
 
 	}
 
@@ -103,13 +98,12 @@ public class TrangScraper {
 				}
 			}
 		}
-		ArrayList<Object> newList = new ArrayList<Object>();
+		
 		for(Poinsettia p: poinsettias) {
 			HelperFunctions.prtPointessiaAttributeas(p);
-			newList.add(p);
 		}
 		
-		HelperFunctions.encodeListToJson(newList,"after_poinsettias.json");
+		//HelperFunctions.encodeListToJson(poinsettias,"after_poinsettias.json");
 
 	}
 

@@ -2,7 +2,6 @@ package dynasties;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,16 +10,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import dynasties.object.Dynasty;
+import figures.helpers.HelperFunctions;
 
-import helper_package.HelperFunctions;
-import objects.Dynasty;
-
-
-public class NguoikesuDynastyScraper {
+public class NKSDynastyScraper {
 
 	public static ArrayList<Dynasty> dynasties = new ArrayList<Dynasty>();
 
-	public static void main(String[] args) {
+	public static void crawl() {
 		try {
 			String url = "https://nguoikesu.com";
 			Document doc = Jsoup.connect(url).get();
@@ -45,6 +42,8 @@ public class NguoikesuDynastyScraper {
 
 			// title
 			Element title = dynastyElement.selectFirst("h3");
+			if(title.text().contains("Hồng Bàng"))
+					continue;
 			System.out.println(title.text());
 
 			// link to detail page
@@ -66,10 +65,10 @@ public class NguoikesuDynastyScraper {
 			Dynasty myDynasty = new Dynasty(title.text(), HelperFunctions.parseYear(years[0]),
 					HelperFunctions.parseYear(years[1]), content.toString());
 
-			NguoikesuDynastyScraper.dynasties.add(myDynasty);
+			dynasties.add(myDynasty);
 		}
 
-		HelperFunctions.encodeListToJson(dynasties, "after_nks_dynasties.json");
+		HelperFunctions.encodeListToJson(dynasties, "nks_dynasties.json");
 		
 		
 	}
